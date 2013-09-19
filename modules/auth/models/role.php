@@ -2,6 +2,6 @@
 
 class Role_Model extends Auth_Role_Model {
 
-	// This class can be replaced or extended
+	protected $has_and_belongs_to_many = array('users','modules');
 
-} // End Role Model
+} 
