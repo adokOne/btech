@@ -12,6 +12,6 @@ class Users_Admin extends Ext_Constructor {
 		"email",
 		"username",
 		"logins",
-		"last_login"
+		"(FROM_UNIXTIME(last_login)) AS last_login"
 	);
 }

@@ -27,5 +27,74 @@ class ext_core {
         return $nodes;
     }
 	
-	
+    public static function record($table, $columns)
+    {
+        foreach ($columns as $key => $val)
+        {
+            $as = strripos($val, 'AS ');
+            $columns[$key] = ($as) ? substr($val, $as + 3) : $val;
+        }
+        $fields = Database::instance()->field_data($table);
+               
+        foreach($fields as $field)
+            $fields[$field->Field] = array_shift($fields);
+        
+        $result = array();
+        foreach($columns as $key)
+        {
+            if (isset($fields[$key]))
+            {
+                $val = $fields[$key];
+                $isset_length = strripos($val->Type, '(');
+                $type = ($isset_length) ? substr($val->Type, 0, $isset_length) : $val->Type;
+                switch ($type)
+                {
+                case 'varchar':
+                case 'text':
+                case 'tinytext':
+                case 'mediumtext':
+                case 'longtext':
+                case 'enum':                
+                    $type = 'string';
+                break;
+                case 'int':
+                case 'tinyint':
+                case 'mediumint':
+                case 'smallint':
+                    $type = 'int';
+                break;
+                case 'float':
+                case 'real':
+                case 'double':
+                    $type = 'float';
+                break;
+                case 'datetime':
+                    $type = 'xdatetime';
+                break;
+                case 'date':
+                    $type = 'date';
+                break;              
+                default:
+                    $type = 'string';
+                }
+                switch ($key)
+                {
+                case 'last_login': 
+                case 'created_at':   
+                case 'updated_at':
+                case 'active_until':                 
+                    $type = 'date';
+                break;           
+                default:
+                    $type = $type;
+                }             
+                $result[] = $type = "date" ? "{name: '$key', type: '$type' , dateFormat: 'n/j/Y'}" :  "{name: '$key', type: '$type'}";
+            }
+            else
+            {
+                $result[] = "{name: '$key'}";
+            }
+        }
+        return implode(",\n", $result);       
+    }  
 }

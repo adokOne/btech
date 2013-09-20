@@ -13,3 +13,12 @@ ORDER BY `id` ASC
 LIMIT 0, 20 в файле /home/adok/WWW/b_tech/system/libraries/drivers/Database/Mysql.php, на строке 371
 2013-09-20 12:00:28 +03:00 --- error: Не пойманное PHP Error: include(/home/adok/WWW/b_tech/modules/admin/views/ext/constructor/main/base.php): failed to open stream: No such file or directory в файле /home/adok/WWW/b_tech/modules/admin/views/ext/list.php, на строке 3
 2013-09-20 12:05:22 +03:00 --- error: Не пойманное Kohana_Database_Exception: Ошибка SQL: Incorrect table name '' - SHOW COLUMNS FROM `` в файле /home/adok/WWW/b_tech/system/libraries/drivers/Database/Mysql.php, на строке 371
+2013-09-20 12:27:40 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669260057, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:27:40 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669260907, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:27:41 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669261499, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:27:53 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669273726, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:28:02 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669282076, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:28:02 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669282495, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:28:02 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669282684, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:28:02 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669282932, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841
+2013-09-20 12:28:03 +03:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, Employee.js?_dc=1379669283190, не найдена. в файле /home/adok/WWW/b_tech/system/core/Kohana.php, на строке 841

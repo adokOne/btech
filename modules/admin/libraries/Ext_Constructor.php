@@ -55,8 +55,10 @@ class Ext_Constructor extends Constructor
             $func = "_load_treecombo_$key";
             $stores[$key] = json_encode($this->$func());
         }
+
+        $view->record = ext::record($this->table, $this->columns);
         $view->stores = $stores; unset($stores);
-        $view->class = $this->class;
+        $view->class  = $this->class;
         $view->list_items = json_encode($this->_list_items());
         $view->include  = file_exists($view->dir."/inc/$this->class.php") ? true : false;
         $view->buttons  = file_exists($view->dir."/buttons/$this->class.php") ? true : false;
