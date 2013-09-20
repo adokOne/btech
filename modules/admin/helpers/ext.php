@@ -13,12 +13,19 @@ class ext_core {
 			$_modules[] = $mod;
 		}
 		return $_modules;
-		
-		
-		
-		
+				
 	}
-	
+    public static function grid()
+    {
+        $offset = (int)Input::instance()->post('start', 0);
+        $limit  = (int)Input::instance()->post('limit', 20);
+        $nodes['items'] = Database::instance()
+            ->limit($limit, $offset)
+            ->get()
+            ->as_array();
+        $nodes['total'] = Database::instance()->query("SELECT FOUND_ROWS() AS total")->current()->total;
+        return $nodes;
+    }
 	
 	
 }

@@ -1,4 +1,4 @@
-
+q
 <?php defined('SYSPATH') or die('No direct script access.');
 /*
  *  @author Chernov Aleksandr <adok@ukr.net>
@@ -7,6 +7,9 @@
  */
 class Bootstrap_Constructor extends Constructor 
 {
+	public function __construct(){
+		
+	}
 
 	public function index() {}
 

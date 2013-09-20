@@ -31,7 +31,7 @@ Ext.require([
 
 ]);
 logout = function(){
-    window.location.href = "/user/logout"
+    window.location.href = "/users/logout"
 }
 
 Ext.onReady(function(){
@@ -45,7 +45,6 @@ Ext.onReady(function(){
 
      contentPanel = new Ext.panel.Panel({
         id:'content',
-        title: '<?php echo $admin_lang["upr"] ?>',
         border: false,
         region: 'center', 
         layout: 'fit',
@@ -101,19 +100,7 @@ Ext.onReady(function(){
 
     });
 
-
-   /* treePanel.getSelectionModel().on('select', function(selModel, record) {
-        if (record.get('leaf')) {
-            Ext.getCmp('content-panel').layout.setActiveItem(record.getId() + '-panel');
-             if (!detailEl) {
-                var bd = Ext.getCmp('details-panel').body;
-                bd.update('').setStyle('background','#fff');
-                detailEl = bd.createChild(); 
-            }
-            detailEl.hide().update(Ext.getDom(record.getId() + '-details').innerHTML).slideIn('l', {stopAnimation:true,duration: 200});
-        }
-    });*/
-        Ext.create('Ext.Viewport', {
+    Ext.create('Ext.Viewport', {
         layout: 'border',
         title: '<?php echo Kohana::config("core.site_name")?> Admin',
         items: [{

@@ -48,7 +48,7 @@ class Admin_Controller extends Controller {
 
 	public function __call($name, $arguments){
 		$class = $name . '_Admin';
-		$path  = __DIR__."/".strtolower($class_name).EXT;
+		$path  = __DIR__."/".strtolower($class).EXT;
 		if (file_exists($path)) require_once $path;	
 		if(class_exists($class)){
 			$instance = new $class;
@@ -57,7 +57,7 @@ class Admin_Controller extends Controller {
 				isset($arguments[1]) ? $instance->$method($arguments[1]) : $instance->$method();
 		}
 		else{
-			$view 	= new View('not_found');
+			$view 	= new View(Kohana::config('admin.admin_type').'/not_found');
 			$view->name  = $name ;
 			$view->render(true);
 		}

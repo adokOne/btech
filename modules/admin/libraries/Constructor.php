@@ -16,6 +16,29 @@ abstract class Constructor
 
 	protected $multi_lang  = false;
 
+	protected $template; #string
+
+	protected $user_fields = array("SQL_CALC_FOUND_ROWS id");
+
+	protected $phantom_fields = array();
+
+	protected $stores = array();
+
+	protected $use_form   = false;
+
+	protected $use_tree   = false;
+
+	protected $use_logo   = false;
+
+	protected $use_filter = false;
+
+	protected $enable_dd  = false;
+
+	protected $order_by   = "id";
+	protected $order_dir  = "ASC";
+
+	public function __construct(){}
+
 	public function index() {}
 
 	public function create()  {}
