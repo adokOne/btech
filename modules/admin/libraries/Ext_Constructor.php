@@ -8,6 +8,9 @@
 class Ext_Constructor extends Constructor 
 {
     protected $template = 'ext/list';
+    protected $join     = null;
+
+    protected $sort;
 
     public function __construct()
     {   
@@ -16,6 +19,7 @@ class Ext_Constructor extends Constructor
         $this->input = Input::instance();
         $keys_1      = array();
         $keys_2      = array();
+        $this->sort     = new StdClass();
         foreach ($this->columns as $field) if ($field != 'id')
         {
             $as = strripos($field, 'AS ');
@@ -33,6 +37,9 @@ class Ext_Constructor extends Constructor
         $this->template = (Kohana::find_file('views/ext', $class, FALSE, 'php')) ? $class : $this->template;
         
         $this->class    = substr($class, 0, strrpos($class, '_'));
+
+        $this->sort->property  = "id";
+        $this->sort->direction = "ASC";
 
     }
 
@@ -57,27 +64,36 @@ class Ext_Constructor extends Constructor
         }
 
         $view->record = ext::record($this->table, $this->columns);
+        $View->user_fields = $this->user_fields;
         $view->stores = $stores; unset($stores);
         $view->class  = $this->class;
-        $view->list_items = json_encode($this->_list_items());
-        $view->include  = file_exists($view->dir."/inc/$this->class.php") ? true : false;
-        $view->buttons  = file_exists($view->dir."/buttons/$this->class.php") ? true : false;
+        $view->include  = file_exists($view->dir."/inc/$this->class.php") ? $view->dir."/inc/".$this->class.EXT : false;
+        $view->buttons  = file_exists($view->dir."/buttons/$this->class.php") ? $view->dir."/buttons/".$this->class.EXT : false;
         $view->lang = Kohana::lang($this->class."_admin");
         $view->render(true);
     }
 
     protected function _list_items()
     {
-        $sort = $this->input->post('sort', $this->order_by,true);
-        $dir  = $this->input->post('dir',  $this->order_dir,true);
+        $sort = is_null($this->input->post('sort')) ? $this->sort : end(json_decode($this->input->post('sort')));
+        
+
         $this->db
             ->from($this->table." AS daddy")
-            ->select($this->user_fields)
-            ->orderby(trim($sort), $dir);
-                  
+            ->select($this->user_fields);
+        if(!is_null($this->join))
+            $this->db->join($this->join[0],$this->join[1],$this->join[2]);
+        $this->db
+            ->orderby("daddy.".trim($sort->property), $sort->direction);
+        if(!is_null($this->where_statement))
+            $this->db->where($this->where_statement);
         $this->_filter();
 
-        return ext::grid();
+        echo json_encode(ext::grid());
+    }
+
+    public function list_items(){
+        $this->_list_items();
     }
 
 
@@ -88,13 +104,33 @@ class Ext_Constructor extends Constructor
 
 	public function edit()  {}
 
-	public function save()  {}
+	public function save()  {
+        $data   = json_decode(file_get_contents('php://input'), true);
+        $data   = isset($data[0]) ? $data : array($data);
+        $model  = inflector::singular($this->table);
 
-	public function save_all()  {}
+        foreach($data as $item){
+            $object = $item["id"] > 0 ? ORM::factory($model,$item["id"])->find() : ORM::factory($model);
+            foreach ($item as $key => $value) {
+                if($key=="id" || in_array($key, $this->phantom_fields)) 
+                    continue;
+                $object->$key = $value;
+            }
+            $object->save();
+        }
+    }
 
-	public function delete()  {}
+	public function delete(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        foreach($data as $item){
+            $id = is_array($item) ? $item["id"] : $data["id"];
+            $this->db->delete($this->table,array("id"=>$id));
+            if(!is_array($item)) break;
+        }
+        $this->_list_items();
+    }
 
-	public function delete_all()  {}
+
 
 
 

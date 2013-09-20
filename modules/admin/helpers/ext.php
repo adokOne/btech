@@ -88,7 +88,7 @@ class ext_core {
                 default:
                     $type = $type;
                 }             
-                $result[] = $type = "date" ? "{name: '$key', type: '$type' , dateFormat: 'n/j/Y'}" :  "{name: '$key', type: '$type'}";
+                $result[] = $type == "date" ? "{name: '$key', type: '$type' , dateFormat: 'd.m.Y', }" :  "{name: '$key', type: '$type'}";
             }
             else
             {

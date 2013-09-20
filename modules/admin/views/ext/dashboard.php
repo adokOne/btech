@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/ext/resources/css/layout-browser.css" media="all">
     <link rel="stylesheet" type="text/css" href="/ext/resources/css/ext-all-neptune-debug.css" media="all">
     <link rel="stylesheet" type="text/css" href="/ext/resources/ext-theme-neptune/ext-theme-neptune-all.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/ext/admin.css" media="all">
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
  <script>
 Ext.Loader.setConfig({enabled: true});
@@ -50,9 +51,9 @@ Ext.onReady(function(){
         layout: 'fit',
         autoScroll: true,
         loader: {
-            //autoLoad:true,
+            autoLoad:true,
             scripts:true,
-            url :'/admin/settings'
+            url :'/admin/users'
         }
     });     
 

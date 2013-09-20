@@ -9,9 +9,12 @@ class Users_Admin extends Ext_Constructor {
 	protected $table   = "users";
 
 	protected $columns = array(
+		"id",
 		"email",
 		"username",
 		"logins",
-		"(FROM_UNIXTIME(last_login)) AS last_login"
+		"active",
+		"(DATE_FORMAT(FROM_UNIXTIME(last_login),GET_FORMAT(DATE,'EUR'))) AS last_login"
 	);
+
 }

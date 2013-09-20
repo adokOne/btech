@@ -13,7 +13,34 @@ class User_Model extends Auth_User_Model {
 		return $modules;
 	}
 
+	public function save(){
+		if($this->id > 0)
+			parent::save();
+		else{
+			$array = array();
+			foreach($this->list_fields() as $key=>$v)
+				$array[$key] = $this->$key;
+			$array["password"] = $this->generate_password();
+			$this->password = $this->generate_password();
+			$array = Validation::factory($array)
+				->pre_filter('trim')
+				->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
+				->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
+				->add_rules('password', 'required', 'length[5,42]');
+			
+			if($array->validate())
+				parent::save();
+		}
+
+
+	}
+
+	public function generate_password(){
+		return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8);
+	}
+
 
 
 	
 }
+#bcf08bae806f6e0910ac7faf1a2c7586309aa80f63991ddb87

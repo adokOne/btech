@@ -14,6 +14,8 @@ abstract class Constructor
 
 	protected $fields      = array();
 
+	protected $where_statement = null;
+
 	protected $multi_lang  = false;
 
 	protected $template; #string
