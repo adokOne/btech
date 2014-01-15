@@ -6,7 +6,9 @@
  */
 class Users_Admin extends Ext_Constructor {
 
-	protected $table   = "users";
+	protected $table    = "users";
+	protected $use_form = true;
+	protected $use_logo = true;
 
 	protected $columns = array(
 		"id",

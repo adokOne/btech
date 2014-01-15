@@ -128,7 +128,7 @@ Ext.onReady(function(){
         renderTo: Ext.getBody()
     });
 });
-
+Ext.BLANK_IMAGE = '/ext/resources/themes/images/default/no-image.png';
 
 
    </script>

@@ -51,6 +51,8 @@ class Ext_Constructor extends Constructor
         $view->use_tree  = $this->use_tree;
         $view->enable_dd = $this->enable_dd;
         $view->use_logo  = $this->use_logo;
+        $view->use_filter= $this->use_filter;
+        $view->use_map   = $this->use_map;
         $this->use_logo  || $view->logo_path = DOCROOT."upload/".$this->class."/";         
        
         if ($this->use_tree)
@@ -97,12 +99,17 @@ class Ext_Constructor extends Constructor
     }
 
 
-
-
-
-	public function create()  {}
-
-	public function edit()  {}
+	public function item_save()  {
+        $model  = inflector::singular($this->table);
+        $id     = $this->input->post("id");
+        $object = ORM::factory($model,$id)->find();
+        foreach($_POST as $key=>$value)
+            if(property_exists($object,$key) || $key!="id")
+                $object->$key = $value;
+        $object->save();
+        if($this->use_logo && (bool)$object->has_logo)
+            $this->_upload_photo();
+    }
 
 	public function save()  {
         $data   = json_decode(file_get_contents('php://input'), true);
@@ -163,6 +170,11 @@ class Ext_Constructor extends Constructor
             if ($tree_id)
                 $this->db->where("`$this->tree_id` = '".$tree_id."'");
         }
+    }
+
+
+    protected function _upload_photo(){
+        Uploader::save("logo","wefwef");
     }
 
 }

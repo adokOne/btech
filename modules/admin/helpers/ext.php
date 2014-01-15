@@ -23,7 +23,7 @@ class ext_core {
             ->limit($limit, $offset)
             ->get()
             ->as_array();
-        $nodes['total'] = Database::instance()->query("SELECT FOUND_ROWS() AS total")->current()->total;
+        $nodes['total'] = (int)Database::instance()->query("SELECT FOUND_ROWS() AS total")->current()->total;
         return $nodes;
     }
 	

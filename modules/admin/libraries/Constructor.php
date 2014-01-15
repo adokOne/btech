@@ -34,6 +34,8 @@ abstract class Constructor
 
 	protected $use_filter = false;
 
+	protected $use_map    = false;
+
 	protected $enable_dd  = false;
 
 	protected $order_by   = "id";

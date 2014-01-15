@@ -17,7 +17,6 @@
             width: 160,
             editor: {
                 allowBlank: false,
-                //vtype: 'email'
             }
         }, {
             xtype: 'datecolumn',
