@@ -35,7 +35,7 @@ $config['default'] = array
 		'host'     => 'localhost',
 		'port'     => FALSE,
 		'socket'   => FALSE,
-		'database' => 'btech'
+		'database' => 'bkt_new'
 	),
 	'character_set' => 'utf8',
 	'table_prefix'  => '',

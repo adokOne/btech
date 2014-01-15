@@ -28,7 +28,8 @@ class Controller extends Controller_Core {
 		$js  = array("jquery-1.7.2.min.js","jquery-ui-1.9.2.custom.min.js");
 		javascript::add($js);
 		stylesheet::add($css);
-		View::set_global("lang",Kohana::lang("all"));
+		$this->lang = Kohana::lang("all");
+		View::set_global("lang",$this->lang);
 	}
 
 

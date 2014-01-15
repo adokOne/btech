@@ -119,8 +119,12 @@ $config['extension_prefix'] = 'BT_';
  */
 $config['modules'] = array
 (
-	 MODPATH.'auth',       // Authentication
-	 MODPATH.'admin',      // Administration
-	 MODPATH.'users',      // Users
-	 MODPATH.'main',       // Users
+	 MODPATH.'auth',       
+	 MODPATH.'admin',      
+	 MODPATH.'users',     
+	 MODPATH.'main',       
+	 MODPATH.'courses',  
+	 MODPATH.'news',  
+
+	 
 );

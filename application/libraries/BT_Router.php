@@ -6,6 +6,7 @@ class Router extends Router_Core {
     public static $desc     = '';
     public static $keywords = '';
     public static $base_cls = '';
+    public static $cur_lang = '';
 
     public static function find_uri()
     {
@@ -78,6 +79,7 @@ class Router extends Router_Core {
 					url::redirect(url::site(Router::$current_uri));
 	        }
 		}
+		self::$cur_lang = self::$language == '' ? Kohana::config('multi_lang.default_language') : self::$language;
     }
 
 }

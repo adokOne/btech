@@ -190,4 +190,17 @@ class inflector_Core {
 		return preg_replace('/[_-]+/', ' ', trim($str));
 	}
 
+
+
+	public static function comments($comments){
+      $lang = Kohana::lang("all.comments");
+      $idx  = $comments == 1 ? 0 : ($comments < 5 && $comments!=0 ? 1 : 2); 
+      return $comments." ".$lang[$idx];
+	}
+	public static function views($views){
+      $lang = Kohana::lang("all.views");
+      $idx  = $views == 1 ? 0 : ($views < 5 && $views!=0 ? 1 : 2); 
+      return $views." ".$lang[$idx];
+	}
+
 } // End inflector

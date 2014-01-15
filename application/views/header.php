@@ -29,7 +29,7 @@
                 <!-- nav -->
                 <ul id="nav">
                     <?php foreach($lang["top_menu"] as $link=>$text):?>
-                        <li><a href="<?php echo url::lang_url().$link?>"><?php echo $text; ?></a></li>
+                        <li class="<?php echo url::current()=="main" && empty($link) || !empty($link) && strpos(url::current(),$link) !== false ? "active" : ""   ?>"><a href="<?php echo url::lang_url().$link?>"><?php echo $text; ?></a></li>
                     <?php endforeach;?>
                 </ul>
                 <!-- end nav -->
