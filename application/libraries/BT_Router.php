@@ -5,6 +5,7 @@ class Router extends Router_Core {
     public static $title    = '';
     public static $desc     = '';
     public static $keywords = '';
+    public static $base_cls = '';
 
     public static function find_uri()
     {

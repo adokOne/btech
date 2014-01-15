@@ -58,4 +58,12 @@ class url extends url_Core {
 	{
 		return ($qs === TRUE) ? Router::$complete_uri : Router::$current_uri;
 	}
+
+	public static function lang_url(){
+		$lang = '';
+		if (Kohana::config('multi_lang.enabled')) {
+			$lang = Router::$language != Kohana::config('multi_lang.default_language') && Router::$language != "" ? Router::$language.'/' : "";
+		}
+		return url::base(false, false).$lang;
+	}
 } // End url

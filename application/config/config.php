@@ -122,4 +122,5 @@ $config['modules'] = array
 	 MODPATH.'auth',       // Authentication
 	 MODPATH.'admin',      // Administration
 	 MODPATH.'users',      // Users
+	 MODPATH.'main',       // Users
 );

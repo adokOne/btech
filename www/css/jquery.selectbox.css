@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+.sbHolder{
+	background-color: #FFF;
+	border: 1px solid #B0BDD1;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFF;
+	height: 34px;
+	position: relative;
+	width: 350px;
+	margin: 0 auto;
+}
+.sbHolder.opened {border: 1px solid #1C1C57}
+.sbHolder:focus .sbSelector{
+	
+}
+.sbHolder:hover .sbToggle {
+	background: url(../img/form_elements/select-icons.png) 0 -219px no-repeat;
+}
+.sbSelector{
+	display: block;
+	height: 34px;
+	left: 0;
+	line-height: 34px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 350px;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+	color: #000;
+	outline: none;
+	text-decoration: none;
+}
+.sbToggle{
+	background: url(../img/form_elements/select-icons.png) 0 0 no-repeat;
+	display: block;
+	height: 34px;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 27px;
+}
+/*.sbToggle:hover{
+	background: url(../img/form_elements/select-icons.png) 0 -34px no-repeat;
+}*/
+.sbToggleOpen{
+	background: url(../img/form_elements/select-icons.png) 0 -68px no-repeat;
+}
+/*.sbToggleOpen:hover{
+	background: url(../img/form_elements/select-icons.png) 0 -102px no-repeat;
+}
+*/
+.sbHolder.opened .sbToggleOpen, .sbHolder:hover .sbToggleOpen {
+	background: url(../img/form_elements/select-icons.png) 0 -253px no-repeat;
+}
+
+.sbHolderDisabled{
+	background-color: #3C3C3C;
+	border: solid 1px #515151;
+}
+.sbHolderDisabled .sbHolder{
+	
+}
+.sbHolderDisabled .sbToggle{
+	
+}
+.sbOptions{
+	background-color: #FFF;
+	border: solid 1px #B0BDD1;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 350px;
+	max-height: 150px !important;
+	z-index: 6;
+	overflow-y: auto;
+}
+.opened .sbOptions {border: 1px solid #1C1C57}
+.sbOptions li{
+}
+.hotel_offers .sbOptions li {border-bottom: none;}
+.sbOptions a{
+	display: block;
+	outline: none;
+	padding: 7px;
+	font-size: 13px;
+}
+.new_search_form .sbOptions a {
+	padding: 7px 0 7px 30px;
+	background: url(../img/form_elements/select_ul_item.png) no-repeat 6px center;
+}
+.sbOptions a:link, .sbOptions a:visited{
+	color: #333;
+	text-decoration: none;
+}
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus {
+	background: #B5439F;
+	color: #FFF;
+}
+.sbOptions li.last a{
+	border-bottom: none;
+}
+.sbOptions .sbDisabled{
+	border-bottom: dotted 1px #515151;
+	color: #999;
+	display: block;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbGroup{
+	border-bottom: dotted 1px #515151;
+	color: #EBB52D;
+	display: block;
+	font-weight: bold;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbSub{
+	padding-left: 17px;
+}
