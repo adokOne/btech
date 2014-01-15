@@ -7,9 +7,12 @@
                 <div class="blog_form">
                     <ul>
                         <?php foreach($news as $post):?>
+                            <?php $time = strtotime($post->created_at);?>
                             <li class="blog_item">
-                                <span class="new"></span>
-                                <div class="left">14 <br>ДЕК <br>2013</div>
+                                <?php if(time() - Kohana::config("core.news_new_time") < $time):?>
+                                    <span class="new"></span>
+                                <?php endif;?>
+                                <div class="left"><?php echo date("j",$time)."<br>".date("M",$time)."<br>".date("Y",$time)?></div>
                                 <div class="right">
                                     <a href="<?php echo url::lang_url()."blog/".$post->seo;?>.html">
                                         <h3><?php echo $post->name();?></h3>
@@ -26,16 +29,7 @@
                         <?php endforeach;?>
                     </ul>
                     <!-- pagination -->
-                    <div class="pagination">
-                        <ul>
-                            <li class="prev"><a href="" class="disabled">Предыдущая страница</a></li>
-                            <li><a href="" class="active">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li class="next"><a href="">Следующая страница</a></li>
-                        </ul>
-                    </div>
+                        <?php echo $pagination;?>
                     <!-- end pagination -->
                     <div class="clear"></div>
 

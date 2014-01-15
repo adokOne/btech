@@ -7,6 +7,7 @@
 $config['site_domain'] = 'portal.local';
 $config['site_name']   = 'BT CRM';
 $config['display_errors'] = TRUE;
+$config['news_new_time']  = 25920;
 
 
 /**
