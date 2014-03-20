@@ -758,7 +758,6 @@ html.job #content .items li:hover .item_img{
 	float: left;
 	width: 100%;
 	min-height: 50px;
-	border: 1px solid red;
 }
 .items .block h4{
 	text-align: center;

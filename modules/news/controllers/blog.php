@@ -25,6 +25,28 @@ class Blog_Controller extends Controller {
 		$view->render(true);
 	}
 
+	public function sale(){
+		Router::$base_cls = "sale";
+		$news 		= ORM::factory("sale")->where("active",1);
+		$pagination = $this->_pagination($news->count_all());
+		$page = $this->input->get("page",1);
+		$news = $news->limit($this->page_limit)->offset($this->page_limit*($page-1))->find_all();
+		$view = new View("sale_index");
+		$view->pagination = $pagination;
+		$view->news = $news;
+		$view->render(true);
+	}
+
+	public function sale_show($seo){
+		Router::$base_cls = "sale";
+		$post = ORM::factory("sale")->where(array("active"=>1,"seo"=>$seo))->find();
+		$post->id || Kohana::show_404();
+		$view = new View("sale_show");
+		$view->post = $post;
+		$view->render(true);
+
+	}
+
 	private function _pagination($total){
         $p_config = array(
             'base_url'          =>  "/blog",

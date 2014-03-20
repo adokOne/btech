@@ -12,3 +12,8 @@ $config['courses/([\w_\-\/]+)'] = 'courses/show/$1';
 
 $config['blog/([\w_\-\/]+).html|htm'] = 'blog/show/$1';
 $config['online'] = 'main/online';
+$config["price"]  = "main/price";
+$config["aktsiyi_ta_znyzhky"] = "blog/sale";
+$config["aktsiyi_ta_znyzhky/([\w_\-\/]+).html|htm"] = "blog/sale_show/$1";
+$config["job"] = "main/job";
+$config["contacts"] = "main/contacts";

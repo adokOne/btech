@@ -21,6 +21,24 @@ class Main_Controller extends Controller {
 		$view->render(true);
 	}
 
+	public function price(){
+		Router::$base_cls = "price";
+		$view = new View("price");
+		$view->courses = $this->_prepare_courses(0);
+		$view->render(true);
+	}
+
+	public function contacts(){
+		Router::$base_cls = "contacts";
+		$view = new View("contacts");
+		$view->render(true);
+	}
+	public function job(){
+		Router::$base_cls = "job";
+		$view = new View("job");
+		$view->jobs = $this->_jobs();
+		$view->render(true);
+	}
 	public function error(){
 		bkt::error();
 	}
@@ -35,6 +53,10 @@ class Main_Controller extends Controller {
 
 	private function _prepare_courses($id){
 		return ORM::factory('course')->where('parent_id',$id)->find_all();
+	}
+
+	private function _jobs(){
+		return ORM::factory('job')->find_all();
 	}
 
 }
