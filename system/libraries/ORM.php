@@ -192,6 +192,11 @@ class ORM_Core {
 	 * @param   array   method arguments
 	 * @return  mixed
 	 */
+
+	public function reset_select(){
+		$this->db->reset_select();
+		return $this;
+	}
 	public function __call($method, array $args)
 	{
 		if (method_exists($this->db, $method))

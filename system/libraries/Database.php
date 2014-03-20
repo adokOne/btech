@@ -1152,7 +1152,7 @@ class Database_Core {
 	 *
 	 * @return  void
 	 */
-	protected function reset_select()
+	public function reset_select()
 	{
 		$this->select   = array();
 		$this->from     = array();

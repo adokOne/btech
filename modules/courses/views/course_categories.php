@@ -38,7 +38,7 @@
                         <?php foreach($course->children as $child):?>
                             <?php foreach($child->groups as $group):?>
                                 <tr>
-                                    <td><?php echo $child->name;?></td>
+                                    <td><?php echo $child->name();?></td>
                                     <td><?php echo $group->number?></td>
                                     <td><?php echo $group->start_date?></td>
                                     <td><?php echo $group->time()?></td>

@@ -51,9 +51,10 @@ class Courses_Controller extends Controller {
 	}
 
 	private function _open($course){
-		die("efe");
 		$view = new View("course_open");
 		$view->course = $course;
+		$view->header  = $course->full_name();
+		$view->desc    = $course->desc();
 		$view->render(true);
 	}
 }

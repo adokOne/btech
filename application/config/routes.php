@@ -11,3 +11,4 @@ $config['courses/([\w_\-\/]+)/([\w_\-\/]+)'] = 'courses/categories/$1/$2';
 $config['courses/([\w_\-\/]+)'] = 'courses/show/$1';
 
 $config['blog/([\w_\-\/]+).html|htm'] = 'blog/show/$1';
+$config['online'] = 'main/online';

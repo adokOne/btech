@@ -24,8 +24,8 @@ class Controller extends Controller_Core {
 	}
 
 	private function _prepare_layout(){
-		$css = array("all","jquery-ui-1.9.2.custom.css");
-		$js  = array("jquery-1.7.2.min.js","jquery-ui-1.9.2.custom.min.js");
+		$css = array("all","jquery-ui-1.9.2.custom");
+		$js  = array("jquery-1.7.2.min","jquery-ui-1.9.2.custom.min","jquery.validate","jquery.mvc","script");
 		javascript::add($js);
 		stylesheet::add($css);
 		$this->lang = Kohana::lang("all");

@@ -406,5 +406,25 @@ class text_Core {
 
 		return $str;
 	}
-
+    public static function mb_ucfirst($str){
+        return mb_strtoupper(mb_substr($str, 0, 1)).mb_substr($str, 1);
+    }
+    
+    public static function mb_ucword($str){
+    	$str = mb_convert_case($str, MB_CASE_TITLE, 'UTF-8');
+    	
+    	$arr = explode('.', $str);
+        foreach($arr as $k => $v){
+            $arr[$k] = self::mb_ucfirst($v);
+        }
+        $str = implode('.', $arr);
+        
+        $arr = explode('-', $str);
+        foreach($arr as $k => $v){
+            $arr[$k] = self::mb_ucfirst($v);
+        }
+        $str = implode('-', $arr);
+        
+        return $str;
+    }
 } // End text

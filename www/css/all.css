@@ -734,3 +734,51 @@ html.job #content .items li:hover .item_img{
 .pagination li a.disabled:hover {color: #8D8D8D;}
 .pagination li a.active:hover {color: #FFF;}
 
+
+
+.course_menu{
+	height: 50px;
+}
+.course_menu ul{
+	margin: 0 auto;
+}
+.course_menu ul li{
+	float: left;
+	width: 25%;
+	text-align: center;
+	height: 17px;
+
+}
+.course_menu ul li a{
+	color: #FFF;
+	font-weight: bold;
+}
+
+.items .block{
+	float: left;
+	width: 100%;
+	min-height: 50px;
+	border: 1px solid red;
+}
+.items .block h4{
+	text-align: center;
+	color: #FFF;
+	font-weight: normal;
+	font-size: 25px;
+}
+.items .block .text{
+		color: #FFF;
+		padding: 10px;
+}
+.red{
+	color: red;
+}
+.text.plan a{
+	font-size: 18px;
+	color: #fff;
+	font-weight: bold;
+}
+.text.plan li{
+	font-size: 15px;
+
+}
