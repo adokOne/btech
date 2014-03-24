@@ -16,7 +16,219 @@ class Examples_Controller extends Controller {
 
 	// Do not allow to run in production
 	const ALLOW_PRODUCTION = FALSE;
+	public function import(){
+		set_time_limit(20000);
+		$this->old_db = new Database ( array(	'benchmark'     => TRUE,
+											'persistent'    => FALSE,
+											'connection'    => array
+											(
+												'type'     => 'mysql',
+												'user'     => 'root',
+												'pass'     => 'adok',
+												'host'     => 'localhost',
+											
+												'port'     => FALSE,
+												'socket'   => FALSE,
+												'database' => 'bkt'
+											),
+											'character_set' => 'utf8',
+											'table_prefix'  => '',
+											'object'        => TRUE,
+											'cache'         => FALSE,
+											'escape'        => TRUE) );
 
+		$courses = $this->old_db->from("courses")->where("parent_id",null)->get();
+		foreach($courses as $course){
+			$this->_create_courses($course,0);
+			
+		}
+		// $organizations = $this->old_db->from("organizations")->get();
+		// foreach($organizations as $item){
+		// 	$new_item = new Organization_Model();
+		// 	$new_item->name = $item->name;
+		// 	$new_item->save();
+		// 	$cupons = $this->old_db->from("cupons")->where("organization_id", $item->id)->get();
+		// 	foreach($cupons as $cupon){
+		// 		$new_cupon = new Cupon_Model();
+		// 		$new_cupon->number = $cupon->number;
+		// 		$new_cupon->discount = $cupon->discount;
+		// 		$new_cupon->organization_id = $new_item->id;
+		// 		$new_cupon->uses =  $cupon->use_count;
+		// 		$new_cupon->save();
+		// 	}
+		// }
+		// $feedbacks = $this->old_db->from("feedbacks")->get();
+		// foreach($feedbacks as $feedback){
+		// 	$new_item = new Feedback_Model();
+		// 	$new_item->date = $feedback->date;
+		// 	$new_item->text = $feedback->text;
+		// 	$new_item->email = $feedback->email;
+		// 	$new_item->name = $feedback->name;
+		// 	$new_item->save();
+		// 	$childs = $this->old_db->from("feedbacks")->where("parent_id", $feedback->id)->get();
+		// 	foreach($childs as $ch){
+		// 		$n_item = new Feedback_Model();
+		// 		$n_item->date = $ch->date;
+		// 		$n_item->text = $ch->text;
+		// 		$n_item->name = $ch->name;
+		// 		$n_item->email = $ch->email;
+		// 		$n_item->parent_id = $new_item->id;
+		// 		$n_item->save();
+		// 	}
+		// }
+		// $news = $this->old_db->from("news")->where("type", "news")->get();
+		// foreach($news as $new){
+		// 	$new_lang = $this->old_db->from("news_langs")->where(array("news_id"=>$new->id,"id_lang"=>1))->get()->current();
+		// 	$item = new News_Model();
+		// 	$item->created_at = $new->created_date;
+		// 	$item->show_on_main = $new->show_on_main;
+		// 	$item->active = $new->active;
+		// 	$item->views_count = $new_lang->views_count;
+
+		// 	$item->name_ua = $new_lang->title;
+		// 	$item->text_ua = $new_lang->text;
+		// 	$item->anons_ua = $new_lang->anons;
+		// 	$item->keyw_ua = $new_lang->meta_keywords;
+		// 	$item->desc_ua = $new_lang->meta_desc;
+		// 	$item->seo     = $new_lang->seo_name;
+		// 	$item->save();
+
+		// }
+
+		// $news = $this->old_db->from("news")->where("type", "sale")->get();
+		// foreach($news as $new){
+		// 	$new_lang = $this->old_db->from("news_langs")->where(array("news_id"=>$new->id,"id_lang"=>1))->get()->current();
+		// 	$item = new Sale_Model();
+		// 	$item->created_at = $new->created_date;
+		// 	$item->show_on_main = $new->show_on_main;
+		// 	$item->active = $new->active;
+		// 	$item->views_count = $new_lang->views_count;
+
+		// 	$item->name_ua = $new_lang->title;
+		// 	$item->text_ua = $new_lang->text;
+		// 	$item->anons_ua = $new_lang->anons;
+		// 	$item->keyw_ua = $new_lang->meta_keywords;
+		// 	$item->desc_ua = $new_lang->meta_desc;
+		// 	$item->seo     = $new_lang->seo_name;
+		// 	$item->save();
+
+		// }
+
+	}
+
+	private function _create_courses($course,$parent){
+		$new_course = new Course_Model();
+		$new_course->seo = $course->seo_name;
+		$new_course->price = $course->individual_price;
+		$new_course->sale_price = $course->sale_price;
+		$new_course->lessons_count = $course->l_count;
+		$new_course->parent_id = $parent;
+
+		$lang_course = $this->old_db->from("courses_langs")->where(array("course_id"=>$course->id,"id_lang"=>0))->get()->current();
+		$new_course->name_ru = $lang_course->name;
+		$lang_course = $this->old_db->from("courses_langs")->where(array("course_id"=>$course->id,"id_lang"=>1))->get()->current();
+		$new_course->name_ua = $lang_course->name;
+
+		$lang_course_dd = $this->old_db->from("pages")->where(array("course_id"=>$course->id))->get()->current();
+
+		if($lang_course_dd){
+				$lang_course = $this->old_db->from("pages_langs")->where(array("page_id"=>$lang_course_dd->id,"id_lang"=>0))->get()->current();
+			if($lang_course ){
+				$new_course->desc_ru = $lang_course->text;
+				$new_course->meta_keys_ru = $lang_course->text;
+				$new_course->meta_desc_ru = $lang_course->text;
+				$new_course->meta_title_ru = $lang_course->text;
+			}
+
+				$lang_course = $this->old_db->from("pages_langs")->where(array("page_id"=>$lang_course_dd->id,"id_lang"=>1))->get()->current();
+			if($lang_course){
+				$new_course->desc_ua = $lang_course->text;
+				$new_course->meta_keys_ua = $lang_course->text;
+				$new_course->meta_desc_ua = $lang_course->text;
+				$new_course->meta_title_ua = $lang_course->text;
+			}
+		}
+
+
+
+		$lang_course = $this->old_db->from("preparations")->where(array("course_id"=>$course->id))->get()->current();
+		if($lang_course){
+			$new_course->preparation_ru = $lang_course->text_ru;
+			$new_course->preparation_ua = $lang_course->text_ua;
+		}
+
+
+		$new_course->save();
+
+		$course_price = $this->old_db->from("prices")->where(array("course_id"=>$course->id))->get()->current();
+		if($course_price){
+			$new_price = new Group_Price_Model();
+			$new_price->course_id = $new_course->id;
+			$new_price->price_2 = $course_price->price_1;
+			$new_price->price_4 = $course_price->price_2;
+			$new_price->price_6 = $course_price->price_3;
+			$new_price->price_8 = $course_price->price_4;
+			$new_price->save();	
+		}
+
+
+		$course_themes = $this->old_db->from("plans")->where(array("course_id"=>$course->id))->get();
+		$position_in_group = 0;
+		foreach($course_themes as $theme){
+			$new_plan = new Theme_Model();
+			$new_plan->parent_id = 0;
+			$new_plan->course_id = $new_course->id;
+			$new_plan->name_ru = $theme->name_ru;
+			$new_plan->name_ua = $theme->name_ua;
+			$new_plan->position_in_group = $position_in_group;
+			$new_plan->save();
+			$position_in_group++;
+			$position_in_group_2 = 0;
+			$course_themes_ch = $this->old_db->from("plan_themes")->where(array("plan_id"=>$theme->id))->get();
+			foreach($course_themes_ch as $th){
+
+				$new_p = new Theme_Model();
+				$new_p->parent_id = $new_plan->id;
+				$new_p->course_id = $new_course->id;
+				$new_p->name_ru = $th->name_ru;
+				$new_p->name_ua = $th->name_ua;
+				$new_p->position_in_group = $position_in_group;
+				$new_p->save();
+				$position_in_group_2++;
+			}
+
+
+		}
+		$course_groups = $this->old_db->from("groups")->where(array("course_id"=>$course->id))->get();
+		$number = 0;
+		$new_course->has_group = (int)(count($course_groups) > 0);
+		$new_course->save();
+		if(file_exists(DOCROOT."logos/".$course->id."/pic_93.jpg"))
+			copy(DOCROOT."logos/".$course->id."/pic_93.jpg", DOCROOT."upload/courses/".$new_course->id.".png");
+		foreach ($course_groups as $group) {
+			$new_group = new Group_Model();
+			$new_group->course_id = $new_course->id;
+			$new_group->people_count = $group->people_count;
+			$new_group->lessons_count = $group->lessons_count;
+			$new_group->time_from = $group->time_from;
+			$new_group->time_to = $group->time_to;
+			$new_group->start_date = $group->start_date;
+			$new_group->price = $group->price;
+			$new_group->days = $group->days;
+			$new_group->number = $number;
+			$new_group->save();
+			$number++;
+		}
+		$curses_childs = $this->old_db->from("courses")->where("parent_id",$course->id)->get();
+		foreach($curses_childs as $child){
+			$this->_create_courses($child,$new_course->id);
+		}
+
+
+
+		// 
+		// 
+	}
 	/**
 	 * Displays a list of available examples
 	 */

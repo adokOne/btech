@@ -24,4 +24,14 @@ class News_Model extends ORM{
 		$field = "keyw_".Router::$cur_lang;
 		return $this->$field;
 	}	
+
+	public function save(){
+		$this->generate_seo();
+		parent::save();
+	}
+	private function generate_seo(){
+		if(!strlen($this->seo)) $this->seo = bkt::transliterate($this->name());
+	}
+
+
 } 

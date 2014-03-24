@@ -8,6 +8,7 @@ class Course_Model extends ORM_Tree{
 	protected $ORM_Tree_children = "courses";
 	protected $has_many = array("groups","themes");
 	protected $has_one  = array("group_price");
+	protected $has_and_belongs_to_many = array('teachers');
 
 	public function name(){
 		$field = "name_".Router::$cur_lang;
@@ -91,6 +92,26 @@ class Course_Model extends ORM_Tree{
 		);
 	}
 	public function img(){
-		return html::image($this->image_path.$this->id.$this->image_ext,$this->name());
+		return html::image(array("src"=>"upload/".$this->image_path(),"width"=>100,"height"=>60),$this->name());
 	}
+
+	public function save(){
+		$this->generate_seo();
+		parent::save();
+	}
+
+
+
+	public function foto(){
+		return html::image(array("src"=>"upload/".$this->image_path(),"width"=>100,"height"=>60));
+	}
+
+	public function image_path(){
+		return "courses/".$this->id.".png";
+	}
+
+	private function generate_seo(){
+		if(!strlen($this->seo)) $this->seo = bkt::transliterate($this->name());
+	}
+
 } 

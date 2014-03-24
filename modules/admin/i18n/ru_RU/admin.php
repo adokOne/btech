@@ -24,4 +24,5 @@ $lang = array
 	"info"				  =>    'Инфо',
 	"save"                =>    'Сохранить',
 	"add_photo"           =>    'Добавить фото',
+	"login_page_title"    => "BKT ADMIN"
 );

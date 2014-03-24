@@ -9,7 +9,19 @@ class Admin_Controller extends Controller {
 	public function __construct(){
 		parent::__construct();
 		View::set_global('admin_lang', Kohana::lang('admin'));
-		$this->logged_in && $this->user->is_admin() || $this->login(!request::is_ajax());
+		View::set_global("max_height",900);
+		$css_arr =array(); 
+		foreach(scandir(DOCROOT."css/admin") as $css){
+			if(strlen($css) < 3) continue;
+			stylesheet::add("admin/".str_replace(".css", "", $css));
+		}
+		foreach(scandir(DOCROOT."js/admin") as $js){
+			if(strlen($js) < 3) continue;
+			javascript::add("admin/".str_replace(".js", "", $js));
+		}
+
+		$this->logged_in && $this->user->is_admin() || $this->login(!in_array(request::method(), array("post")));
+
 	}
 	
 	public function index(){
@@ -26,7 +38,7 @@ class Admin_Controller extends Controller {
 		else{
 			$username = $this->input->post('username',null,true);
 			$password = $this->input->post('password',null,true);
-			$response = array('success'=>false,'text'=>Kohana::lang('admin.default_login_error'));
+			$url = url::current()."?".http_build_query(array('errors'=>'default_login_error'));
 			$user = Validation::factory($_POST)
 				->pre_filter('trim', TRUE)
 				->add_rules('username', 'required', 'length[5,127]')
@@ -34,9 +46,9 @@ class Admin_Controller extends Controller {
 			if($user->validate()){
 				$user = ORM::factory('user',$username);
 				if($user->is_admin() && Auth::instance()->login($username, $password, false))
-					$response = array('success'=>true);
+					$url = "/admin";
 			}
-			echo json_encode($response);
+			url::redirect($url);
 		}
 		exit;
 
