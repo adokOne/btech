@@ -7,8 +7,13 @@ class Main_Controller extends Controller {
 	{
 		
 		Router::$base_cls = "index first_page";
+		javascript::add(array("jquery.selectbox-0.2.min","controllers/online"));
+		stylesheet::add("jquery.selectbox");
 		$view = new View("main");
 		$view->main_text = Kohana::lang("all.main_text");
+		$view->header  = $this->lang["courses_head"];
+		$view->desc    = $this->lang["courses_desc"];
+		$view->courses = $this->_prepare_courses(0);
 		$view->render(true);
 	}
 

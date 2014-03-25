@@ -256,15 +256,15 @@ input[type="text"],input[type="email"],input[type="password"],input[type="submit
 
 /*backgrounds for different pages*/
 /* navigation */
-html.index #nav li.active{
+html.index #nav li.active ,html.index  #nav .index.active{
 	background: #313132;
 }
 
-html.courses #nav li.active{
+html.courses #nav li.active , html.index #nav .courses.active{
 	background: #4c3f4b;
 }
 
-html.online #nav li.active{
+html.online #nav li.active , html.index #nav .online.active{
 	background: #52AA9C;
 }
 html.job #nav li.active{
@@ -284,6 +284,7 @@ html.contacts #nav li.active{
 html.sale #nav li.active{
 	background: #f39c12;
 }
+
 /* end navigation */
 
 
@@ -386,11 +387,11 @@ html.index{
 	background: url("../img/bg/index.jpg") no-repeat;
 }
 
-html.courses{
+html.courses,#content.courses{
 	background: #665464 url("../img/bg/courses.png") no-repeat;
 	
 }
-html.online{
+html.online,#content.online{
 	background: #00C2A3 url("../img/bg/courses.png") no-repeat;
 	
 }
@@ -413,8 +414,18 @@ html.contacts{
 	background: #7f8c8d url("../img/bg/contacts.png") no-repeat;
 	
 }
+#content.online,#content.courses{
+	height: 900px;
+}
 
+#content.online .wrapper,#content.courses .wrapper{
+	padding-top: 100px;
+}
 
+html.index .header_ins{
+	position: fixed;
+	z-index: 500;
+}
 
 
 #content .top{
@@ -467,7 +478,10 @@ html.contacts{
 }
 #content{
 	margin-top: 30px;
-	padding-bottom: 100px;
+	padding-bottom: 132px;
+}
+#content.online{
+	margin-top: 0;
 }
 #content .schedule{
 	margin: 30px 0;
