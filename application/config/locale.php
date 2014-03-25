@@ -7,7 +7,7 @@
  * for OS's that don't support the first (e.g. Windows). The first valid locale in the array will be used.
  * @see http://php.net/setlocale
  */
-$config['language'] = array('ru_RU', 'Russian');
+$config['language'] = array('ua_UK', 'Russian');
 
 /**
  * Locale timezone. Defaults to use the server timezone.

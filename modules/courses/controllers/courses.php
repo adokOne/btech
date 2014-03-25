@@ -8,6 +8,7 @@ class Courses_Controller extends Controller {
 	}
 
 	public function index(){
+		Router::$base_cls = "courses first_page";
 		$courses = ORM::factory('course')->where('parent_id', 0)->find_all();
 		$view = new View("courses_main");
 		$view->courses = $courses;
@@ -37,6 +38,7 @@ class Courses_Controller extends Controller {
 		$view->courses = $course->children;
 		$view->header  = $course->name();
 		$view->desc    = $course->desc();
+		$view->parent_course    = $course;
 		$view->render(true);
 	}
 
@@ -53,7 +55,7 @@ class Courses_Controller extends Controller {
 	private function _open($course){
 		$view = new View("course_open");
 		$view->course = $course;
-		$view->header  = $course->full_name();
+		$view->header  = $course->name();
 		$view->desc    = $course->desc();
 		$view->render(true);
 	}

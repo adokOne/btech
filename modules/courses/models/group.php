@@ -5,10 +5,11 @@ class Group_Model extends ORM{
 	protected $belongs_to = array("course");
 
 	public function days(){
-		$days = array();
+/*		$days = array();
 		foreach(explode("|", $this->days) as $day)
 			$days[] = Kohana::lang("all.short_days.".$day); 
-		return implode(",", $days);
+		return implode(",", $days);*/
+		return $this->days;
 	}
 
 	public function time(){

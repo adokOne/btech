@@ -27,10 +27,10 @@
                                     </ul>
                                 </li>
                             <?php endforeach;?>
-                            <li class="comment_add">
+<!--                             <li class="comment_add">
                                 <a href="#">Залишити коментар</a>
                             </li>
-                        </ul>
+                        </ul> -->
                         
                     </div>
                 </div>

@@ -70,7 +70,9 @@ $.Controller("OnlineRegController",{
 	create_select_2:function(data){
 		var select = $("<select name='course_3'/>");
 		for(i in data){
-			select.append($("<option value='" + data[i].id + "'>" + data[i].name + "</option>"))
+			var option = $("<option value='" + data[i].id + "'>" + data[i].name + "</option>")
+			option.data("options",data[i])
+			select.append(option)
 		}
 		this.element.find("#course2").append(select)
 		this.element.find("#course2").show();
@@ -79,7 +81,9 @@ $.Controller("OnlineRegController",{
 	create_select_3:function(data){
 		var select = $("<select name='group'/>");
 		for(i in data){
-			select.append($("<option value='" + data[i].id + "'>" + data[i].name + "</option>"))
+			var option = $("<option value='" + data[i].id + "'>" + data[i].name + "</option>")
+			option.data("options",data[i])
+			select.append(option)
 		}
 		this.element.find("#group").append(select)
 		this.element.find("#group").show();

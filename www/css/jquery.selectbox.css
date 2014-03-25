@@ -79,7 +79,7 @@
 	position: absolute;
 	top: 30px;
 	width: 350px;
-	max-height: 150px !important;
+	max-height: 450px !important;
 	z-index: 6;
 	overflow-y: auto;
 }

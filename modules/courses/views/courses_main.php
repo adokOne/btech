@@ -3,7 +3,7 @@
     <div id="content">
         <div class="wrapper">
             <p class="heading"><?php echo $header?></p>
-            <p class="heading_desc"><?php echo $desc?></p>
+            <div class="heading_desc"><?php echo $desc?></div>
             <div class="items">
                 <?php foreach($courses as $course):?>
                     <div class="item">

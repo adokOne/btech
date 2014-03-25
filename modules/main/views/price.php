@@ -6,9 +6,9 @@
                 <?php echo $lang["idividual_less"]?>
             </p>
             <div class="price_form">
-                <table>
+                <table cellpadding="0" cellspacing="0">
                     <thead>
-                        <tr>
+                        <tr class="table_head">
                             <th width="300"><?php echo $lang["course"]?></th>
                             <th width="300"><?php echo $lang["l_count"]?></th>
                             <th width="300"><?php echo $lang["lesson_price"]?></th>
@@ -16,13 +16,13 @@
                     </thead>
                 </table>
                 <?php foreach($courses as $course):?>
-               		<p class="price_cource"><?php echo $course->name()?></p>
-	                <table>
+               		<p class="price_cource"><a href="<?php echo url::lang_url()."courses/".$course->seo();?>"><?php echo $course->name()?></a></p>
+	                <table cellpadding="0" cellspacing="0">
 	                    <tbody>
-	                    	<?php foreach($course->get_all_childs() as $child):?>
-		                        <tr>
-		                            <td width="300"><?php echo $child->course_full_name()?></td>
-		                            <td width="300"><?php echo $child->lessons_count?></td>
+	                    	<?php $i=1; foreach($course->get_all_childs() as $child):?>
+		                        <tr <?php if($i%2===0):?> class="table_grey" <?php endif; $i++?>>
+		                            <td width="300"><?php echo $child->name()?></td>
+		                            <td width="300"><?php echo sprintf($lang["ak_god"],$child->lessons_count) ?></td>
 		                            <td width="300"><?php echo sprintf($lang["price_pattern"],$child->price)?></td>
 		                        </tr>
 	                        <?php endforeach;?>
@@ -36,9 +36,9 @@
                 <?php echo $lang["group_less"]?>
             </p>
             <div class="price_form">
-                <table>
+                <table cellpadding="0" cellspacing="0">
                     <thead>
-                        <tr>
+                        <tr class="table_head group">
                             <th width="300"><?php echo $lang["course"]?></th>
                             <th width="300"><?php echo $lang["l_count"]?></th>
                             <th width="300"><?php echo $lang["lesson_price"]?><br/><small><?php echo $lang["groupe_price_desc"]?></small></th>
@@ -46,7 +46,7 @@
 
                     </thead>
                 </table>
-                <table>
+                <table cellpadding="0" cellspacing="0">
                         <tr>
                         	<td width="300"><?php echo $lang["people_group_price"]?></td>
                         	<td width="300"></td>
@@ -57,13 +57,14 @@
                         </tr>
                 </table>
                 <?php foreach($courses as $course):?>
-               		<p class="price_cource"><?php echo $course->name()?></p>
-	                <table>
+                <?php if(count($course->get_all_childs_with_groups())):?>
+               		<p class="price_cource"><a href="<?php echo url::lang_url()."courses/".$course->seo();?>"><?php echo $course->name()?></a></p>
+	                <table cellpadding="0" cellspacing="0">
 	                    <tbody>
-	                    	<?php foreach($course->get_all_childs_with_groups() as $child):?>
-		                        <tr>
-		                            <td width="300"><?php echo $child->course_full_name()?></td>
-		                            <td width="300"><?php echo $child->lessons_count?></td>
+	                    	<?php $i=1; foreach($course->get_all_childs_with_groups() as $child):?>
+		                        <tr <?php if($i%2===0):?> class="table_grey" <?php endif; $i++?>>
+		                            <td width="300"><?php echo $child->name()?></td>
+		                            <td width="300"><?php echo sprintf($lang["ak_god"],$child->lessons_count) ?></td>
 		                            <td width="75"><?php echo sprintf($lang["price_pattern"],$child->group_price->price_2)?></td>
 		                            <td width="75"><?php echo sprintf($lang["price_pattern"],$child->group_price->price_4)?></td>
 		                            <td width="75"><?php echo sprintf($lang["price_pattern"],$child->group_price->price_6)?></td>
@@ -72,6 +73,7 @@
 	                        <?php endforeach;?>
 	                    </tbody>
 	                </table>
+                <?php endif;?>
                 <?php endforeach;?>
                 <div class="clear"></div>
 
