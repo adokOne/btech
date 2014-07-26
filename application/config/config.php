@@ -4,7 +4,7 @@
  * then a full URL will be used, eg: http://localhost/kohana/. If it only includes
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
-$config['site_domain'] = 'portal.local';
+$config['site_domain'] = 'cake.local';
 $config['site_name']   = 'BT CRM';
 $config['display_errors'] = TRUE;
 
@@ -122,4 +122,5 @@ $config['modules'] = array
 	 MODPATH.'auth',       // Authentication
 	 MODPATH.'admin',      // Administration
 	 MODPATH.'users',      // Users
+	  MODPATH.'cake',      // Users
 );

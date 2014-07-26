@@ -25,7 +25,7 @@ class User_Model extends Auth_User_Model {
 			$array = Validation::factory($array)
 				->pre_filter('trim')
 				->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
-				->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
+				->add_rules('name', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]')
 				->add_rules('password', 'required', 'length[5,42]');
 			
 			if($array->validate())
@@ -33,6 +33,18 @@ class User_Model extends Auth_User_Model {
 		}
 
 
+	}
+
+	public function avatar(){
+		
+	}
+
+	public function roles(){
+		$roles = array();
+		foreach($this->roles as $role){
+			$roles[] = $role->name;
+		}
+		return $roles;
 	}
 
 	public function generate_password(){

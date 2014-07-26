@@ -24,4 +24,30 @@ $lang = array
 	"info"				  =>    'Инфо',
 	"save"                =>    'Сохранить',
 	"add_photo"           =>    'Добавить фото',
+	"forgot" 		      =>    "Забыли пароль?",
+	"stay_signed"         =>    "Оставаться в системе",
+	"login_tip"           =>    "Введите Email пользователя",
+	"pass_tip"            =>    "Введите пароль пользователя",
+	"admin_index"         =>    "Главная",
+	"admin_list"           =>   "Список администраторов",
+	"delete"              => "Удалить",
+	"edit"   => "Редактировать",
+	"good_list" => "Список товаров",
+	"answ_0" => "Нет",
+	"answ_1"  => "Да",
+);
+$lang["users"] = array(
+	"admin_name"  => "Имя администратора",
+	"admin_email" => "Email",
+	"last_login"  => "Последний вход",
+	"roles"       => "Роли",
+	"actions"     => "Действия"
+);
+$lang["goods"] = array(
+	"good_name"   => "Название",
+	"good_price"  => "Цена(грн)",
+	"good_active" => "Товар доступен?",
+	"on_tomorrow" => "Только на завтра?",
+	"image"       => "Картинка",
+	"actions"     => "Действия"
 );

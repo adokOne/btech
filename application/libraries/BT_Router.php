@@ -2,6 +2,7 @@
 class Router extends Router_Core {
 
     public static $language = '';
+    public static $current_language = '';
     public static $title    = '';
     public static $desc     = '';
     public static $keywords = '';
@@ -10,7 +11,7 @@ class Router extends Router_Core {
     {
         Router_Core::find_uri();
 		if (Kohana::config('multi_lang.enabled')) {
-			
+			self::$current_language = Kohana::config('multi_lang.default_language');
 			$allowed_languages = Kohana::config('multi_lang.allowed_languages');
 			if (preg_match('~^[a-z]{2}(?=/|$)~i', Router::$current_uri, $matches) AND isset($matches[0]))
 		    {
@@ -23,7 +24,7 @@ class Router extends Router_Core {
 					
 	            // Set the currently defined language
 	            Router::$language = $lang_lc;
-	            
+	            self::$current_language  = $lang_lc;
 	            // Remove the language from the URI
 	            Router::$current_uri = substr(Router::$current_uri, 3);
 	            

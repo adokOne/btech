@@ -12,9 +12,8 @@ $config['enabled'] = true;
 
 $config['allowed_languages'] = array
 (
-	'en' => 'en_GB',
+	'uk' => 'uk_UA',
 	'ru' => 'ru_RU',
-	'es' => 'es_ES',
 );
 
 $config['fallback_language'] = 'ru';
