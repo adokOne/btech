@@ -56,9 +56,7 @@
 										<?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "anons_".$k;?>
 											<label class="textarea lang lang_<?php echo $k;?>"> 	
 												<i class="icon-append fa fa-comment"></i>									
-												<textarea  required="required" rows="3" name="object[anons_<?php echo $k;?>]" placeholder="Анонс">
-													<?php echo $object->$f;?>
-												</textarea> 
+												<textarea  required="required" rows="3" name="object[anons_<?php echo $k;?>]" placeholder="Анонс"><?php echo $object->$f;?></textarea> 
 											</label>
 										<?php endforeach;?>
 									</section>
@@ -66,9 +64,7 @@
 										<?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "desc_".$k;?>
 											<label class="textarea lang lang_<?php echo $k;?>"> 
 												<i class="icon-append fa fa-comment"></i>										
-												<textarea   required="required" rows="6" name="object[desc_<?php echo $k;?>]" placeholder="Описание">
-													<?php echo $object->$f;?>
-												</textarea> 
+												<textarea   required="required" rows="6" name="object[desc_<?php echo $k;?>]" placeholder="Описание"><?php echo $object->$f;?></textarea> 
 											</label>
 										<?php endforeach;?>
 									</section>

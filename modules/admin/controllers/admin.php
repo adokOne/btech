@@ -15,10 +15,11 @@ class Admin_Controller extends Controller {
 			"smartadmin-skins.min",
 		);
 		$js = array(
-			"vendor/dropzone.min",
+
 			"vendor/jquery.min",
 			"vendor/jquery-ui.min",
 			"vendor/app.config",
+			"vendor/summernote",
 			"vendor/bootstrap.min",
 			"vendor/jquery.validate.min",
 			"vendor/jquery.maskedinput.min",
