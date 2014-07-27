@@ -89,7 +89,7 @@
 											</td>
 											<td rowspan="1" colspan="1">
 												<label class="input">
-													<input type="text" name="search[date]" value="<?php echo isset($search["date"]) ? $search["date"] : "" ?>" class="search_init">
+													<input type="text" name="search[date]" class="datepicker" value="<?php echo isset($search["date"]) ? date("d.m.Y",strtotime($search["date"]))  : "" ?>" class="search_init">
 												</label>
 											</td>
 											<td rowspan="1" colspan="1"></td>
@@ -104,19 +104,19 @@
 								        <tr role="row" class="<?php echo $k%2 > 0 ? "odd" : "even"?>">
 								                <td><?php echo $item->name?></td>
 								                <td><?php echo $item->phone?></td>
-								                <td><?php echo $item->goods_admin_html()?></td>
+								                <td style="font-size: 10px;"><?php echo $item->goods_admin_html()?></td>
 								                <td><?php echo $admin_lang["pay_types"][$item->pay_type]?></td>
 								                <td><?php echo $item->total_price?></td>
 								                <td><b style="color:<?php echo $admin_lang["order_statuses_color"][$item->status]?>"><?php echo $admin_lang["order_statuses"][$item->status]?></b></td>
 								                <td><?php echo $item->address?></td>
 								                <td><?php echo $item->email?></td>
-								                <td><?php echo $item->date?></td>
+								                <td><?php echo $item->date == "0000-00-00" ? "-" : date("d.m.Y",strtotime($item->date))?></td>
 								                <td><?php echo $item->time?></td>
 								                <td><?php echo $item->comment?></td>
 								                <td><?php echo $item->manager_comment?></td>
 								                <td>
-								                	<a class="btn btn-primary" href="/admin/orders/edit/<?php echo $item->id?>">O</a>
-								                	<a class="btn btn-danger" href="/admin/orders/delete/<?php echo $item->id?>">X</a>
+								                	<a style="padding: 6px 12px;" class="btn btn-primary" href="/admin/orders/edit/<?php echo $item->id?>">O</a>
+								                	<a style="padding: 6px 12px;" class="btn btn-danger" href="/admin/orders/delete/<?php echo $item->id?>">X</a>
 								                </td>
 								        </tr>
 							    	<?php endforeach;?>

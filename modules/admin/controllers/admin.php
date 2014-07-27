@@ -88,6 +88,11 @@ class Admin_Controller extends Controller {
 		}
 	}
 
+	public function logout(){
+		Auth::instance()->logout(TRUE);
+		url::redirect(request::referrer(),301);
+	}
+
 	protected function pagination(){
 
 		$config = array(

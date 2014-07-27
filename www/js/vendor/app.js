@@ -1165,7 +1165,9 @@ function checkURL() {
 	container = $('#content');
 	// Do this if url exists (for page refresh, etc...)
 	if (url) {
-		console.log('nav li:has(a[href="' + url + '"])')
+		url = url.split("/")
+		url = "/" + url[1] + "/" + url[2]
+		//console.log('nav li:has(a[href="' + url + '"])')
 		// remove all active class
 		$('nav li.active').removeClass("active");
 		// match the url and add the active class

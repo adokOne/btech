@@ -7,6 +7,7 @@
 class Goods_Admin extends Admin_Controller {
 
 	public function index($page = 1){
+		View::set_global("main_height",1400);
 		$items = ORM::factory("good")->limit($this->config["per_page"])->offset(($page-1)*$this->config["per_page"])->find_all();
 		$view  = new View("goods/index");
 		$view->items = $items;

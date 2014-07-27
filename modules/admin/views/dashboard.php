@@ -2,15 +2,20 @@
 <html lang="en-us"><head>
 	<head>
 		<meta charset="utf-8">
-		<title>B1Dev Admin</title>
+		<title>Cheescake Admin</title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		<?php echo css::render();?>
+	    <!--[if lt IE 9]>
+	    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
 		<?php echo js::render();?>
 	</head>
-	<body class="desktop-detected" style="min-height: 900px;">
+	<body class="desktop-detected" style="min-height: <?php echo isset($main_height) && is_numeric($main_height)? $main_height : "900" ?>px;">
 		<!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 		<script type="text/javascript">
 			window.language = '<?php echo Router::$current_language?>';
@@ -37,7 +42,7 @@
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
 					<span> 
-						<a style="cursor: pointer!important;" href="/admin/exit">
+						<a style="cursor: pointer!important;" href="/admin/logout">
 						<i class="fa fa-sign-out"></i>
 						</a>
 					</span>
@@ -51,7 +56,7 @@
 
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
-		<aside id="left-panel" style="min-height: 900px;">
+		<aside id="left-panel" style="min-height:<?php echo isset($main_height) && is_numeric($main_height)? $main_height : "900" ?>px;">
 
 			<!-- User info -->
 			<div class="login-info">
@@ -114,7 +119,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 						<h1 class="page-title txt-color-blueDark">
-							Мод Тайтл
+							
 							
 						</h1>
 					</div>
@@ -130,7 +135,7 @@
 							<strong>Успешно!</strong>
 						</div>
 					<?php endif;?>
-					<?php echo isset($content) ? $content : ""; ?>
+					<?php echo isset($content) ? $content : '<article><div class="widget-body no-padding"><div class="row"><div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm"><img src="/img/admin_baner.png" width="810" height="355" class="login_img pull-right display-image"></div></div></div></article>'; ?>
 				</section>
 				
 			</div>

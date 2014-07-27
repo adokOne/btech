@@ -28,6 +28,14 @@ class Order_Model  extends ORM{
 		{
 		  $result[] = "<b>". $pos->count."</b> x ".$pos->good->name()."<span style='float:right'>".$pos->good->price." грн.</span>";
 		}
-		return implode("<br/>", $result);
+		return implode("<br/><br/>", $result);
+	}
+	public function goods_admin_exel(){
+		$result = array();
+		foreach($this->positions as $pos)
+		{
+		  $result[] = $pos->count." x ".$pos->good->name()."---".$pos->good->price." грн.";
+		}
+		return implode("\n", $result);
 	}
 }

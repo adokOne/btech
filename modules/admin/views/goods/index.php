@@ -49,9 +49,16 @@
 					    	</tbody>
 					
 						</table>
-						<div class="dt-toolbar-footer">
-						   <?php echo $pagination->render();?>
-						</div>
+							<div class="dt-row dt-bottom-row">
+								<div class="row">
+									<div class="col-sm-6"></div>
+									<div class="col-sm-6 text-right">
+										<div class="dataTables_paginate paging_bootstrap">
+							  		 		<?php echo $pagination->render();?>
+							  		 	</div>
+							  		 </div>
+							  	</div>
+							</div>
 					</div>
 
 				</div>

@@ -8,6 +8,7 @@ class Orders_Admin extends Admin_Controller {
 	private $search = array(); 
 
 	public function index($page = 1){
+		View::set_global("main_height",1400);
 		$js = array(
 			"modules/admin_orders",
 		);
@@ -30,6 +31,7 @@ class Orders_Admin extends Admin_Controller {
 	}
 
 	public function new_one(){
+		View::set_global("main_height",1400);
 		$goods = ORM::factory("good")->find_all()->as_array();
 		$goods = array_chunk($goods, ceil(count($goods)/3));
 		$view = new View("orders/edit");
@@ -40,6 +42,7 @@ class Orders_Admin extends Admin_Controller {
 	}
 
 	public function edit($id=false){
+		View::set_global("main_height",1400);
 		$object = $this->check_object_by_id("order",$id);
 		$goods = ORM::factory("good")->find_all()->as_array();
 		$goods = array_chunk($goods, ceil(count($goods)/3));
@@ -82,8 +85,64 @@ class Orders_Admin extends Admin_Controller {
 	}
 
 	public function export(){
-		die("To Do");
-	}
+		include Kohana::find_file('vendor', 'PHPExcel');
+        $file_name = 'xls_'.date('Y_m_d(H:i:s)', time()).'.xls';
+        header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', true);
+        header('Content-type: application/vnd.ms-excel', true);
+        header('Content-Disposition: attachment;filename="'.$file_name);
+        header('Cache-Control: max-age=0');  
+        header('Content-Transfer-Encoding: binary');
+
+        $xls = new PHPExcel();
+        $xls->getActiveSheet()->setTitle('Заказы');
+
+        $rows = array();
+        $rows[0] = array("ID","Заказ","Имя","Телефон","e-mail","Дата доставки","Время доставки","Тип оплаты","Комментарий","Комментарий меннеджера","Цена","Статус");
+
+        $rowCount = 1;
+        foreach (ORM::factory("order")->find_all() as $k=>$order) {
+       	$xls->getActiveSheet()
+          ->getRowDimension($k+1)
+          ->setRowHeight(100);      
+          $rows[] = array(
+            $order->id,
+            $order->goods_admin_exel(),
+            $order->name,
+            $order->phone,
+            $order->email,
+            $order->date,
+            $order->time,
+            Kohana::lang("admin.pay_types.".$order->pay_type),
+            $order->comment,
+            $order->manager_comment,
+            $order->total_price,
+            Kohana::lang("admin.order_statuses.".$order->status),
+          );
+          $rowCount++;
+        }
+        
+        $xls->getActiveSheet()->fromArray($rows);
+          for($i = 'A'; $i !== "K"; $i++) {
+            $xls->getActiveSheet()->getColumnDimension($i)->setAutoSize(TRUE);
+          }
+          $xls->setActiveSheetIndex(0);
+
+
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel5');
+        $objWriter->setPreCalculateFormulas(false);
+
+        ob_clean();
+        $objWriter->save('php://output');
+
+        $excelOutput = ob_get_clean();
+        $bom = pack("CCC", 0xef, 0xbb, 0xbf);
+        if (0 == strncmp($excelOutput, $bom, 3)) {
+                $excelOutput = substr($excelOutput, 3);
+        }
+        $xls->disconnectWorksheets();
+        unset($xls);
+        echo $excelOutput;
+    }
 
 	private function check_conditions(){
 		$result = array();
