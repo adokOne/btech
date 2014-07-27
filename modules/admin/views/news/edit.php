@@ -2,7 +2,7 @@
 
 				<header role="heading">
 					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-					<h2>Редактирование страницы</h2>				
+					<h2>Редактирование Новости</h2>				
 
 				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
 				<div class="widget-toolbar" role="menu">
@@ -24,7 +24,7 @@
 					<!-- widget content -->
 					<div class="widget-body no-padding">
 						
-						<form onsubmit="return postForm()"action="/admin/pages/update" id="checkout-form" class="smart-form" method="post" enctype="multipart/form-data" novalidate> 
+						<form onsubmit="return postForm()"action="/admin/news/update" id="checkout-form" class="smart-form" method="post" enctype="multipart/form-data" novalidate> 
 
 							<fieldset>
 								<div class="row">

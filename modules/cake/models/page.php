@@ -26,4 +26,15 @@ class Page_Model  extends ORM{
 
 		parent::__set($key, $value);
 	}
+
+	public function save(){
+		if(!strlen($this->seo_name)){
+			$this->seo_name = $this->generate_seo();
+		}
+		parent::save();
+	}
+
+	private function generate_seo(){
+		return text::ru2Lat($this->name_ru);
+	}
 }

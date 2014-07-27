@@ -37,18 +37,12 @@
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
 					<span> 
-						<a style="cursor: pointer!important;" href="<%=admin_exit_path%>">
+						<a style="cursor: pointer!important;" href="/admin/exit">
 						<i class="fa fa-sign-out"></i>
 						</a>
 					</span>
 				</div>
 				<!-- end logout button -->
-
-				<!-- search mobile button (this is hidden till mobile view port) -->
-				<div id="search-mobile" class="btn-header transparent pull-right">
-					<span> <a href="#" title="Search"><i class="fa fa-search"></i></a> </span>
-				</div>
-
 			</div>
 			<!-- end pulled right: nav area -->
 

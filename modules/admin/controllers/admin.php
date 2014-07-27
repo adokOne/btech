@@ -11,7 +11,7 @@ class Admin_Controller extends Controller {
 		$css = array(
 			"bootstrap.min",
 			"font-awesome.min",
-			"smartadmin-production.min",
+			"smartadmin-production",
 			"smartadmin-skins.min",
 		);
 		$js = array(
@@ -19,16 +19,16 @@ class Admin_Controller extends Controller {
 			"vendor/jquery.min",
 			"vendor/jquery-ui.min",
 			"vendor/app.config",
-			"vendor/summernote",
 			"vendor/bootstrap.min",
-			"vendor/jquery.validate.min",
+			"vendor/jquery.validate",
 			"vendor/jquery.maskedinput.min",
 			"vendor/select2.min",
 			"vendor/jquery.mb.browser.min",
 			"vendor/app",
 			"jquery.mvc",
 			"admin",
-			"modules/admin_login"
+			"modules/admin_login",
+			"vendor/summernote",
 		);
 		js::add($js);
 		css::add($css);

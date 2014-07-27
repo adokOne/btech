@@ -4,6 +4,7 @@
 class Good_Model  extends ORM{
     protected $has_one = array("label");
     public    $img_dir = "upload/goods/";
+    protected $has_many = array("positions");
     
 	public function name(){
 		$field = "name_".Router::$current_language; 

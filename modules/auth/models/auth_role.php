@@ -2,7 +2,7 @@
 
 class Auth_Role_Model extends ORM {
 
-	protected $has_and_belongs_to_many = array('users');
+	protected $has_and_belongs_to_many = array('users','modules');
 
 	/**
 	 * Validates and optionally saves a role record from an array.
