@@ -13,7 +13,7 @@ class html_Core {
 	public static function label ($text,$bg,$color,$size=80,$radius_size=500){
 		return '<div class="lbl" style="text-align:center;-webkit-border-radius: '.$radius_size.'px;-moz-border-radius: '.$radius_size.'px;border-radius: 500px;background-color:'.$bg.';color:'.$color.';display: table; width:'.$size.'px;height: '.$size.'px; #position: relative; overflow: hidden;">
 		  <div style="#position: absolute; #top: 50%;display: table-cell; vertical-align: middle;">
-		    <div style=" #position: relative; #top: -50%">
+		    <div class="text_div" style=" #position: relative; #top: -50%">
 		    '.$text.'
 		    </div>
 		  </div>

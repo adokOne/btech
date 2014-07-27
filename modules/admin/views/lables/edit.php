@@ -27,7 +27,7 @@
 								<section class="col col-6">
 									<?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "name_".$k;?>
 										<label class="input lang lang_<?php echo $k;?>"> <i class="icon-append fa fa-tag"></i>
-											<input required="required" type="text" name="object[name_<?php echo $k;?>]" placeholder="Название" value="<?php echo $object->$f?>">
+											<input class="name" required="required" type="text" name="object[name_<?php echo $k;?>]" placeholder="Название" value="<?php echo $object->$f?>">
 										</label>
 									<?php endforeach;?>
 								</section>
@@ -85,6 +85,9 @@ $(document).ready(function(){
 	});
 	change_lang(window.language);
 	cycle_example();
+	$(".name").keyup(function(){
+		$(".lbl .text_div").text($(this).val())
+	})
 })
 
 function change_lang(lang){
@@ -130,4 +133,6 @@ function change_lang(lang){
 	  colorwheel.onchange(update).color($(".sel:eq(0)").val());
 	  colorwheel_1.onchange(update_front).color($(".sel:eq(1)").val())
 	}
+
+
 </script>
