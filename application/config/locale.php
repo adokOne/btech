@@ -8,6 +8,10 @@
  * @see http://php.net/setlocale
  */
 $config['language'] = array('ru_RU', 'Russian');
+$config['allowed_languages'] = array(
+  "ru" => "Рус",
+  "uk" => "Укр"
+  );
 
 /**
  * Locale timezone. Defaults to use the server timezone.

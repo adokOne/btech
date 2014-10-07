@@ -22,6 +22,7 @@ class url_Core {
 		return ($qs === TRUE) ? Router::$complete_uri : Router::$current_uri;
 	}
 
+
 	/**
 	 * Base URL, with or without the index page.
 	 *

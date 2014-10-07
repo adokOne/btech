@@ -19,6 +19,7 @@ class Goods_Admin extends Admin_Controller {
 	}
 
 	public function new_one(){
+		View::set_global("main_height",1000);
 		$view = new View("goods/edit");
 		$view->object =  new Good_Model();
 		$view->lables = ORM::factory("label")->find_all();
@@ -27,6 +28,7 @@ class Goods_Admin extends Admin_Controller {
 	}
 
 	public function edit($id=false){
+		View::set_global("main_height",1000);
 		$object = $this->check_object_by_id("good",$id);
 		$view = new View("goods/edit");
 		$view->object =  $object ;
@@ -52,7 +54,7 @@ class Goods_Admin extends Admin_Controller {
 	public function delete($id=false){
 		$user = $this->check_object_by_id("good",$id);
 		$user->delete();
-		url::redirect(request::referrer()."?success");
+		url::redirect(url::base()."admin/goods?success");
 	}
 
 	private function upload_pictures($item){

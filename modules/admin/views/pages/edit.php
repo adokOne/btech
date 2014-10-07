@@ -29,7 +29,7 @@
 							<fieldset>
 								<div class="row">
 									<input type="hidden" name="object[id]" value="<?php echo $object->id?>"/>
-									<input type="hidden" name="object[type]" value="news"/>
+									<input type="hidden" name="object[type]" value="page"/>
 									<section class="col col-6">
 										<?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "name_".$k;?>
 											<label class="input lang lang_<?php echo $k;?>"> <i class="icon-append fa fa-tag"></i>
