@@ -64,7 +64,7 @@
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
           <div class="logo">
-            <a href="#">
+            <a href="/<?php echo Router::$language?>">
               <img src="/img/front/logo.png" alt=".">
             </a>
           </div>
