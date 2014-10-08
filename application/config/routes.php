@@ -5,4 +5,4 @@
  * Sets the default route to "welcome"
  */
 $config['_default'] = 'index';
-$config["to_card/(\d)"]  = 'index/to_card/$1';
+$config["to_card/(\d+)"]  = 'index/to_card/$1';
