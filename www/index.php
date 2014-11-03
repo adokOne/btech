@@ -54,7 +54,7 @@ version_compare(PHP_VERSION, '5.2', '<') and exit('Kohana requires PHP 5.2 or ne
  * good level for error reporting.
  */
 error_reporting(E_ALL & ~E_STRICT);
-
+error_reporting(E_ALL & ~E_DEPRECATED);
 /**
  * Turning off display_errors will effectively disable Kohana error display
  * and logging. You can turn off Kohana errors in application/config/config.php
@@ -104,4 +104,5 @@ else
 {
 	// Initialize Kohana
 	require SYSPATH.'core/Bootstrap'.EXT;
+	
 }

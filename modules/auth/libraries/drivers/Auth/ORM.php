@@ -89,19 +89,19 @@ class Auth_ORM_Driver extends Auth_Driver {
 		// If the passwords match, perform a login
 		if ($user->has(ORM::factory('role', 'login')) AND $user->password === $password)
 		{
-			if ($remember === TRUE)
-			{
-				// Create a new autologin token
-				$token = ORM::factory('user_token');
+			// if ($remember === TRUE)
+			// {
+			// 	// Create a new autologin token
+			// 	$token = ORM::factory('user_token');
 
-				// Set token data
-				$token->user_id = $user->id;
-				$token->expires = time() + $this->config['lifetime'];
-				$token->save();
+			// 	// Set token data
+			// 	$token->user_id = $user->id;
+			// 	$token->expires = time() + $this->config['lifetime'];
+			// 	$token->save();
 
-				// Set the autologin cookie
-				cookie::set('authautologin', $token->token, $this->config['lifetime']);
-			}
+			// 	// Set the autologin cookie
+			// 	cookie::set('authautologin', $token->token, $this->config['lifetime']);
+			// }
 
 			// Finish the login
 			$this->complete_login($user);

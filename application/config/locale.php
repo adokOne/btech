@@ -7,7 +7,7 @@
  * for OS's that don't support the first (e.g. Windows). The first valid locale in the array will be used.
  * @see http://php.net/setlocale
  */
-$config['language'] = array('ru_RU', 'Russian');
+$config['language'] = array('uk_UA', 'Russian');
 $config['allowed_languages'] = array(
   "ru" => "Рус",
   "uk" => "Укр"

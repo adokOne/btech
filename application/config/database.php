@@ -31,11 +31,11 @@ $config['default'] = array
 	(
 		'type'     => 'mysql',
 		'user'     => 'root',
-		'pass'     => 'adok',
+		'pass'     => '',
 		'host'     => 'localhost',
 		'port'     => FALSE,
 		'socket'   => FALSE,
-		'database' => 'cheese'
+		'database' => 'lesya'
 	),
 	'character_set' => 'utf8',
 	'table_prefix'  => '',

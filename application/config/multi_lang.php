@@ -17,7 +17,7 @@ $config['allowed_languages'] = array
 );
 
 $config['fallback_language'] = 'ru';
-$config['default_language']  = 'ru';
+$config['default_language']  = 'uk';
 
 //$config['fallback_language'] = $config['language']; // Fallback to the default language - set to FALSE to disable fallback.
 													// WARNING: Kohana::lang() doesn't respect this option.

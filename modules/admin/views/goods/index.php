@@ -25,7 +25,7 @@
 					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["image"]?></th>
 					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["good_price"]?></th>
 					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["good_active"]?></th>
-					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["on_tomorrow"]?></th>
+					            	<th tabindex="0" rowspan="1" colspan="1">Категория</th>
 					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["actions"]?></th>
 					            </tr>
 					        </thead>
@@ -35,11 +35,11 @@
 						        <tr role="row" class="<?php echo $k%2 > 0 ? "odd" : "even"?>">
 						                <td><?php echo $item->name()?></td>
 						                <td style="text-align: center;">
-						                	<img style="-webkit-border-radius: 500px;-moz-border-radius: 500px;border-radius: 500px;"src="<?php echo url::base().$item->main_image()?>">
+						                	<img style="-webkit-border-radius: 50px;-moz-border-radius: 50px;border-radius: 50px;"src="<?php echo url::base().$item->main_image("thumb")?>">
 						                </td>
 						                <td><?php echo $item->price?></td>
 						                <td><?php echo $admin_lang["answ_".$item->active]?></td>
-						                <td><?php echo $admin_lang["answ_".$item->only_tomorrow]?></td>
+						                <td><?php echo $item->category->name()?></td>
 						                <td>
 						                	<a class="btn btn-warning" href="/admin/goods/edit/<?php echo $item->id?>"><?php echo $admin_lang["edit"]?></a>
 						                	<a class="btn btn-danger" href="/admin/goods/delete/<?php echo $item->id?>"><?php echo $admin_lang["delete"]?></a>

@@ -5,9 +5,16 @@
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
 $config['site_domain'] = 'cake.local';
-$config['site_name']   = 'BT CRM';
+$config['site_name']   = 'Lesya ';
 $config['display_errors'] = TRUE;
+$config["site_mail"] = "adok@ukr.net";
+$config["fb_link"] = "https://www.facebook.com/profile.php?id=1768664556";
+$config["vk_link"] = "https://www.facebook.com/profile.php?id=1768664556";
+$config["tw_link"] = "https://www.facebook.com/profile.php?id=1768664556";
+$config["shop_address"]= "My Company, 4578 Marmora Road, Glasgow D04 89GR";
 
+
+$config["currencies"] = array("UAH","USD");
 
 /**
  * Force a default protocol to be used by the site. If no site_protocol is
@@ -122,5 +129,5 @@ $config['modules'] = array
 	 MODPATH.'auth',       // Authentication
 	 MODPATH.'admin',      // Administration
 	 MODPATH.'users',      // Users
-	  MODPATH.'cake',      // Users
+	  MODPATH.'lesya',      // Users
 );

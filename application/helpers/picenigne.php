@@ -14,21 +14,20 @@ class picenigne {
 	
 		
 		$filename = $destination_dir . $out_file;
-		
+		#var_dump($filename);die;
 		if(!file_exists(DOCROOT . $destination_dir ))
 			mkdir(DOCROOT . $destination_dir , 0777, true);
-		
 		if(is_uploaded_file($in_file))
-			move_uploaded_file($in_file, $filename);
+			move_uploaded_file($in_file, DOCROOT.$filename);
 		else
-			rename($in_file, $filename);
+			rename($in_file, DOCROOT.$filename);
 		
 		$sizes = is_array($config) ? $config : Kohana::config('pictures.sizes');
 
-		$image = Image::factory($filename);
+		$image = Image::factory(DOCROOT.$filename);
 
  		foreach($sizes as $size){
-			$img_size=getimagesize($filename);
+			$img_size=getimagesize(DOCROOT.$filename);
 			$width=$img_size[0];
 			$height=$img_size[1];
 			
@@ -48,7 +47,7 @@ class picenigne {
 		}
 		
 		if($drop_original)
-			unlink($filename);	
+			unlink(DOCROOT.$filename);	
 		
 		return true;
 	}
@@ -122,7 +121,8 @@ class picenigne {
 	}
 	public static function addSuffix($filename, $suffix){	
 		$last_point = strrpos($filename, ".");
-		$extension = end(explode(".", $filename));
+		$f = explode(".", $filename);
+		$extension = end($f);
 		$res = substr($filename, 0, $last_point);
 		$res = $res . $suffix . '.' . $extension;
 		
