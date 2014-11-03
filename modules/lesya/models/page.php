@@ -16,9 +16,12 @@ class Page_Model  extends ORM{
 		$field = "desc_".Router::$current_language; 
 		return $this->$field;
 	}
-
+	public function text(){
+		$field = "text_".Router::$current_language; 
+		return $this->$field;
+	}
 	public function __set($key, $value)
-	{	$trim_keys = array("anons_ru","anons_uk","desc_ru","desc_uk");
+	{	$trim_keys = array("text_ru","text_uk","anons_ru","anons_uk","desc_ru","desc_uk");
 		if (in_array($key, $trim_keys))
 		{
 			$value = trim($value);

@@ -10,7 +10,7 @@ class picenigne {
 	 * @param array $config - array with configuration options
 	 * @return boolean
 	 */
-	public static function process_picture($in_file, $destination_dir, $out_file, $config, $drop_original = true){
+	public static function process_picture($in_file, $destination_dir, $out_file, $config, $drop_original = false){
 	
 		
 		$filename = $destination_dir . $out_file;

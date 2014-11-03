@@ -30,16 +30,16 @@
                                        <a href="<?php echo url::base()?>contacts" title="<?php echo $lang["contact_us"]?>"><?php echo $lang["contact_us"]?></a>
                                     </li>
                                     <li class="item">
-                                       <a href="<?php echo url::base()?>delivery" title="<?php echo $lang["delivery_and_pay"]?>"><?php echo $lang["delivery_and_pay"]?></a>
+                                       <a href="<?php echo url::base()?>page/delivery" title="<?php echo $lang["delivery_and_pay"]?>"><?php echo $lang["delivery_and_pay"]?></a>
                                     </li>
                                     <li class="item">
-                                       <a href="<?php echo url::base()?>wholesasle" title="<?php echo $lang["to_wholesasle"]?>"><?php echo $lang["to_wholesasle"]?></a>
+                                       <a href="<?php echo url::base()?>page/wholesale" title="<?php echo $lang["to_wholesasle"]?>"><?php echo $lang["to_wholesasle"]?></a>
                                     </li>
                                  </ul>
                               </section>
                               <div class="bottom-footer col-xs-12">
                                  <div>
-                                    &copy; 2014 <a class="_blank" title="prestashop" href="https://vk.com/adok_one">Powere by Adok™</a>
+                                    &copy; 2014 <a class="_blank" href="https://vk.com/adok_one">Powere by Adok™</a>
                                  </div>
                               </div>
                               <!-- /MODULE Block footer -->
@@ -51,10 +51,10 @@
                                  <div class="block_content toggle-footer">
                                     <ul class="bullet">
                                        <li>
-                                          <a href="<?php echo url::base()?>account/orders" title="My orders" rel="nofollow"><?php echo $lang["my_orders"]?></a>
+                                          <a href="<?php echo url::base()?>users/orders" title="My orders" rel="nofollow"><?php echo $lang["my_orders"]?></a>
                                        </li>
                                        <li>
-                                          <a href="<?php echo url::base()?>account/profile" title="My merchandise returns" rel="nofollow"><?php echo $lang["my_profile"]?></a>
+                                          <a href="<?php echo url::base()?>users/profile" title="My merchandise returns" rel="nofollow"><?php echo $lang["my_profile"]?></a>
                                        </li>
                                     </ul>
                                  </div>
@@ -116,7 +116,27 @@
                         </footer>
                      </div>
                      <!-- #footer -->
+                     <div id="prod_template">
+                        <dt data-id="cart_block_product_%id%" class="first_item">
+                           <a class="cart-images" href="/product/%seo%-%id%" title="%name%">
+                           <img src="/upload/goods/%id%/1_thumb.png" alt="%name%">
+                           </a>
+                           <div class="cart-info">
+                              <div class="product-name">
+                                 <span class="quantity-formated">
+                                 <span class="quantity">%count%</span>&nbsp;x&nbsp;
+                                 </span>
+                                 <a class="cart_block_product_name" href="/product/%seo%-%id%" title="%name%">%id%</a>
+                              </div>
+                              <span class="price">%price% грн.</span>
+                           </div>
+                           <span class="remove_link">
+                           <a class="remove" data-id="%id%" rel="nofollow">&nbsp;</a>
+                           </span>
+                        </dt>
+                     </div>
                   </div>
                   <!-- #page -->
+                  
                </body>
             </html>

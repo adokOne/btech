@@ -5,7 +5,7 @@
    <div id="columns" class="container">
       <!-- Breadcrumb -->
       <div class="breadcrumb clearfix">
-         <a class="home" href="/" title="<?php echo $lang["to_home"]?>">
+         <a class="home" href="<?php echo url::base()?>" title="<?php echo $lang["to_home"]?>">
          <i class="fa fa-home"></i>
          </a>
      		<span class="navigation-pipe">&gt;</span>
@@ -21,7 +21,7 @@
             <?php if(!in_array($heading, array("new_products"))) echo lesya::new_items();?>
             <!-- /MODULE Block new products -->
             <!-- MODULE Block specials -->
-            <?php echo lesya::sale();?>
+            <?php if(!in_array($heading, array("specials"))) echo lesya::sale();?>
             <!-- /MODULE Block specials -->
          </div>
          <div id="center_column" class="center_column col-xs-12 col-sm-9">

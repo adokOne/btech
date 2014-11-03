@@ -52,7 +52,7 @@
    </div>
    <div id="layered_ajax_loader" style="display: none;">
       <p>
-         <img src="http://livedemo00.template-help.com/prestashop_51239/img/loader.gif" alt="">
+         <img src="/img/loader.gif" alt="">
          <br>Loading...
       </p>
    </div>

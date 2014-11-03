@@ -6,68 +6,8 @@
  */
 class Index_Controller extends Controller {
 
-  private $session_key = "order";
+  protected $session_key = "order";
   public function __construct(){
-    $css = array(
-      "front/global",
-      "front/highdpi",
-      "front/responsive-tables",
-      "front/uniform.default",
-      "front/superfish-modified",
-      "front/productcomments",
-      "front/product_list",
-      "front/jquery.fancybox",
-      "front/jquery.autocomplete",
-      "front/hooks",
-      "front/homeslider",
-      "front/blockwishlist",
-      "front/blockviewed",
-      "front/blockuserinfo",
-      "front/blocktopmenu",
-      "front/blocktags",
-      "front/blocksearch",
-      "front/blockpermanentlinks",
-
-      "front/blocknewsletter",
-
-      "front/blocklanguages",
-
-      "front/blockfacebook",
-      "front/blockcurrencies",
-      "front/blockcontact",
-      "front/blockcategories",
-      "front/blockcart",
-      "front/category",
-     # "front/",
-
-    );
-    $js = array(
-      "front/jquery-1.11.0.min",
-      "front/jquery-migrate-1.2.1.min",
-      "front/jquery.easing",
-      "front/tools",
-      "front/global",
-      "front/10-bootstrap.min",
-      "front/15-jquery.total-storage.min",
-      "front/15-jquery.uniform-modified",
-      "front/jquery.fancybox",
-      "front/jquery.scrollTo",
-      "front/jquery.serialScroll",
-      "front/jquery.bxslider",
-      "front/treeManagement",
-      "front/blocknewsletter",
-      "front/jquery.autocomplete",
-      "front/homeslider",
-      "front/hoverIntent",
-      "front/superfish-modified",
-      "front/blocktopmenu",
-      "front/index",
-      "jquery.mvc",
-      "script",
-      "front/main",
-    );
-    js::add($js);
-    css::add($css);
     parent::__construct();
     View::set_global("card",Session::instance()->get($this->session_key));
     View::set_global("lang",Kohana::lang("global"));
@@ -79,7 +19,6 @@ class Index_Controller extends Controller {
     $this->set_categories();
     $view = new View("index");
     $view->items  = ORM::factory("good")->where("active",1)->where("show_on_main",1)->find_all();
-    // $view->feedbacks = ORM::factory("feedback")->limit(5)->find_all();
     $view->render(true);
   }
 
@@ -97,7 +36,18 @@ class Index_Controller extends Controller {
     $view->items  = $category->where("active",1)->limit(Kohana::config("lesya.per_page"))->offset($offset)->goods;
     $view->total      = $category->goods->count();
     $view->pagination = $this->pagination($category_clone->where("active",1)->goods->count());
-    // $view->feedbacks = ORM::factory("feedback")->limit(5)->find_all();
+    $view->render(true);
+  }
+
+  public function product($seo){
+    $seo = explode("-", $seo);
+    $id = end($seo);
+    $good = ORM::factory("good")->find((int)$id);
+    $good->id || Kohana::show_404();
+    $this->set_categories();
+    $view = new View("item");
+    $view->active_category = $good->category;;
+    $view->item = $good;
     $view->render(true);
   }
 
@@ -110,7 +60,6 @@ class Index_Controller extends Controller {
     foreach ($top_ids as $key => $value) {
       $top_ids_[] = $value->good_id;
     }
-    #var_dump($top_ids_);die;
     $view = new View("sorted_list");
     $view->pagination = $this->pagination(10/*ORM::factory("good")->where("active",1)->count()*/);
     $view->items = ORM::factory("good")->where("active",1)->where("id IN (".implode(",", $top_ids_).")")->find_all();
@@ -132,25 +81,88 @@ class Index_Controller extends Controller {
     $view->render(true);
   }
 
+  public function specials(){
+    $page = $this->input->get("page",1);
+    $offset = (Kohana::config("lesya.per_page") * ($page - 1));
+    $this->set_categories();
+    $view = new View("sorted_list");
+    $new_time = time() - Kohana::config("lesya.new_time");
+    $view->pagination = $this->pagination(10/*ORM::factory("good")->where("active",1)->count()*/);
+    $view->items = ORM::factory("good")->where("has_sale",1)->orderby("created_at","DESC")->offset($offset)->limit(Kohana::config("lesya.new_limit"))->find_all();
+   
+    $view->heading      = "specials";
+    $view->render(true);
+  }
+
+
+
+  public function set_comment($id){
+
+  }
+
   public function to_card($id){
     is_numeric($id) || die(json_encode(array("success"=>false)));
     $obj = ORM::factory("good")->find($id);
     $obj->id || die(json_encode(array("success"=>false)));
     if(!$data = Session::instance()->get($this->session_key)){
-      $data  = array("ids"=>array($id),"price"=>$obj->price);
+      $data  = array("ids"=>array($obj->id),"items"=>array(array("seo"=>$obj->seo_name,"price"=>$obj->price,"id"=>$obj->id,"count"=>1,"name"=>$obj->name())),"total"=>$obj->price);
     }
     else{
-      array_push($data["ids"], $obj->id);
-      $data["price"] =  $data["price"] + $obj->price;
+      if(in_array($obj->id, $data["ids"])){
+        foreach($data["items"] as &$item){
+          if($obj->id == $item["id"]){
+            $item["count"] =  $item["count"] + 1;
+          }
+        }
+      }
+      else{
+        array_push($data["items"], array("seo"=>$obj->seo_name,"price"=>$obj->price,"id"=>$obj->id,"count"=>1,"name"=>$obj->name()));
+      }
+      $data["total"] =  $data["total"] + $obj->price;
+      array_push($data["ids"] , $obj->id);
     }
     Session::instance()->set($this->session_key,$data);
-    die(json_encode(array("success"=>true,"price"=>$data["price"],"count"=>count($data["ids"]))));
+    die(json_encode(array("success"=>true, "ids" =>$data["ids"] ,  "total"=>$data["total"],"items"=>$data["items"])));
   }
 
-  private function set_categories(){
-    $categories = ORM::factory("category")->where("parent_id",1)->find_all();
-    View::set_global("categories",$categories);
+  public function delete_from_cart($id){
+    is_numeric($id) || die(json_encode(array("success"=>false)));
+    $obj = ORM::factory("good")->find($id);
+    $obj->id || die(json_encode(array("success"=>false)));
+    if(!$data = Session::instance()->get($this->session_key)){
+      $data  = array("ids"=>array(),"items"=>array(),"total"=>0);
+    }
+    else{
+      if(count($data["items"])){
+        foreach($data["items"] as &$item){
+          if($obj->id == $item["id"]){
+            if($item["count"] > 1){
+              $item["count"] = $item["count"] - 1;
+            }
+            else{
+              $item = array();
+            }
+            
+          }
+        }
+      }
+    }
+    $ids = $data["ids"];
+    foreach ($data["ids"] as $key => $value) {
+      if($value == $obj->id){
+        unset($ids[$key]);break;
+        
+      }
+    }
+    $data["ids"] = array_values($ids);
+    $data["items"] = array_filter($data["items"]);
+    $data["total"] =  $data["total"] - $obj->price;
+    $data["total"] = $data["total"] < 0 ? 0 : $data["total"];
+    Session::instance()->set($this->session_key,$data);
+    die(json_encode(array("success"=>true, "ids" =>$data["ids"] ,  "total"=>$data["total"],"items"=>$data["items"])));
   }
+
+
 
   private function pagination($total){
         $p_config = array(

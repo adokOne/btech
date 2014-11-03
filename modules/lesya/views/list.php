@@ -5,13 +5,13 @@
    <div id="columns" class="container">
       <!-- Breadcrumb -->
       <div class="breadcrumb clearfix">
-         <a class="home" href="/" title="<?php echo $lang["to_home"]?>">
+         <a class="home" href="<?php echo url::base()?>" title="<?php echo $lang["to_home"]?>">
          <i class="fa fa-home"></i>
          </a>
          <?php  foreach(array_reverse($active_category->parents()) as $seo):?>
 	         <span class="navigation-pipe">&gt;</span>
 	         <a href="<?php echo $seo->url();?>" title="<?php echo $seo->name();?>"><?php echo $seo->name();?></a>
-     	<?php endforeach;?>
+     	   <?php endforeach;?>
      		<span class="navigation-pipe">&gt;</span>
      		<span class="navigation_page"><?php echo $active_category->name();?></span>
       </div>

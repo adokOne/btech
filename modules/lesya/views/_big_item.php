@@ -54,13 +54,13 @@
             </span>
             <span class="price-percent-reduction">-<?php echo ceil(($item->price - $item->sale_price)/($item->price/100))?>  %</span>
          <?php else:?>
-            <span class="product-price">
+            <span class="price ">
              <?php echo $item->price." ".$lang["currencies"][$active_currency]?>  
             </span>
          <?php endif;?>
          </div>
          <div class="button-container">
-            <a class="ajax_add_to_cart_button btn btn-default" href="<?php echo $item->url() ?>" rel="nofollow" title="<?php echo $lang["add_to_cart"] ?>" data-id-product="1">
+            <a class="ajax_add_to_cart_button btn btn-default" href="<?php echo url::base()."to_card/".$item->id; ?>" rel="nofollow" title="<?php echo $lang["add_to_cart"] ?>" data-id-product="1">
             <span><?php echo $lang["add_to_cart"] ?></span>
             </a>
             <a itemprop="url" class="lnk_view btn btn-default" href="<?php echo $item->url() ?>" title="<?php echo $lang["more"] ?>">
