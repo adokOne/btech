@@ -2,116 +2,46 @@ $.Controller("All",{
   cart_item_template:null,
   init:function(){
     var self = this;
-    this.notification = this.element.find("#layer_cart");
+    this.notification = this.element.find("#notification");
     this.parent.cart_item_template = this.element.find("#prod_template").html();
     this.element.find("#prod_template").remove();
-    this.quantity_wanted = this.element.find("#quantity_wanted");
     this.element.find("form").each(function(){self.setup_validation($(this))});
-    this.create_account_error = this.element.find("#create_account_error").clone();
-    this.element.find("#create_account_error").remove();
     if($("#phone").size())
       $("#phone").mask("(999) 999-99-99")
   },
-  "#submitNewMessage -> click":function(ev){
+  ".icon-remove-sign -> click":function(ev){
     ev.preventDefault();
-    var form =$(ev.target).parents("form");
-    if(form.valid()){
-      $.ajax({
-        url:form.attr("action"),
-        data:form.serialize(),
-        dataType: "json",
-        success:function(resp){
-          if(resp.success){
-            window.location.reload();
-          }
-        }
-      });
-    }
+    this.notification.hide();
   },
-  ".layered_filter input -> change":function(ev){
-    $(ev.target).parents("form").submit();
-  },
-  ".product_quantity_up -> click":function(ev){
-    ev.preventDefault();
-    this.quantity_wanted.val(Number(this.quantity_wanted.val()) + 1);
-    this.quantity_wanted.change();
-  },
-  ".product_quantity_down -> click":function(ev){
-    ev.preventDefault();
-    if(Number(this.quantity_wanted.val()) > 1){
-      this.quantity_wanted.val(Number(this.quantity_wanted.val()) - 1);
-      this.quantity_wanted.change();
-    }
-    
-  },
-  ".del -> click":function(ev){
-    ev.preventDefault();
-    var el = $(ev.target);
-    el = el.hasClass("del") ? el : el.parents(".del");
-    $.ajax({
-      url: el.attr("href"),
-      data:{qty:el.data("count")},
-      dataType: "json",
-      success:function(resp){
-        if(resp.success){
-          window.location.reload();
-        }
-      }
-    })
-  },
-  ".cart_quantity_up -> click":function(ev){
-    ev.preventDefault();
-    var el = $(ev.target);
-    el = el.hasClass("cart_quantity_up") ? el : el.parents(".cart_quantity_up");
-    $.ajax({
-      url: el.attr("href"),
-      data:{qty:el.data("count")},
-      dataType: "json",
-      success:function(resp){
-        if(resp.success){
-          window.location.reload();
-        }
-      }
-    })
-  } ,
-  ".ajax_add_to_cart_button  -> click":function(ev){
+  ".addToCart -> click":function(ev){
     ev.preventDefault();
     var self = this;
-    var el = $(ev.target).hasClass("ajax_add_to_cart_button") ? $(ev.target) : $(ev.target).parents(".ajax_add_to_cart_button");
+    var el = $(ev.target).hasClass("addToCart") ? $(ev.target) : $(ev.target).parents(".addToCart");
     $.ajax({
       url:el.attr("href"),
-      data:{qty:self.quantity_wanted.val()},
       dataType:"json",
       success:function(resp){
         if(resp.success){
-          self.element.find(".cart_block_list .products").empty();
-          self.quantity_wanted.val(1);
+          self.element.find(".mini-cart-info").empty();
           for(i in resp.items){
             var block = self.parent.cart_item_template;
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%seo%",resp.items[i].id);
-            block = block.replace("%seo%",resp.items[i].id);
-            block = block.replace("%price%",resp.items[i].price);
             block = block.replace("%count%",resp.items[i].count);
             block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            self.element.find(".cart_block_list .products").append($(block));
+            block = block.replace("%price%",resp.items[i].price);
+            self.element.find(".mini-cart-info").append($(block));
           }
-          var total_el = self.element.find(".ajax_cart_quantity");
-          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length));
-          self.element.find(".cart_block_total, .ajax_block_cart_total").text(self.element.find(".cart_block_total").text().replace(/[0-9]+/g,resp.total));
-          self.element.find(".cart-buttons").removeClass("hidden");
-          self.element.find(".cart_block_no_products").addClass("hidden");
+          var total_el = self.element.find("#cart-total");
+          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length,resp.total));
+          self.element.find(".t-price").text(self.element.find(".t-price").text().replace(/[0-9]+/g,resp.total));
+          self.element.find(".checkout").show()
         }
       }
     })
+    self.notification.show();self.notification.delay(1000).fadeOut('slow');
   },
   ".remove -> click":function(ev){
     ev.preventDefault();
@@ -119,38 +49,28 @@ $.Controller("All",{
     var self = this;
     $.ajax({
       url:"/delete_from_cart/" + el.data("id"),
-      data:{qty:el.data("count")},
       dataType:"json",
       success:function(resp){
         if(resp.success){
-          self.element.find(".cart_block_list .products").empty();
+          self.element.find(".mini-cart-info").empty();
           for(i in resp.items){
             var block = self.parent.cart_item_template;
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%id%",resp.items[i].id);
-            block = block.replace("%seo%",resp.items[i].id);
-            block = block.replace("%seo%",resp.items[i].id);
-            block = block.replace("%price%",resp.items[i].price);
             block = block.replace("%count%",resp.items[i].count);
             block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            block = block.replace("%name%",resp.items[i].name);
-            
-            self.element.find(".cart_block_list .products").append($(block));
+            block = block.replace("%price%",resp.items[i].price);
+            self.element.find(".mini-cart-info").append($(block));
           }
-          var total_el = self.element.find(".ajax_cart_quantity");
+          var total_el = self.element.find("#cart-total");
           if(resp.items.length == 0){
-            self.element.find(".cart-buttons").addClass("hidden");
-            self.element.find(".cart_block_no_products").removeClass("hidden");
+            self.element.find(".checkout").hide()
           }
           
-          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length));
-          self.element.find(".cart_block_total").text(self.element.find(".cart_block_total").text().replace(/[0-9]+/g,resp.total));
+          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length,resp.total));
+          self.element.find(".t-price").text(self.element.find(".t-price").text().replace(/[0-9]+/g,resp.total));
         }
       }
     })
@@ -161,7 +81,9 @@ $.Controller("All",{
       data:form.serialize(),
       dataType:"json",
       success:function(resp){
+        console.log(resp);
         if(resp.success){
+          console.log(resp,"qwdqw");
           window.location.href = resp.href;
         }
       }
@@ -180,7 +102,7 @@ $.Controller("All",{
     var self = this
     form.validate({
   errorPlacement : function(error, element) {
-    error.addClass("error");
+    error.insertAfter(element.parent());
   },
     onkeyup: false,
     onfocusout: false,
@@ -189,58 +111,6 @@ $.Controller("All",{
     minlength:3
     });
   },
-  "#SubmitCreate -> click":function(ev){
-    ev.preventDefault();
-    var form = $(ev.target).parents("form");
-    var self = this;
-    if(form.valid()){
-      $.ajax({
-        url:form.attr("action"),
-        data:form.serialize(),
-        dataType: "json",
-        success:function(resp){
-          if(resp.success){
-            window.location.reload();
-          }
-          else{
-            form.find(".alert-danger").remove();
-            for (var i = 0; i < resp.errors.length; i++) {
-              var text = resp.errors[i][Object.keys(resp.errors[0])]
-              form.find(".form_content").prepend(self.create_account_error.text(text));
-            };
-            form.find(".alert-danger").show();form.find(".alert-danger").show().delay(1000).fadeOut('slow');
-          }
-        }
-      });
-     }
-  },
-  "#SubmitLogin -> click":function(ev){
-    ev.preventDefault();
-    var form =$(ev.target).parents("form");
-    var self = this;
-    if(form.valid()){
-      $.ajax({
-        url:form.attr("action"),
-        data:form.serialize(),
-        dataType: "json",
-        success:function(resp){
-          if(resp.success){
-            window.location.reload();
-          }
-          else{
-            form.find(".alert-danger").remove();
-            for (var i = 0; i < resp.errors.length; i++) {
-              var text = resp.errors[i][Object.keys(resp.errors[0])];
-              form.find(".form_content").prepend(self.create_account_error.text(text));
-            };
-            form.find(".alert-danger").show();form.find(".alert-danger").show().delay(1000).fadeOut('slow');
-          }
-        }
-      });
-    }
-  },
-
-  
 
 });
 

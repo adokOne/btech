@@ -6,8 +6,8 @@
 
 				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
 				<div class="widget-toolbar" role="menu">
-					<a  href="javascript:void(0);" class="active btn-warning btn button-icon jarviswidget-toggle-btn">RU</a>
-					<a  href="javascript:void(0);" class="btn-warning btn button-icon jarviswidget-toggle-btn" style="margin-left:10px;">UK</a>
+					<a  href="javascript:void(0);" class="btn-warning btn button-icon jarviswidget-toggle-btn">RU</a>
+					<a  href="javascript:void(0);" class="active btn-warning btn button-icon jarviswidget-toggle-btn" style="margin-left:10px;">UK</a>
 				</div>
 				</header>
 

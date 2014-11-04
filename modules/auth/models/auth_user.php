@@ -3,7 +3,7 @@
 class Auth_User_Model extends ORM {
 
 	// Relationships
-	protected $has_many = array('user_tokens',"orders");
+	protected $has_many = array('user_tokens');
 	protected $has_and_belongs_to_many = array('roles');
 
 	// Columns to ignore
@@ -27,17 +27,17 @@ class Auth_User_Model extends ORM {
 	 * @param  boolean  save the record when validation succeeds
 	 * @return boolean
 	 */
-	// public function validate(Validation & $array, $save = FALSE)
-	// {
-	// 	$array = Validation::factory($array)
-	// 		->pre_filter('trim')
-	// 		->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
-	// 		->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
-	// 		->add_rules('password', 'required', 'length[5,42]')
-	// 		->add_rules('password_confirm', 'matches[password]');
-	// 	var_dump($array);die;
-	// 	#return parent::validate($array, $save);
-	// }
+	public function validate(array & $array, $save = FALSE)
+	{
+		$array = Validation::factory($array)
+			->pre_filter('trim')
+			->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
+			->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
+			->add_rules('password', 'required', 'length[5,42]')
+			->add_rules('password_confirm', 'matches[password]');
+
+		return parent::validate($array, $save);
+	}
 
 	/**
 	 * Validates login information from an array, and optionally redirects
@@ -51,7 +51,7 @@ class Auth_User_Model extends ORM {
 	{
 		$array = Validation::factory($array)
 			->pre_filter('trim')
-			->add_rules('email', 'required', 'length[4,127]')
+			->add_rules('username', 'required', 'length[4,127]')
 			->add_rules('password', 'required', 'length[5,42]');
 
 		// Login starts out invalid
@@ -60,7 +60,7 @@ class Auth_User_Model extends ORM {
 		if ($array->validate())
 		{
 			// Attempt to load the user
-			$this->find($array['email']);
+			$this->find($array['username']);
 
 			if ($this->loaded AND Auth::instance()->login($this, $array['password']))
 			{
@@ -75,7 +75,7 @@ class Auth_User_Model extends ORM {
 			}
 			else
 			{
-				$array->add_error('email', 'invalid');
+				$array->add_error('username', 'invalid');
 			}
 		}
 

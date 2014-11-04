@@ -6,7 +6,15 @@ class Router extends Router_Core {
     public static $title    = '';
     public static $desc     = '';
     public static $keywords = '';
+    public static $redirect_url = '';
 
+    public static function setup()
+    {
+    	
+       parent::setup();
+       self::$redirect_url = Input::instance()->xss_clean( self::$redirect_url  );
+       self::$current_uri = Input::instance()->xss_clean( self::$current_uri );
+    }
     public static function find_uri()
     {
         Router_Core::find_uri();
@@ -25,6 +33,7 @@ class Router extends Router_Core {
 	            // Set the currently defined language
 	            Router::$language = $lang_lc;
 	            self::$current_language  = $lang_lc;
+
 	            // Remove the language from the URI
 	            Router::$current_uri = substr(Router::$current_uri, 3);
 	            

@@ -45,6 +45,11 @@
 										<?php endforeach;?>
 									</section>
 									<section class="col col-6">
+										<label class="input">
+											<input required="required" type="text" name="object[seo_name]" placeholder="SEO" value="<?php echo $object->seo_name?>">
+										</label>
+									</section>
+									<section class="col col-6">
 										<label class="checkbox">
 											<input type="checkbox" name="object[active]"  value="1" <?php echo $object->active ? 'checked="checked"' : "" ?> /><i></i>Опубликовано?
 										</label>

@@ -38,6 +38,7 @@
                   <label class="label">Родительская категория</label>
                   <label class="select">
                     <select name="object[parent_id]">
+                      <option  <?php echo $object->parent_id == 0 ? "selected" : ""?>  value="0">Главная</option>
                       <?php foreach($categories as $cat):?>
                       <option <?php echo $object->parent_id == $cat->id ? "selected" : ""?> value="<?php echo $cat->id?>"><?php echo $cat->name();?></option>
                       <?php endforeach;?>
@@ -45,27 +46,6 @@
                   </label>
                   </section>
                 </div>
-              </fieldset>
-              <fieldset>
-                  <section class="col col-6">
-                    <label class="label">Описание</label>
-                    <?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "desc_".$k;?>
-                      <label class="textarea lang lang_<?php echo $k;?>"> 
-                        <i class="icon-append fa fa-comment"></i>                   
-                        <textarea   required="required" rows="6" name="object[desc_<?php echo $k;?>]" placeholder="Описание"><?php echo $object->$f;?></textarea> 
-                      </label>
-                    <?php endforeach;?>
-                  </section>
-                <section class="col col-6" style="text-align: center;">
-                  <img style="-webkit-border-radius: 500px;-moz-border-radius: 500px;border-radius: 500px;"src="<?php echo url::base().$object->main_image("thumb")?>">
-                  <label for="file" class="input input-file">
-                    <div class="button">
-                      <input type="file" name="main_pic" onchange="$(this).parent().next().val( this.value)">
-                      Загрузить
-                    </div>
-                    <input type="text" placeholder="Картинка 1 " readonly="" value="">
-                  </label>
-                </section>
               </fieldset>
               <footer>
                 <button type="submit" class="btn btn-primary">

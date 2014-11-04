@@ -2,13 +2,13 @@
 <html lang="en-us"><head>
 	<head>
 		<meta charset="utf-8">
-		<title>Cheescake Admin</title>
+		<title>Sushi Do Admin</title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 		<?php echo css::render();?>
 	    <!--[if lt IE 9]>
 	    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>

@@ -31,12 +31,11 @@
 							            	<th width="120"  class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["name"]?></th>
 							            	<th width="120"  class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["phone"]?></th>
 							            	<th width="250"  class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["order"]?></th>
-							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["pay_type"]?></th>
-							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["total_price"]?></th>
+							            	<!-- <th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["pay_type"]?></th> -->
+							            	<!-- <th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["total_price"]?></th> -->
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["status"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["address"]?></th>
 							            	<th width="60" class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["email"]?></th>
-							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["time"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["comment"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["manager_com"]?></th>
 							            	<th width="30" class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["goods"]["actions"]?></th>
@@ -53,7 +52,7 @@
 												</label>
 											</td>
 											<td rowspan="1" colspan="1"></td>
-											<td rowspan="1" colspan="1">
+											<!-- <td rowspan="1" colspan="1">
 												<label class="select" style="width:80px">
 												   <select size="1" name="search[pay_type]" >
 												   	    <option selected disabled>Тип оплаты</option>
@@ -63,8 +62,8 @@
 												   </select>
 												   <i></i>
 												</label>
-											</td>
-											<td rowspan="1" colspan="1"></td>
+											</td>  -->
+											
 											<td rowspan="1" colspan="1">
 												<label class="select" >
 												   <select size="1" name="search[status]" >
@@ -97,14 +96,13 @@
 							        <?php foreach($items as $k=>$item):?>    
 								        <tr role="row" class="<?php echo $k%2 > 0 ? "odd" : "even"?>">
 								                <td><?php echo $item->name?></td>
-								                <td><?php echo $item->user->id ? $item->user->phone : $item->phone?></td>
+								                <td><?php echo $item->phone?></td>
 								                <td style="font-size: 10px;"><?php echo $item->goods_admin_html()?></td>
-								                <td><?php echo $admin_lang["pay_types"][$item->pay_type]?></td>
-								                <td><?php echo $item->total_price?></td>
+								                <!-- <td><?php echo $admin_lang["pay_types"][$item->pay_type]?></td> -->
+								                <!--  <td><?php echo $item->total_price?></td> -->
 								                <td><b style="color:<?php echo $admin_lang["order_statuses_color"][$item->status]?>"><?php echo $admin_lang["order_statuses"][$item->status]?></b></td>
 								                <td><?php echo $item->address?></td>
 								                <td><?php echo $item->email?></td>
-								                <td><?php echo date("d.m.Y",$item->time)?></td>
 								                <td><?php echo $item->comment?></td>
 								                <td><?php echo $item->manager_comment?></td>
 								                <td>

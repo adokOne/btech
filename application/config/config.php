@@ -4,17 +4,15 @@
  * then a full URL will be used, eg: http://localhost/kohana/. If it only includes
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
-$config['site_domain'] = 'cake.local';
-$config['site_name']   = 'Lesya ';
-$config['display_errors'] = true;
-$config["site_mail"] = "adok@ukr.net";
-$config["fb_link"] = "https://www.facebook.com/tickets.ua";
-$config["vk_link"] = "https://www.facebook.com/tickets.ua";
-$config["tw_link"] = "https://www.facebook.com/tickets.ua";
-$config["shop_address"]= "My Company, 4578 Marmora Road, Glasgow D04 89GR";
-
-
-$config["currencies"] = array("UAH","USD");
+$config['site_domain'] = 'sushi-do.lviv.ua';
+$config['site_name']   = 'BT CRM';
+$config['display_errors'] = false;
+$config["phones"] = array("+38 093 951 46 85","+38 067 259 51 25");
+$config["support_mail"] = "adok@ukr.net";
+$config["order_theme"] = "Новый заказ на Sushi Do";
+$config["g_mail"] = "one.rops@gmail.com";
+$config["g_pass"] = "b1b1b1b1";
+$config["site_name"] = "Sushi Do";
 
 /**
  * Force a default protocol to be used by the site. If no site_protocol is
@@ -129,5 +127,5 @@ $config['modules'] = array
 	 MODPATH.'auth',       // Authentication
 	 MODPATH.'admin',      // Administration
 	 MODPATH.'users',      // Users
-	  MODPATH.'lesya',      // Users
+	  MODPATH.'sushi',      // Users
 );

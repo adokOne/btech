@@ -19,7 +19,7 @@ $config['driver'] = 'smtp';
  * @param   string  sendmail: executable path, with -bs or equivalent attached
  * @param   array   smtp: hostname, (username), (password), (port), (auth), (encryption)
  */
-$config["sender"] = "support@lesya.vliv.ua";
+$config["sender"] = "support@sushi-do.vliv.ua";
 $config['options'] = array(
     'hostname' => 'smtp.gmail.com',
     'port' => '465',

@@ -65,10 +65,10 @@
 								<section>
 									<label class="label">Полная стоимость</label>
 									<label class="input">
-										<input value="<?php echo $object->total_price?>" name="object[total_price]" type="text" class="input-sm">
+										<input readonly value="<?php echo $object->total_price?>" name="object[total_price]" type="text" class="input-sm">
 									</label>
 								</section>
-								<section>
+<!-- 								<section>
 									<label class="label">Способ оплаты</label>
 									<label class="select">
 										<select name="object[pay_type]" class="input-sm">
@@ -76,7 +76,7 @@
 												<option value="<?php echo $k;?>"><?php echo $v;?></option>
 											<?php endforeach;?>
 										</select> <i></i> </label>
-								</section>
+								</section> -->
 								<section>
 									<label class="label">Статус</label>
 									<label class="select">

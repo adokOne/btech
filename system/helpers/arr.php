@@ -308,15 +308,5 @@ class arr_Core {
 
 		return $object;
 	}
-	public static function flatten($array){
-		 $out=array();
-		 foreach($array as $k=>$v){
-		  if(is_array($array[$k])){
-		   $out=array_merge($out,self::flatten($array[$k]));
-		  }else{
-		   $out[]=$v;
-		  }
-		 }
-		 return $out;
-	}
+
 } // End arr

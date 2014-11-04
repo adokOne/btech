@@ -17,6 +17,7 @@ class Orders_Admin extends Admin_Controller {
 			->where($this->check_conditions())
 			->limit($this->config["per_page"])
 			->offset(($page-1)*$this->config["per_page"])
+      ->orderby("id","desc")
 			->find_all();
 
 		$view  = new View("orders/index");
@@ -97,7 +98,7 @@ class Orders_Admin extends Admin_Controller {
         $xls->getActiveSheet()->setTitle('Заказы');
 
         $rows = array();
-        $rows[0] = array("ID","Заказ","Имя","Телефон","e-mail","Дата доставки","Время доставки","Тип оплаты","Комментарий","Комментарий меннеджера","Цена","Статус");
+        $rows[0] = array("ID","Заказ","Имя","Телефон","e-mail","Комментарий","Комментарий меннеджера","Статус");
 
         $rowCount = 1;
         foreach (ORM::factory("order")->find_all() as $k=>$order) {
@@ -110,12 +111,8 @@ class Orders_Admin extends Admin_Controller {
             $order->name,
             $order->phone,
             $order->email,
-            $order->date,
-            $order->time,
-            Kohana::lang("admin.pay_types.".$order->pay_type),
             $order->comment,
             $order->manager_comment,
-            $order->total_price,
             Kohana::lang("admin.order_statuses.".$order->status),
           );
           $rowCount++;

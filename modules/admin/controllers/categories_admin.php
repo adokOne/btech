@@ -8,7 +8,7 @@ class Categories_Admin extends Admin_Controller {
 
   public function index($page = 1){
     View::set_global("main_height",1400);
-    $items = ORM::factory("category")->where("id != 1")->limit($this->config["per_page"])->offset(($page-1)*$this->config["per_page"])->find_all();
+    $items = ORM::factory("category")->limit($this->config["per_page"])->offset(($page-1)*$this->config["per_page"])->find_all();
     $view  = new View("categories/index");
     $view->items = $items;
 
@@ -22,7 +22,7 @@ class Categories_Admin extends Admin_Controller {
   public function new_one(){
     View::set_global("main_height",1000);
     $view = new View("categories/edit");
-	$view->categories = ORM::factory("category")/*->where("parent_id IN (0,1)")*/->find_all();
+$view->categories = ORM::factory("category")->where("parent_id",0)->find_all();
     $view->object =  new Category_Model();
     $this->view->content = $view->render(false);
     $this->view->render(true);
@@ -32,7 +32,7 @@ class Categories_Admin extends Admin_Controller {
     View::set_global("main_height",1000);
     $object = $this->check_object_by_id("category",$id);
     $view = new View("categories/edit");
-$view->categories = ORM::factory("category")/*->where("parent_id IN (0,1)")*/->find_all();
+$view->categories = ORM::factory("category")->where("parent_id",0)->find_all();
     $view->object =  $object ;
     $this->view->content = $view->render(false);
     $this->view->render(true);
@@ -45,9 +45,6 @@ $view->categories = ORM::factory("category")/*->where("parent_id IN (0,1)")*/->f
       $item->$attr = $value;
     }
     $item->save();
-    if(isset($_FILES["main_pic"])){
-      $this->upload_pictures($item);
-    }
     url::redirect(url::base()."admin/categories?success");
   }
 
@@ -57,13 +54,7 @@ $view->categories = ORM::factory("category")/*->where("parent_id IN (0,1)")*/->f
     $user->delete();
     url::redirect(url::base()."admin/categories?success");
   }
-  private function upload_pictures($item){
-   # var_dump($_FILES);die;
-   # foreach($_FILES["main_pic"] as $name=>$file){
-      if(!strlen($_FILES["main_pic"]["name"])) return;
-      picenigne::process_picture($_FILES["main_pic"]["tmp_name"],$item->img_dir.$item->id."/","main_pic.png",Kohana::config("goods_images.sizes"));
-   # }
-  }
+
 
 
 }

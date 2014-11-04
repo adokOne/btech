@@ -115,6 +115,7 @@ class email_Core {
 	 */
 	public static function send($to, $from, $subject, $message, $html = FALSE)
 	{
+		
 		// Connect to SwiftMailer
 		(email::$mail === NULL) and email::connect();
 

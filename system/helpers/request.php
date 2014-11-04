@@ -73,6 +73,10 @@ class request_Core {
 		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
 	}
 
+	public static function is_post(){
+		return in_array(self::method(), array("post"));
+	}
+
 	/**
 	 * Returns current request method.
 	 *
