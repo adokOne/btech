@@ -78,7 +78,7 @@
                   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
                   <![endif]-->
                </head>
-               <body id="index" class="index hide-left-column hide-right-column lang_en" data-auto-controller="All">
+               <body id="<?php echo isset($body_cls) ? $body_cls : "index" ?>" class="index hide-left-column hide-right-column lang_en" data-auto-controller="All">
                   <!--[if IE 8]>
                   <div style='clear:both;height:59px;padding:0 15px 0 15px;position:relative;z-index:10000;text-align:center;'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div>
                   <![endif]-->
@@ -109,9 +109,15 @@
                                        <div class="header_user_info">
                                           <a  href="<?php echo url::base()?>page/delivery" title="<?php echo $lang["delivery_and_pay"]?>"><?php echo $lang["delivery_and_pay"]?></a>
                                        </div>
-                                       <div class="header_user_info">
-                                          <a  href="<?php echo url::base()?>users" title="<?php echo $lang["login"]?>"><?php echo $lang["login"]?></a>
-                                       </div>
+                                       <?php if(!$logged_in):?>
+                                          <div class="header_user_info">
+                                             <a  href="<?php echo url::base()?>users" title="<?php echo $lang["login"]?>"><?php echo $lang["login"]?></a>
+                                          </div>
+                                       <?php else:?>
+                                          <div class="header_user_info">
+                                             <a  href="<?php echo url::base()?>users/account" title="<?php echo $user->name?>"><?php echo $user->name?></a>
+                                          </div>
+                                       <?php endif;?>
                                        <!-- /Block usmodule NAV --><!-- Block currencies module -->
                                        <div id="currencies-block-top">
                                           <form id="setCurrency" action="<?php echo url::current()?>" method="post">
@@ -159,13 +165,13 @@
                                  <div class="row">
                                     <div id="header_logo">
                                        <a href="<?php echo url::base()?>" title="<?php echo Kohana::config("core.site_name")?>">
-                                        <img class="logo img-responsive" src="/img/front/logo.png" alt="<?php echo Kohana::config("core.site_name")?>" width="226" height="44"/>
+                                        <img class="logo img-responsive" src="/img/front/logo.png" alt="<?php echo Kohana::config("core.site_name")?>"  height="44"/>
                                        </a>
                                     </div>
                                     <!-- MODULE Block cart -->
                                     <div class="">
                                        <div class="shopping_cart">
-                                          <a href="/" title="<?php echo $lang["cart"]?>" rel="nofollow">
+                                          <a href="#" title="<?php echo $lang["cart"]?>" rel="nofollow">
                                           <b><?php echo $lang["cart"]?></b>     
                                           <span class="ajax_cart_quantity" ><?php echo isset($card) && $card ? count($card["items"]) : 0?></span>
                                           <span class="ajax_cart_product_txt unvisible"><?php echo $lang["prod"]?></span>
@@ -180,42 +186,44 @@
                                              <div class="block_content">
                                                 <!-- block list of products -->
                                                 <div class="cart_block_list">
-                                                   <?php if(!isset($card) || !$card): ?>
-                                                      <p class="cart_block_no_products">
+                                                      <p  class="cart_block_no_products <?php echo (!isset($card) || $card && count($card["items"])) ? "hidden" : "" ?>">
                                                          <?php echo $lang["no_products"]?>
                                                       </p>
-                                                   <?php else:?>
-                                                      <dl class="products">
-                                                         <?php foreach($card["items"] as $prod):?>
-                                                            <dt data-id="cart_block_product_<?php echo $prod["id"]?>" class="first_item">
-                                                               <a class="cart-images" href="<?php echo ORM::factory("good")->find($prod["id"])->url();?>" title="<?php echo $prod["name"]?>">
-                                                                  <img src="<?php echo ORM::factory("good")->find($prod["id"])->main_image("thumb");?>" alt="<?php echo $prod["name"]?>">
-                                                               </a>
-                                                               <div class="cart-info">
-                                                                  <div class="product-name">
-                                                                     <span class="quantity-formated">
-                                                                     <span class="quantity"><?php echo $prod["count"];?></span>&nbsp;x&nbsp;
+                                                      
+                                                         <dl class="products">
+                                                            <?php if(isset($card) && isset($card["items"]) && count($card["items"])):?>
+                                                               <?php foreach($card["items"] as $prod):?>
+                                                                  <dt data-id="cart_block_product_<?php echo $prod["id"]?>" class="first_item">
+                                                                     <a class="cart-images" href="<?php echo ORM::factory("good")->find($prod["id"])->url();?>" title="<?php echo $prod["name"]?>">
+                                                                        <img src="<?php echo ORM::factory("good")->find($prod["id"])->main_image("thumb");?>" alt="<?php echo $prod["name"]?>">
+                                                                     </a>
+                                                                     <div class="cart-info">
+                                                                        <div class="product-name">
+                                                                           <span class="quantity-formated">
+                                                                           <span class="quantity"><?php echo $prod["count"];?></span>&nbsp;x&nbsp;
+                                                                           </span>
+                                                                           <a class="cart_block_product_name" href="<?php echo ORM::factory("good")->find($prod["id"])->url();?>" title="<?php echo $prod["name"]?>"><?php echo text::limit_chars($prod["name"],8);?></a>
+                                                                        </div>
+                                                                        <span class="price">
+                                                                           <?php echo $prod["price"]." ".$lang["currencies"][$active_currency];?>
+                                                                        </span>
+                                                                     </div>
+                                                                     <span class="remove_link">
+                                                                        <a  class="remove" data-id="<?php echo $prod["id"];?>" href="<?php echo url::base()."delete_from_cart/".$prod["id"];?>" rel="nofollow">&nbsp;</a>
                                                                      </span>
-                                                                     <a class="cart_block_product_name" href="<?php echo ORM::factory("good")->find($prod["id"])->url();?>" title="<?php echo $prod["name"]?>"><?php echo text::limit_chars($prod["name"],8);?></a>
-                                                                  </div>
-                                                                  <span class="price">
-                                                                     <?php echo $prod["price"]." ".$lang["currencies"][$active_currency];?>
-                                                                  </span>
-                                                               </div>
-                                                               <span class="remove_link">
-                                                                  <a  class="remove" data-id="<?php echo $prod["id"];?>" href="<?php echo url::base()."delete_from_cart/".$prod["id"];?>" rel="nofollow">&nbsp;</a>
-                                                               </span>
-                                                            </dt>
-                                                         <?php endforeach;?>
-                                                      </dl>
-                                                   <?php endif;?>
+                                                                  </dt>
+                                                               <?php endforeach;?>
+                                                            <?php endif;?>
+                                                         </dl>
+                                                      
+                     
                                                    <div class="cart-prices">
                                                       <div class="cart-prices-line last-line">
                                                          <span class="price cart_block_total ajax_block_cart_total"><?php echo (isset($card) && $card ? $card["total"] : 0)." ".$lang["currencies"][$active_currency] ?></span>
                                                          <span><?php echo $lang["total"]?></span>
                                                       </div>
                                                    </div>
-                                                   <p class="cart-buttons">
+                                                   <p class="cart-buttons <?php echo (!isset($card) || $card && $card["total"] < 1) ? "hidden" : "" ?>">
                                                       <a id="button_order_cart" class="btn btn-default btn-sm icon-right" href="<?php echo url::base()?>checkout" title="<?php echo $lang["checkout"]?>" rel="nofollow">
                                                          <span><?php echo $lang["checkout"]?></span>
                                                       </a>
@@ -226,35 +234,32 @@
                                           <!-- .cart_block -->
                                        </div>
                                     </div>
-                                    <div id="layer_cart">
+<!--                                     <div id="layer_cart">
                                        <div class="clearfix">
                                           <div class="layer_cart_product col-xs-12 col-md-6">
                                              <span class="cross" title="<?php echo $lang["close_window"]?>"></span>
-                                             <h2>
-                                                <i class="fa fa-ok"></i><?php echo $lang["prod_successfully"]?>
-                                             </h2>
-                                             <div class="product-image-container layer_cart_img">
-                                             </div>
+                                             <h2><i class="fa fa-ok"></i><?php echo $lang["prod_successfully"]?></h2>
+                                             <div class="product-image-container layer_cart_img"><img class="layer_cart_img img-responsive" src="/upload/goods/%id%/1_thumb.png" ></div>
                                              <div class="layer_cart_product_info">
-                                                <span id="layer_cart_product_title" class="product-name"></span>
+                                                <span id="layer_cart_product_title" class="product-name">%name%</span>
                                                 <span id="layer_cart_product_attributes"></span>
                                                 <div>
                                                    <strong class="dark"><?php echo $lang["Quantity"]?></strong>
-                                                   <span id="layer_cart_product_quantity"></span>
+                                                   <span id="layer_cart_product_quantity">0</span>
                                                 </div>
                                                 <div>
                                                    <strong class="dark"><?php echo $lang["total"]?></strong>
-                                                   <span id="layer_cart_product_price"></span>
+                                                   <span id="layer_cart_product_price"><?php echo "0 ".$lang["currencies"][$active_currency]?></span>
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="layer_cart_cart col-xs-12 col-md-6">
                                              <h2>
-                                                <!-- Plural Case [both cases are needed because page may be updated in Javascript] -->
+                                                
                                                 <span class="ajax_cart_product_txt_s  unvisible">
                                                 <?php echo $lang["in_cart"]?> <span class="ajax_cart_quantity">0</span> <?php echo $lang["tovariv"]?>
                                                 </span>
-                                                <!-- Singular Case [both cases are needed because page may be updated in Javascript] -->
+                                           
                                                 <span class="ajax_cart_product_txt ">
                                                    <?php echo $lang["in_cart"]?> <span class="ajax_cart_quantity">0</span> <?php echo $lang["tovariv"]?>
                                                 </span>
@@ -263,8 +268,7 @@
                                                 <strong class="dark">
                                                 <?php echo $lang["total"]?>
                                                 </strong>
-                                                <span class="ajax_block_cart_total">
-                                                </span>
+                                                <span class="ajax_block_cart_total"><?php echo "0 ".$lang["currencies"][$active_currency]?></span>
                                              </div>
                                              <div class="button-container"> 
                                                 <span class="continue btn btn-default btn-md icon-left" title="<?php echo $lang["contine_shopong"]?>">
@@ -277,7 +281,7 @@
                                           </div>
                                        </div>
                                        <div class="crossseling"></div>
-                                    </div>
+                                    </div> -->
                                     <!-- #layer_cart -->
                                     <div class="layer_cart_overlay"></div>
                                     <!-- /MODULE Block cart -->

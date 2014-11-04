@@ -20,14 +20,13 @@ class User_Model extends Auth_User_Model {
 			$array = array();
 			foreach($this->list_fields() as $key=>$v)
 				$array[$key] = $this->$key;
-			$array["password"] = $this->generate_password();
-			$this->password = $this->generate_password();
+			$array["password"] = strlen($array["password"]) ? $array["password"] : $this->generate_password();
+			
 			$array = Validation::factory($array)
 				->pre_filter('trim')
 				->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
-				->add_rules('name', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]')
-				->add_rules('password', 'required', 'length[5,42]');
-			
+				->add_rules('name', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.\s]');
+				// ->add_rules('password', 'required', 'length[5,42]');
 			if($array->validate())
 				parent::save();
 		}
@@ -37,6 +36,9 @@ class User_Model extends Auth_User_Model {
 
 	public function avatar(){
 		
+	}
+	public function is_full(){
+		return strlen($this->email) && strlen($this->name) && strlen($this->phone) && strlen($this->address);
 	}
 
 	public function is_wholesale(){

@@ -5,9 +5,9 @@
             <a class="product_img_link"  href="<?php echo $item->url() ?>" title="<?php echo $item->name() ?>" itemprop="url">
             <img class="replace-2x img-responsive" src="<?php echo $item->main_image() ?>" alt="<?php echo $item->name() ?>" title="<?php echo $item->name() ?>" itemprop="image" />
             </a>
-            <a class="quick-view" href="<?php echo $item->url() ?>">
-            <span><?php echo $lang["quick_view"]?></span>
-            </a>
+<!--             <a class="quick-view" href="<?php echo $item->url() ?>">
+               <span><?php echo $lang["quick_view"]?></span>
+            </a> -->
             <?php if($item->is_new()):?>
                <a class="new-box" href="<?php echo $item->url() ?>">
                   <span class="new-label"><?php echo $lang["new"]?></span>

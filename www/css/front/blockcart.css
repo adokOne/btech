@@ -1,6 +1,9 @@
 /*******************************************************************
 					Cart Block Styles
 ********************************************************************/
+.invalid{
+  border: 1px solid red!important;
+}
 #header .shopping_cart {
   position: relative;
   float: right;

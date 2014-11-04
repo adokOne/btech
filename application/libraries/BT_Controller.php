@@ -37,12 +37,14 @@ class Controller extends Controller_Core {
       "front/blockcart",
       "front/category",
       "front/product",
+      "front/my-account",
 
     );
     $js = array(
       "front/jquery-1.11.0.min",
       "front/jquery-migrate-1.2.1.min",
       "front/jquery.easing",
+      "front/jquery.validate",
       "front/tools",
       "front/global",
       "front/10-bootstrap.min",
@@ -60,9 +62,11 @@ class Controller extends Controller_Core {
       "front/hoverIntent",
       "front/jquery.jqzoom",
       "front/superfish-modified",
+      "front/jquery.maskedinput.min",
       "front/blocktopmenu",
       "front/index",
       "front/product",
+      "front/blockfacebook",
       "front/productscategory",
       "jquery.mvc",
       "script",
@@ -85,6 +89,9 @@ class Controller extends Controller_Core {
 			$this->user = Auth::instance()->get_user();
 			View::set_global('user',$this->user);
 		}	
+    else{
+      $this->user = false;
+    }
 		View::set_global('logged_in', $this->logged_in);
 	}
 
@@ -97,7 +104,16 @@ class Controller extends Controller_Core {
     View::set_global("categories",$categories);
   }
 
+  protected function _send_sms($desc){
+      // include_once 'GCalendarEvent.php';
+      // $event = new GCalendarEvent(Kohana::config("core.g_mail"),Kohana::config("core.g_pass"));
+      // $result = $event->addEvent(Kohana::config("core.order_theme"), $desc, $desc,date('c', time()),date('c', time()),1);
+  }
 
+  public function error_page(){
+    $view = new View("_kohana_error_disabled");
+    $view->render(true);
+  }
 
 
 

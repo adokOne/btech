@@ -131,7 +131,7 @@
                          <div class="box-info-product">
                             <div class="content_prices clearfix">
                                <!-- prices -->
-                               <?php if($item->wholesale_price > 0 && $user->is_wholesale()):?>
+                               <?php if($item->wholesale_price > 0 && $logged_in && $user->is_wholesale()):?>
                 									<div class="price">
                 									   <p class="our_price_display" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                 									      <link itemprop="availability" href="http://schema.org/InStock">
@@ -178,7 +178,7 @@
                                <!-- quantity wanted -->
                                <p id="quantity_wanted_p">
                                   <label><?php echo $lang["Quantity"]?></label>
-                                  <input type="text" name="qty" id="quantity_wanted" class="text" value="1" />
+                                  <input type="text" name="qty" readonly="readonly" id="quantity_wanted" class="text" value="1" />
                                   <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
                                   <span>
                                   <i class="fa fa-minus"></i>
@@ -195,8 +195,8 @@
                             <!-- end product_attributes -->
                             <div class="box-cart-bottom">
                                <div>
-                                  <p id="add_to_cart" class="buttons_bottom_block no-print" href="<?php echo url::base()."to_card/".$item->id(); ?>">
-                                     <button type="submit" name="Submit" class="exclusive btn btn-default ajax_add_to_cart_product_button">
+                                  <p id="add_to_cart" class="buttons_bottom_block no-print" >
+                                     <button href="<?php echo url::base()."to_card/".$item->id; ?>" type="submit" name="Submit" class="exclusive btn btn-default ajax_add_to_cart_button">
                                      <span><?php echo $lang["add_to_card"]?></span>
                                      </button>
                                   </p>
@@ -261,7 +261,8 @@
                    <!-- Fancybox -->
                    <div style="display:none;">
                       <div id="new_comment_form">
-                         <form id="id_new_comment_form" action="#">
+                         <form id="id_new_comment_form" action="<?php echo url::base()."set_comment/".$item->id?>">
+                            <input type="hidden" name="feedback[good_id]" value="<?php echo $item->id?>"/>
                             <h2 class="page-subheading"><?php echo $lang["write_reviews"]?></h2>
                             <div class="row">
                                <div class="product clearfix  col-xs-12 col-sm-6">
@@ -282,11 +283,11 @@
                                      <li>
                                         <label><?php echo $lang["quality"]?>:</label>
                                         <div class="star_content">
-                                           <input class="star" type="radio" name="criterion[1]" value="1" />
-                                           <input class="star" type="radio" name="criterion[1]" value="2" />
-                                           <input class="star" type="radio" name="criterion[1]" value="3" />
-                                           <input class="star" type="radio" name="criterion[1]" value="4" checked="checked" />
-                                           <input class="star" type="radio" name="criterion[1]" value="5" />
+                                           <input class="star" type="radio" name="feedback[rating]" value="1" />
+                                           <input class="star" type="radio" name="feedback[rating]" value="2" />
+                                           <input class="star" type="radio" name="feedback[rating]" value="3" />
+                                           <input class="star" type="radio" name="feedback[rating]" value="4" checked="checked" />
+                                           <input class="star" type="radio" name="feedback[rating]" value="5" />
                                         </div>
                                         <div class="clearfix"></div>
                                      </li>
@@ -294,15 +295,15 @@
                                   <label for="comment_title">
                                   <?php echo $lang["author"]?>: <sup class="required">*</sup>
                                   </label>
-                                  <input id="comment_title" name="author" type="text" value=""/>
+                                  <input id="comment_title" name="feedback[author]" type="text" value="" required="required"/>
                                   <label for="comment_title">
                                   <?php echo $lang["email"]?>: <sup class="required">*</sup>
                                   </label>
-                                  <input id="comment_email" name="email" type="text" value=""/>
+                                  <input id="comment_email" name="feedback[email]" type="email" value=""  required="required"/>
                                   <label for="content">
                                   <?php echo $lang["Comment"]?>: <sup class="required">*</sup>
                                   </label>
-                                  <textarea id="content" name="content"></textarea>
+                                  <textarea id="content" name="feedback[text]"  required="required"></textarea>
                                   <div id="new_comment_form_footer">
                                      <input id="id_product_comment_send" name="id_product" type="hidden" value='1' />
                                      <p class="fl required"><sup>*</sup> <?php echo $lang["Required"]?></p>
@@ -339,7 +340,7 @@
 	                               <a href="<?php echo $good->url()?>" title="<?php echo $good->name()?>"><?php echo text::limit_chars($good->name(),15); ?></a>
 	                            </h5>
 	                            <p class="price_display">
-		                            <?php if($good->wholesale_price > 0 && $user->is_wholesale()):?>
+		                            <?php if($good->wholesale_price > 0  && $logged_in && $user->is_wholesale()):?>
 		                            	<span class="price"><?php echo $good->wholesale_price." ".$lang["currencies"][$active_currency]?>  </span>
 		                            	<p class="pack_price">
                                         	<?php echo $lang["Instead_of"]?>

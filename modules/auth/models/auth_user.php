@@ -3,7 +3,7 @@
 class Auth_User_Model extends ORM {
 
 	// Relationships
-	protected $has_many = array('user_tokens');
+	protected $has_many = array('user_tokens',"orders");
 	protected $has_and_belongs_to_many = array('roles');
 
 	// Columns to ignore
@@ -51,7 +51,7 @@ class Auth_User_Model extends ORM {
 	{
 		$array = Validation::factory($array)
 			->pre_filter('trim')
-			->add_rules('username', 'required', 'length[4,127]')
+			->add_rules('email', 'required', 'length[4,127]')
 			->add_rules('password', 'required', 'length[5,42]');
 
 		// Login starts out invalid
@@ -60,7 +60,7 @@ class Auth_User_Model extends ORM {
 		if ($array->validate())
 		{
 			// Attempt to load the user
-			$this->find($array['username']);
+			$this->find($array['email']);
 
 			if ($this->loaded AND Auth::instance()->login($this, $array['password']))
 			{
@@ -75,7 +75,7 @@ class Auth_User_Model extends ORM {
 			}
 			else
 			{
-				$array->add_error('username', 'invalid');
+				$array->add_error('email', 'invalid');
 			}
 		}
 

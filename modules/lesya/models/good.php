@@ -20,7 +20,7 @@ class Good_Model  extends ORM{
 		foreach($this->size_counts as $pos){
 			$sizes[] = $pos->size_id;
 		}
-		return ORM::factory("size")->where("id IN (".implode(",", $sizes).")")->find_all();
+		return $sizes ? ORM::factory("size")->where("id IN (".implode(",", $sizes).")")->find_all() : array();
 	}
 
 	public function save(){
@@ -34,7 +34,7 @@ class Good_Model  extends ORM{
 	}
 
 	public function price($user){
-		if($this->wholesale_price > 0 && $user->is_wholesale()){
+		if($this->wholesale_price > 0 && $user &&  $user->is_wholesale()){
 			return $this->wholesale_price;
 		}
 		elseif ($this->has_sale && $this->sale_price > 0) {
@@ -119,7 +119,10 @@ class Good_Model  extends ORM{
 	}
 
 	public function rating(){
-		return 3;
+		$count   = Database::instance()->from("reviews")->where("good_id",$this->id)->count_records();
+		$total   = Database::instance()->from("reviews")->select("SUM(rating) as rating")->where("good_id",$this->id)->get()->current()->rating;
+		
+		return ($total/$count);
 	}
     private function generate_seo(){
       return text::ru2Lat($this->name_uk);

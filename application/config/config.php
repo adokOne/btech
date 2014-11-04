@@ -8,9 +8,9 @@ $config['site_domain'] = 'cake.local';
 $config['site_name']   = 'Lesya ';
 $config['display_errors'] = TRUE;
 $config["site_mail"] = "adok@ukr.net";
-$config["fb_link"] = "https://www.facebook.com/profile.php?id=1768664556";
-$config["vk_link"] = "https://www.facebook.com/profile.php?id=1768664556";
-$config["tw_link"] = "https://www.facebook.com/profile.php?id=1768664556";
+$config["fb_link"] = "https://www.facebook.com/tickets.ua";
+$config["vk_link"] = "https://www.facebook.com/tickets.ua";
+$config["tw_link"] = "https://www.facebook.com/tickets.ua";
 $config["shop_address"]= "My Company, 4578 Marmora Road, Glasgow D04 89GR";
 
 

@@ -126,7 +126,7 @@
                                  <span class="quantity-formated">
                                  <span class="quantity">%count%</span>&nbsp;x&nbsp;
                                  </span>
-                                 <a class="cart_block_product_name" href="/product/%seo%-%id%" title="%name%">%id%</a>
+                                 <a class="cart_block_product_name" href="/product/%seo%-%id%" title="%name%">%name%</a>
                               </div>
                               <span class="price">%price% грн.</span>
                            </div>
