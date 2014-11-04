@@ -63,18 +63,6 @@
 									</label>
 								</section>
 								<section>
-									<label class="label">Дата доставки</label>
-									<label class="input">
-										<input value="<?php echo $object->date?>" name="object[date]" type="text" class="input-sm">
-									</label>
-								</section>
-								<section>
-									<label class="label">Время доставки</label>
-									<label class="input">
-										<input value="<?php echo $object->time?>" name="object[time]" type="text" class="input-sm">
-									</label>
-								</section>
-								<section>
 									<label class="label">Полная стоимость</label>
 									<label class="input">
 										<input value="<?php echo $object->total_price?>" name="object[total_price]" type="text" class="input-sm">

@@ -3,6 +3,7 @@
 
 class Order_Model  extends ORM{
 	protected $has_many = array("positions");
+	protected $belongs_to = array("user");
 	public $goods = array();
 
 	public function pay_type(){

@@ -36,7 +36,6 @@
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["status"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["address"]?></th>
 							            	<th width="60" class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["email"]?></th>
-							            	<th width="70" class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["date"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["time"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["comment"]?></th>
 							            	<th class="sorting" tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["orders"]["manager_com"]?></th>
@@ -87,11 +86,6 @@
 													<input type="text" name="search[email]" value="<?php echo isset($search["email"]) ? $search["email"] : "" ?>" class="search_init">
 												</label>
 											</td>
-											<td rowspan="1" colspan="1">
-												<label class="input">
-													<input type="text" name="search[date]" class="datepicker" value="<?php echo isset($search["date"]) ? date("d.m.Y",strtotime($search["date"]))  : "" ?>" class="search_init">
-												</label>
-											</td>
 											<td rowspan="1" colspan="1"></td>
 											<td rowspan="1" colspan="1"></td>
 											<td rowspan="1" colspan="1"></td>
@@ -103,15 +97,14 @@
 							        <?php foreach($items as $k=>$item):?>    
 								        <tr role="row" class="<?php echo $k%2 > 0 ? "odd" : "even"?>">
 								                <td><?php echo $item->name?></td>
-								                <td><?php echo $item->phone?></td>
+								                <td><?php echo $item->user->id ? $item->user->phone : $item->phone?></td>
 								                <td style="font-size: 10px;"><?php echo $item->goods_admin_html()?></td>
 								                <td><?php echo $admin_lang["pay_types"][$item->pay_type]?></td>
 								                <td><?php echo $item->total_price?></td>
 								                <td><b style="color:<?php echo $admin_lang["order_statuses_color"][$item->status]?>"><?php echo $admin_lang["order_statuses"][$item->status]?></b></td>
 								                <td><?php echo $item->address?></td>
 								                <td><?php echo $item->email?></td>
-								                <td><?php echo $item->date == "0000-00-00" ? "-" : date("d.m.Y",strtotime($item->date))?></td>
-								                <td><?php echo $item->time?></td>
+								                <td><?php echo date("d.m.Y",$item->time)?></td>
 								                <td><?php echo $item->comment?></td>
 								                <td><?php echo $item->manager_comment?></td>
 								                <td>
