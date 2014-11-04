@@ -6,7 +6,7 @@
  */
 $config['site_domain'] = 'cale.local';
 $config['site_name']   = 'BT CRM';
-$config['display_errors'] = false;
+$config['display_errors'] = true;
 $config["phones"] = array("+38 093 951 46 85","+38 067 259 51 25");
 $config["support_mail"] = "adok@ukr.net";
 $config["order_theme"] = "Новый заказ на Sushi Do";

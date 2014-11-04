@@ -22,7 +22,7 @@ define('IN_PRODUCTION', FALSE);
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_application = 'application';
+$kohana_application = '../application';
 
 /**
  * Kohana modules directory. This directory should contain all the modules used
@@ -31,7 +31,7 @@ $kohana_application = 'application';
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_modules = 'modules';
+$kohana_modules = '../modules';
 
 /**
  * Kohana system directory. This directory should contain the core/ directory,
@@ -39,7 +39,7 @@ $kohana_modules = 'modules';
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_system = 'system';
+$kohana_system = '../system';
 
 /**
  * Test to make sure that Kohana is running on PHP 5.2 or newer. Once you are
@@ -53,7 +53,8 @@ version_compare(PHP_VERSION, '5.2', '<') and exit('Kohana requires PHP 5.2 or ne
  * Set the error reporting level. Unless you have a special need, E_ALL is a
  * good level for error reporting.
  */
-error_reporting(E_ALL & ~E_STRICT);
+error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
+
 
 /**
  * Turning off display_errors will effectively disable Kohana error display
