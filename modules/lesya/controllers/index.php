@@ -66,17 +66,46 @@ class Index_Controller extends Controller {
   public function category($seo){
     $seo = explode("-", $seo);
     $id = end($seo);
-    $category = ORM::factory("category")->find((int)$id);
-    $category->id || Kohana::show_404();
     $page = $this->input->get("page",1);
+    $limit = Kohana::config("lesya.per_page");
     $offset = (Kohana::config("lesya.per_page") * ($page - 1));
-    $category_clone = clone($category);
+    $category = ORM::factory("category")->find((int)$id);
+    $price_min = $this->input->get("price_min",0);
+    $price_max = $this->input->get("price_max",800000);
+
+    $category->id || Kohana::show_404();
+
+    if(isset($_GET["size"])){
+      $sql = "SELECT Distinct(s.good_id) 
+              FROM goods g 
+              JOIN size_counts s 
+              ON s.good_id = g.id 
+              WHERE size_id IN (".implode(",", array_values($_GET["size"])).")
+              AND g.category_id = {$category->id}
+              AND g.price >= {$price_min}
+              AND g.price <= {$price_max}
+              LIMIT {$limit} 
+              OFFSET {$offset}";
+    }
+    else{
+      $sql = "SELECT Distinct(s.good_id) 
+              FROM goods g 
+              JOIN size_counts s 
+              ON s.good_id = g.id 
+              WHERE g.category_id = {$category->id}
+              AND g.price >= {$price_min}
+              AND g.price <= {$price_max}
+              LIMIT {$limit} 
+              OFFSET {$offset}";
+    }
+    $ids = Database::instance()->query($sql)->as_array();
+    $ids = array_map(function($it){ return $it->good_id;}, $ids);
     $this->set_categories();
     $view = new View("list");
     $view->active_category = $category;
-    $view->items  = $category->where("active",1)->limit(Kohana::config("lesya.per_page"))->offset($offset)->goods;
+    $view->items      = ORM::factory("good")->where("id IN (".implode(",", $ids).")")->find_all();
     $view->total      = $category->goods->count();
-    $view->pagination = $this->pagination($category_clone->where("active",1)->goods->count());
+    $view->pagination = $this->pagination(ORM::factory("good")->where("id IN (".implode(",", $ids).")")->count());
     $view->render(true);
   }
 

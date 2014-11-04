@@ -6,7 +6,7 @@
  */
 $config['site_domain'] = 'cake.local';
 $config['site_name']   = 'Lesya ';
-$config['display_errors'] = false;
+$config['display_errors'] = true;
 $config["site_mail"] = "adok@ukr.net";
 $config["fb_link"] = "https://www.facebook.com/tickets.ua";
 $config["vk_link"] = "https://www.facebook.com/tickets.ua";
