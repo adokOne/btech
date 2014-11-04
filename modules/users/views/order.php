@@ -101,7 +101,7 @@
                         </tbody>
                      </table>
                   </div>
-                  <form action="<?php url::current()?>" method="post" class="std" id="sendOrderMessage">
+                  <form action="<?php url::base().url::current()?>" method="post" class="std">
                      <h3 class="page-heading bottom-indent"><?php echo $lang["add_comment"]?>:</h3>
                      <p><?php echo $lang["add_comment_if"]?></p>
                      <p class="form-group">

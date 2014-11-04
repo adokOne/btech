@@ -66,6 +66,7 @@ class Users_Controller extends Controller {
 		$order->id || Kohana::show_404();
 		if(isset($_POST["msgText"])){
 			$order->comment = $_POST["msgText"];
+			$order->save();
 			url::redirect(url::current());
 		}
 		$view = new View("order");
