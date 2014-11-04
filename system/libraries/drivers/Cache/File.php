@@ -103,7 +103,7 @@ class Cache_File_Driver implements Cache_Driver {
 			// Convert the tags into a string list
 			$tags = implode('+', $tags);
 		}
-
+		$tags = is_array($tags) ? current($tags) : $tags;
 		// Write out a serialized cache
 		return (bool) file_put_contents($this->directory.$id.'~'.$tags.'~'.$lifetime, serialize($data));
 	}

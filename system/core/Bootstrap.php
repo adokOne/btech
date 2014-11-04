@@ -53,6 +53,6 @@ Benchmark::stop(SYSTEM_BENCHMARK.'_system_initialization');
 
 // Make the magic happen!
 Event::run('system.execute');
-
+die("ef");
 // Clean up and exit
 Event::run('system.shutdown');
