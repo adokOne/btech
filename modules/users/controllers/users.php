@@ -14,6 +14,23 @@ class Users_Controller extends Controller {
 	    View::set_global("body_cls","my-account");
 	}
 
+	public function get_pass(){
+		if($email = $this->input->post("eamil",false)){
+			$user = ORM::factory("user")->where("email",$email)->find();
+			if($user->id){
+				$pass = $this->generate_password();
+				$user->change_password($pass,$pass);
+				$message = new View("forgot_email");
+				$message->password = $password;
+				$message->email    = $email;
+				$message->name     = $username;
+				email::send($email, Kohana::config("email.sender"), Kohana::lang("global.forgot_email"), $message->render(), true);
+				url::redirect(url::base());
+			}
+			
+		}
+	}
+
 	public function index(){
 		if($this->logged_in){
 			url::redirect(url::base());

@@ -104,7 +104,7 @@ $.Controller("All",{
           var total_el = self.element.find(".ajax_cart_quantity");
           total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length));
           self.element.find(".cart_block_total, .ajax_block_cart_total").text(self.element.find(".cart_block_total").text().replace(/[0-9]+/g,resp.total));
-          self.element.find("#button_order_cart").removeClass("hidden");
+          self.element.find(".cart-buttons").removeClass("hidden");
           self.element.find(".cart_block_no_products").addClass("hidden");
         }
       }
@@ -142,7 +142,7 @@ $.Controller("All",{
           }
           var total_el = self.element.find(".ajax_cart_quantity");
           if(resp.items.length == 0){
-            self.element.find("#button_order_cart").addClass("hidden");
+            self.element.find(".cart-buttons").addClass("hidden");
             self.element.find(".cart_block_no_products").removeClass("hidden");
           }
           
