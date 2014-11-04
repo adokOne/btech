@@ -33,7 +33,54 @@ class url_Core {
 	 * @param   boolean  non-default protocol
 	 * @return  string
 	 */
-	public static function base($index = FALSE, $protocol = FALSE)
+	// public static function base($index = FALSE, $protocol = FALSE)
+	// {
+	// 	if ($protocol == FALSE)
+	// 	{
+	// 		// Use the default configured protocol
+	// 		$protocol = Kohana::config('core.site_protocol');
+	// 	}
+
+	// 	// Load the site domain
+	// 	$site_domain = (string) Kohana::config('core.site_domain', TRUE);
+
+	// 	if ($protocol == FALSE)
+	// 	{
+	// 		if ($site_domain === '' OR $site_domain[0] === '/')
+	// 		{
+	// 			// Use the configured site domain
+	// 			$base_url = $site_domain;
+	// 		}
+	// 		else
+	// 		{
+	// 			// Guess the protocol to provide full http://domain/path URL
+	// 			$base_url = ((empty($_SERVER['HTTPS']) OR $_SERVER['HTTPS'] === 'off') ? 'http' : 'https').'://'.$site_domain;
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		if ($site_domain === '' OR $site_domain[0] === '/')
+	// 		{
+	// 			// Guess the server name if the domain starts with slash
+	// 			$base_url = $protocol.'://'.$_SERVER['HTTP_HOST'].$site_domain;
+	// 		}
+	// 		else
+	// 		{
+	// 			// Use the configured site domain
+	// 			$base_url = $protocol.'://'.$site_domain;
+	// 		}
+	// 	}
+
+	// 	if ($index === TRUE AND $index = Kohana::config('core.index_page'))
+	// 	{
+	// 		// Append the index page
+	// 		$base_url = $base_url.$index;
+	// 	}
+
+	// 	// Force a slash on the end of the URL
+	// 	return rtrim($base_url, '/').'/';
+	// }
+	public static function base($index = FALSE, $protocol = FALSE,  $lang = FALSE)
 	{
 		if ($protocol == FALSE)
 		{
@@ -44,6 +91,9 @@ class url_Core {
 		// Load the site domain
 		$site_domain = (string) Kohana::config('core.site_domain', TRUE);
 
+        $lang = $lang !== FALSE ? ($lang ? $lang.'/' : '') : Router::$language;
+        $site_domain = rtrim($site_domain, '/').'/'.$lang;
+        
 		if ($protocol == FALSE)
 		{
 			if ($site_domain === '' OR $site_domain[0] === '/')
@@ -80,7 +130,6 @@ class url_Core {
 		// Force a slash on the end of the URL
 		return rtrim($base_url, '/').'/';
 	}
-
 	/**
 	 * Fetches an absolute site URL based on a URI segment.
 	 *

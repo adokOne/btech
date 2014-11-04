@@ -1,7 +1,11 @@
 # Turn on URL rewriting
 RewriteEngine On
-RewriteRule admin/images/(.*)$ images/$1
-RewriteRule ru/images/(.*)$ images/$1
+RewriteRule uk/upload/(.*)$ upload/$1
+RewriteRule ru/upload/(.*)$ upload/$1
+RewriteRule uk/css/(.*)$ css/$1
+RewriteRule ru/css/(.*)$ css/$1
+RewriteRule uk/js/(.*)$ js/$1
+RewriteRule ru/js/(.*)$ js/$1
 # Installation directory
 RewriteBase /
 

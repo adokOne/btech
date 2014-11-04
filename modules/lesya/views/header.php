@@ -119,7 +119,7 @@
                                           </div>
                                        <?php endif;?>
                                        <!-- /Block usmodule NAV --><!-- Block currencies module -->
-                                       <div id="currencies-block-top">
+<!--                                        <div id="currencies-block-top">
                                           <form id="setCurrency" action="<?php echo url::current()?>" method="post">
                                              <div class="current">
                                                 <input type="hidden" name="id_currency" id="id_currency" value=""/>
@@ -135,7 +135,7 @@
                                                 <?php endforeach;?>
                                              </ul>
                                           </form>
-                                       </div>
+                                       </div> -->
                                        <!-- /Block currencies module --><!-- Block languages module -->
                                        <div id="languages-block-top" class="languages-block">
                                           <div class="current">

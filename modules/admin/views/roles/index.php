@@ -49,9 +49,10 @@
 						                <td><?php echo implode("<br/>", $item->modules())?></td>
 						                <td>
 						                	<?php if($item->can_destroy):?>
-						                		<a class="btn btn-warning" href="/admin/roles/edit/<?php echo $item->id?>"><?php echo $admin_lang["edit"]?></a>
+						                		
 						                		<a class="btn btn-danger" href="/admin/roles/delete/<?php echo $item->id?>"><?php echo $admin_lang["delete"]?></a>
 						               		<?php endif;?>
+						               		<a class="btn btn-warning" href="/admin/roles/edit/<?php echo $item->id?>"><?php echo $admin_lang["edit"]?></a>
 						                </td>
 						        </tr>
 					    	<?php endforeach;?>

@@ -19,7 +19,7 @@
   #homepage-slider .homeslider-description {
     cursor: pointer; }
     #homepage-slider .homeslider-description h2 {
-      font-size: 190px;
+      font-size: 90px;
       line-height: 1em;
       font-weight: 100;
       font-family: "Roboto", sans-serif;
@@ -81,8 +81,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-top: -196px;
-  margin-left: -580px; }
+  margin-top: -15px;
+  margin-left: -730px; }
   @media (max-width: 1199px) {
     #homepage-slider .homeslider-description {
       margin-left: -492px; } }

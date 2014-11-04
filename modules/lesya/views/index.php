@@ -61,16 +61,16 @@
          <!-- MODULE Block cmsinfo -->
          <div id="cmsinfo_block">
             <div class="col-xs-6">
-               <h3>Custom Block 2</h3>
-               <p><strong>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</strong></p>
-               <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
-               <p><a href="#"><?php echo $lang["read_more"]?></a></p>
+               <h3><?php echo $lang["about"]?></h3>
+               <p><strong><?php echo $lang["about_anons"]?></strong></p>
+               <p><?php echo $lang["about_desc"]?></p>
+               <p><a href="<?php echo url::base()?>page/about"><?php echo $lang["read_more"]?></a></p>
             </div>
             <div class="col-xs-6">
-               <h3>Custom Block 3</h3>
-               <p><strong>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</strong></p>
-               <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
-               <p><a href="#"><?php echo $lang["read_more"]?></a></p>
+               <h3><?php echo $lang["rozmir"]?></h3>
+               <p><strong><?php echo $lang["rozmir_anons"]?></strong></p>
+               <p><?php echo $lang["rozmir_desc"]?></p>
+               <p><a href="<?php echo url::base()?>page/rozmir"><?php echo $lang["read_more"]?></a></p>
             </div>
          </div>
          <!-- /MODULE Block cmsinfo -->

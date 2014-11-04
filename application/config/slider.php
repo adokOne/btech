@@ -2,21 +2,21 @@
 
 $config = array(
 	array(
-		"heading" => "w wefwefw e",
-		"pre_heading" => " wef e",
-		"desc" => "wefwe",
+		"heading" => "Вишивнака ",
+		"pre_heading" => "by Lesya",
+		"desc" => "Сучасний одяг з українською вишивкою",
 		"link" => "#",
 	),
-	array(
-		"heading" => "wefew",
-		"pre_heading" => "wfewef",
-		"desc" => "wefwefwe",
-		"link" => "#",
-	),
-	array(
-		"heading" => "wfwefwef ",
-		"pre_heading" => "fwe fwefwef",
-		"desc" => "wfwefwefwe",
-		"link" => "#",
-	),
+	// array(
+	// 	"heading" => "wefew",
+	// 	"pre_heading" => "wfewef",
+	// 	"desc" => "wefwefwe",
+	// 	"link" => "#",
+	// ),
+	// array(
+	// 	"heading" => "wfwefwef ",
+	// 	"pre_heading" => "fwe fwefwef",
+	// 	"desc" => "wfwefwefwe",
+	// 	"link" => "#",
+	// ),
 );
