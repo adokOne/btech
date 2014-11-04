@@ -28,6 +28,9 @@ $.Controller("All",{
       });
     }
   },
+  ".layered_filter input -> change":function(ev){
+    $(ev.target).parents("form").submit();
+  },
   ".product_quantity_up -> click":function(ev){
     ev.preventDefault();
     this.quantity_wanted.val(Number(this.quantity_wanted.val()) + 1);

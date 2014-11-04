@@ -97,9 +97,9 @@
                                     <nav>
                                        <!-- Block permanent links module HEADER -->
                                        <ul id="header_links">
-                                          <li id="header_link_contact">
+<!--                                           <li id="header_link_contact">
                                              <a  href="<?php echo url::base()?>contacts" title="<?php echo $lang["contact_us"]?>"><?php echo $lang["contact_us"]?></a>
-                                          </li>
+                                          </li> -->
                                           <li id="header_link_sitemap">
                                              <a  href="<?php echo url::base()?>page/wholesale" title="<?php echo $lang["to_wholesasle"]?>"><?php echo $lang["to_wholesasle"]?></a>
                                           </li>
