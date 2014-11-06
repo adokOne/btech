@@ -42,7 +42,7 @@ class User_Model extends Auth_User_Model {
 	}
 
 	public function is_wholesale(){
-		return false;
+		return true;
 	}
 
 	public function roles(){
