@@ -100,12 +100,13 @@ class Index_Controller extends Controller {
     }
     $ids = Database::instance()->query($sql)->as_array();
     $ids = array_map(function($it){ return $it->good_id;}, $ids);
+    $goods = $ids ? ORM::factory("good")->where("id IN (".implode(",", $ids).")")->find_all() : $ids;
     $this->set_categories();
     $view = new View("list");
     $view->active_category = $category;
-    $view->items      = ORM::factory("good")->where("id IN (".implode(",", $ids).")")->find_all();
+    $view->items      = $goods;
     $view->total      = $category->goods->count();
-    $view->pagination = $this->pagination(ORM::factory("good")->where("id IN (".implode(",", $ids).")")->count());
+    $view->pagination = $this->pagination($category->goods->count());
     $view->render(true);
   }
 
