@@ -41,8 +41,8 @@ class Goods_Admin extends Admin_Controller {
 	}
 	public function update(){
 		$object = (object)$this->input->post("object");
-		$sizes  = $object->sizes;
-		unset($object->sizes);
+		#$sizes  = $object->sizes;
+		#unset($object->sizes);
 		$item   = $object->id ? ORM::factory("good")->find($object->id) : new Good_Model();
 		foreach ($object as $attr => $value) {
 			$item->$attr = $value;
@@ -52,16 +52,16 @@ class Goods_Admin extends Admin_Controller {
 		$item->active = isset($object->active) ? 1 : 0;
 		
 		$item->save();
-		if(isset($sizes["id"]) && count($sizes["id"])){
-			foreach($sizes["id"] as $k=>$v){
-				$position = new Size_Count_Model();
-				$position->good_id  = $item->id;
-				$position->size_id  = $k;
-				$position->count    = $sizes["count"][$v];
-				$position->save();
-			}
-			$item->save();
-		}
+		// if(isset($sizes["id"]) && count($sizes["id"])){
+		// 	foreach($sizes["id"] as $k=>$v){
+		// 		$position = new Size_Count_Model();
+		// 		$position->good_id  = $item->id;
+		// 		$position->size_id  = $k;
+		// 		$position->count    = $sizes["count"][$v];
+		// 		$position->save();
+		// 	}
+		// 	$item->save();
+		// }
 		if(isset($_FILES["pic"])){
 			$this->upload_pictures($item);
 		}

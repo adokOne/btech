@@ -17,6 +17,7 @@ class Orders_Admin extends Admin_Controller {
 			->where($this->check_conditions())
 			->limit($this->config["per_page"])
 			->offset(($page-1)*$this->config["per_page"])
+			->orderby("id","DESC")
 			->find_all();
 
 		$view  = new View("orders/index");

@@ -11,7 +11,7 @@
  */
 
 /* css buttons */
-#indexHomeBody .cssButton, .cssButtonHover {color: #fff;}
+#indexHomeBody .cssButton, .cssButtonHover {color: #000;}
 .cssButton, .cssButtonHover {
 	font:300 15px/19px 'Roboto', 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	color:#777;
@@ -60,7 +60,7 @@ a span{
 	width:17px!important;
 	height:17px!important;
 	border:none;
-	background:url(../images/search.png) no-repeat 0 0;
+	background:url(/img/front/search.png) no-repeat 0 0;
 	font-size:0;
 	cursor:pointer;
 	float:left;
@@ -75,7 +75,7 @@ a span{
 	width:17px!important;
 	height:17px!important;
 	border:none;
-	background:url(../images/search_hover.png) no-repeat 0 0;
+	background:url(/img/front/search_hover.png) no-repeat 0 0;
 	font-size:0;
 	cursor:pointer;
 	float:left;

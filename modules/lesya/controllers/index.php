@@ -25,40 +25,31 @@ class Index_Controller extends Controller {
   }
 
   public function thanks(){
-    in_array(request::referrer(), array("checkout")) || Kohana::show_404();
+    (strpos(request::referrer(),'create_order') !== false)|| Kohana::show_404();
     $this->set_categories();
     $view = new View("page");
     $view->page  = ORM::factory("page")->where("active",1)->where("seo_name","thanks")->find();
     $view->render(true);
   }
 
-  public function process_order($pay_id){
-    count($this->cart["items"]) || Kohana::show_404();
-    $this->logged_in || Kohana::show_404();
+  public function process_order(){
     $item   = new Order_Model();
-    $item->user_id  = $this->user->id;
-    $item->name     = $this->user->name;
-    $item->phone    = $this->user->id;
-    $item->email    = $this->user->email;
-    $item->address  = $this->user->address;
-    $item->pay_type = intval($pay_id);
-    $item->time     = time();
-    $item->total_price = intval($this->cart["total"]);
-    $item->save();
-    $desc = array();
-    if($this->cart["items"]){
-      foreach($this->cart["items"] as $good){
-        $position = new Position_Model();
-        $position->order_id = $item->id;
-        $position->good_id  = $good["id"];
-        $position->count    = $good["count"];
-        $position->save();
-        $desc[] = $good["name"]." x ".$good["count"];
-      }
-      $item->save();
+    $good_id = 0;
+    foreach($this->input->post("order",array()) as $k=>$v){
+      if($k=="good_id"){$good_id = $v;continue;}
+      $item->$k = $v;
     }
+    $item->time     = time();
+    $item->save();
+    $position = new Position_Model();
+    $position->order_id = $item->id;
+    $position->good_id  = $good_id;
+    $position->count    = 1;
+    $position->save();
+
+
+    $desc = array();
     $desc = implode("|", $desc);
-    Session::instance()->destroy($this->session_key);
     url::redirect(url::base()."thanks");
     $this->_send_sms($desc);
   }
@@ -165,17 +156,12 @@ class Index_Controller extends Controller {
     $view->render(true);
   }
 
-  public function checkout(){
-    count($this->cart["items"]) || Kohana::show_404();
-    if(!$this->logged_in){
-      url::redirect(url::base()."users");
-    }
-    if(!$this->user->is_full()){
-      url::redirect(url::base()."users/profile");
-    }
+  public function checkout($id){
+    $item = ORM::factory("good")->find($id);
+    $item->id || Kohana::show_404();
     $this->set_categories();
     $view = new View("checkout");
-    $view->body_cls = "checkout-checkout";
+    $view->item = $item;
     $view->render(true);
   }
 

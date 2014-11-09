@@ -16,7 +16,7 @@ $config["set_comment/(\d+)"] = "index/set_comment/$1";
 
 $config["page/(.*)"] = "page/index/$1";
 $config["contacts"] = "page/contacts";
-$config["checkout"] = "index/checkout";
-$config["process_order/(\d)"] = "index/process_order/$1";
+$config["create_order/(\d+)"] = "index/checkout/$1";
+$config["process_order/"] = "index/process_order/$1";
 
 $config["thanks"] = "index/thanks";

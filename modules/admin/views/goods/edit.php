@@ -43,24 +43,24 @@
 											<input required="required" type="text" name="object[price]" placeholder="Цена" value="<?php echo $object->price ? $object->price : ""?>">
 										</label>
 									</section>
-									<section class="col col-6">
+<!-- 									<section class="col col-6">
 										<label class="label">Цена со скидкой</label>
 										<label class="input"> <i class="icon-append fa fa-tag"></i>
 											<input  type="text" name="object[sale_price]" placeholder="Цена со скидкой" value="<?php echo $object->sale_price ? $object->sale_price : ""?>">
 										</label>
-									</section>
-									<section class="col col-6">
+									</section> -->
+<!-- 									<section class="col col-6">
 										<label class="label">Оптовая цена</label>
 										<label class="input"> <i class="icon-append fa fa-tag"></i>
 											<input required="required" type="text" name="object[wholesale_price]" placeholder="Оптовая цена" value="<?php echo $object->wholesale_price ? $object->wholesale_price : ""?>">
 										</label>
-									</section>
-									<section class="col col-6">
+									</section> -->
+<!-- 									<section class="col col-6">
 									    <label class="label">Артикул</label>
 										<label class="input"> <i class="icon-append fa fa-tag"></i>
 											<input required="required" type="text" name="object[artikul]" placeholder="Артикул" value="<?php echo $object->artikul?>">
 										</label>
-									</section>
+									</section> -->
 									<section class="col col-6">
 										<label class="label">Категория</label>
 										<label class="select">
@@ -100,10 +100,10 @@
 										<input type="checkbox" name="object[active]"  value="1" <?php echo $object->active ? 'checked="checked"' : "" ?> />
 											<i></i>Товар активен?
 										</label>
-										<label class="checkbox">
+<!-- 										<label class="checkbox">
 										<input type="checkbox" name="object[has_sale]"  value="1" <?php echo $object->has_sale ? 'checked="checked"' : "" ?> />
 											<i></i>Есть скидка?
-										</label>
+										</label> -->
 										<label class="checkbox">
 										<input type="checkbox" name="object[show_on_main]"  value="1" <?php echo $object->show_on_main ? 'checked="checked"' : "" ?> />
 											<i></i>Отображать на главной?
@@ -111,31 +111,7 @@
 									</div>
 								</section>
 							</fieldset>
-							<fieldset>
-								<section>
-									<label class="label">Доступные размеры</label>
-									<div class="inline-group">
-										<?php foreach($lables as $item):?>
-											<div class="col col-2">
-												<label class="checkbox">
-													<input type="checkbox" name="object[sizes][id][<?php echo $item->id?>]"  value="<?php echo $item->id?>" <?php echo  in_array($item->id, $object->sizes()) > 0 ? 'checked="checked"'  : ""  ? 'checked="checked"' : ""?> />
-													<i></i><?php echo $item->name?>
-												</label>
-											</div>
-											<div class="col col-2">
-														<label class="select">
-															<select name="object[sizes][count][<?php echo $item->id?>]" class="input-sm">
-																<?php for($i=0;$i<100;$i++):?>
-																	<option <?php echo array_key_exists($item->id, $object->sizes()) && $object->sizes[$item->id] == $i ? 'selected="selected"' : ""?> value="<?php echo $i?>"><?php echo $i?></option>
-																<?php endfor;?>
-															</select><i></i> 
-														</label>
-													</div>
-										<?php endforeach;?>
-									</div>
-								</section>
 
-							</fieldset>
 							<fieldset>
 								<section class="col col-6" style="text-align: center;">
 									<img style="-webkit-border-radius: 500px;-moz-border-radius: 500px;border-radius: 500px;"src="<?php echo url::base().$object->main_image("thumb")?>">

@@ -17,7 +17,7 @@ class Controller extends Controller_Core {
       "front/stylesheet_social_media_icons",
       "front/stylesheet_tm",
       "front/index_home",
-      "front/print_stylesheet",
+      // "front/print_stylesheet",
       // "front/",
       // "front/",
       // "front/",

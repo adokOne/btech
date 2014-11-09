@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Disallow: /*create_order/*

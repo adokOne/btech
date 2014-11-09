@@ -5,7 +5,7 @@
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
 $config['site_domain'] = 'cake.local';
-$config['site_name']   = 'Lesya ';
+$config['site_name']   = 'Xbox.in.ua ';
 $config['display_errors'] = true;
 $config["site_mail"] = "adok@ukr.net";
 $config["fb_link"] = "https://www.facebook.com/tickets.ua";

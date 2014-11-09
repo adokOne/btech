@@ -1,382 +1,85 @@
 <?php include Kohana::find_file("views","header");?>
-<div class="columns-container">
-   <div id="top_column" class="center_column"></div>
-   <div id="columns" class="container">
-      <!-- Breadcrumb -->
-      <div class="breadcrumb clearfix">
-         <a class="home" href="<?php echo url::base()?>" title="Return to Home">
-         <i class="fa fa-home"></i>
-         </a>
-         <?php  foreach(array_reverse($active_category->parents()) as $seo):?>
-	         <span class="navigation-pipe">&gt;</span>
-	         <a href="<?php echo $seo->url();?>" title="<?php echo $seo->name();?>"><?php echo $seo->name();?></a>
-     	    <?php endforeach;?>
-     		<span class="navigation-pipe">&gt;</span>
-     		<span class="navigation_page"><?php echo $item->name();?></span>
-      </div>
-      <!-- /Breadcrumb -->
-      <div class="row">
-          <div id="center_column" class="center_column col-xs-12 col-sm-12">
-             <div itemscope itemtype="http://schema.org/Product">
-                <div class="primary_block row">
-                   <div class="container">
-                      <div class="top-hr"></div>
-                   </div>
-                   <!-- left infos-->  
-                   <div class="pb-left-column col-xs-12  col-sm-4 col-md-5">
-                      <!-- product img-->        
-                      <div id="image-block" class="clearfix">
-	                 	 <?php if($item->has_sale):?>
-	                         <span class="sale-box no-print">
-	                         	<span class="sale-label"><?php echo $lang["sale"]?></span>
-	                         </span>
-	                     <?php endif;?>
-                         <span id="view_full_size">
-                         <a class="jqzoom" title="<?php echo $item->name();?>" rel="gal1" href="<?php echo $item->main_image("original");?>" itemprop="url">
-                         <img itemprop="image" src="<?php echo $item->main_image("large");?>" title="<?php echo $item->main_image();?>" alt="<?php echo $item->name();?>"/>
-                         </a>
-                         </span>
-                      </div>
-                      <!-- end image-block -->
-                      <!-- thumbnails -->
-                      <div id="views_block" class="clearfix ">
-                         <span class="view_scroll_spacer">
-                            <a id="view_scroll_left" href="javascript:{}"><?php echo $lang["previous"]?></a>
-                         </span>
-                         <div id="thumbs_list">
-                            <ul id="thumbs_list_frame">
-                               <?php foreach($item->alt_images("thumb") as $k=>$image): ?>
-                               <li id="thumbnail_<?php echo $k+1?>" class="<?php echo $k==(count($item->alt_images("thumb")) - 1) ? "last" : ""?>">
-                                  <a 
-                                     href="javascript:void(0);"
-                                     rel="{gallery: 'gal1', smallimage: '<?php echo str_replace("_thumb", "_large", $image);?>',largeimage: '<?php echo str_replace("_thumb", "", $image);?>'}"
-                                     title="<?php echo $item->name();?>">
-                                  <img class="img-responsive" id="thumb_<?php echo $k+1?>" src="<?php echo $image;?>" alt="<?php echo $item->name();?>" title="<?php echo $item->name();?>" height="80" width="80" itemprop="image" />
-                                  </a>
-                               </li>
-                           	   <?php endforeach;?>
-                            </ul>
-                         </div>
-                         <!-- end thumbs_list -->
-                         <a id="view_scroll_right" href="javascript:{}"><?php echo $lang["next"]?></a>
-                      </div>
-                   </div>
-                   <div class="pb-center-column col-xs-12  col-sm-4">
-                      <h1 itemprop="name"><?php echo $item->name();?></h1>
-                      <div id="short_description_block">
-                         <div id="short_description_content" class="rte align_justify" itemprop="description">
-                            <p><?php echo $item->anons();?></p>
-                         </div>
-                      </div>
-                      <p id="pQuantityAvailable">
-                         <span  id="quantityAvailableTxtMultiple"><?php echo sprintf($lang["availible"], $item->count())?></span>  
-                      </p>
-                      <p class="socialsharing_product list-inline no-print">
-                         <button type="button" class="btn btn-default btn-twitter" onclick="socialsharing_twitter_click('AR-15 Nature Grass and Animals <?php echo $item->url();?>');">
-                            <i class="icon-twitter"></i> Tweet
-                         </button>
-                         <button type="button" class="btn btn-default btn-facebook" onclick="socialsharing_facebook_click();">
-                            <i class="icon-facebook"></i> Share
-                         </button>
-                         <button type="button" class="btn btn-default btn-google-plus" onclick="socialsharing_google_click();">
-                            <i class="icon-google-plus"></i> Google+
-                         </button>
-                         <button type="button" class="btn btn-default btn-pinterest" onclick="socialsharing_pinterest_click('<?php echo $item->main_image();?>');">
-                            <i class="icon-pinterest"></i> Pinterest
-                         </button>
-                      </p>
-                      <br/>
-                      <p id="pQuantityAvailable">
-                         <span><?php echo $lang["availible_sizes"];?></span>  
-                      </p>
-                      <p class="socialsharing_product list-inline no-print">
-                         <?php foreach($item->size_names() as $size):?>
-                           <button type="button" class="btn btn-default btn-twitter">
-                              <i class="icon-twitter"></i><?php echo $size->name?>
-                           </button>
-                         <?php endforeach;?>
-                      </p>
+<div class="middle-content">
+   <div class="extra">
+      <div class="main-width">
+         <table border="0" cellspacing="0" cellpadding="0" width="100%" id="contentMainWrapper">
+            <tbody>
+               <tr>
+                  <td id="column-center" valign="top">
+                     <div class="column-center-padding">
+                        <div class="centerColumn" id="productGeneral">
+                           <!--bof Product Name-->
+                           <h1 id="productName" class="productGeneral"><?php echo $item->name();?></h1>
+                           <!--eof Product Name-->
+                           <div class="tie">
+                              <div class="tie-indent">
+                                 <div class="page-content">
+                                    <div class="wrapper">
+                                          <div class="fleft">
+                                             <!--bof Main Product Image -->
+                                             <div id="productMainImage" class="centeredContent back">
+                                                <span class="image"><a href="<?php echo $item->main_image()?>"><img src="<?php echo $item->main_image()?>" alt="<?php echo $item->name()?>" title="<?php echo $item->name()?>" width="350" height="350" /><span class="zoom"></span></a></span>
+                                             </div>
+                                             <!--eof Main Product Image-->
+                                             <div class="clear"></div>
+                                             <div id="productAdditionalImages">
+                                                <div id="gallery">
+                                                   <?php foreach($item->alt_images("thumb") as $k=>$image): ?>
+                                                      <div class="additionalImages centeredContent back">
+                                                         <script language="javascript" type="text/javascript"><!--
+                                                            document.write('<a href="<?php echo str_replace("_thumb", "", $image);?>"><img src="<?php echo $image;?>" alt="<?php echo $item->name()?>" title="<?php echo $item->name()?>" width="114" height="114" /></a>');
+                                                            //--></script>
+                                                      </div>
+                                                   <?php endforeach;?>
+                                                   <br class="clearBoth" />
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="fleft desc2">
+                                             <h2 id="productPrices" class="productGeneral">
+                                                <span class="price-text"><?php echo $lang["price"]?>: &nbsp;</span>
+                                                <?php echo $item->price();?> грн.
+                                             </h2>
 
-
-
-                      <?php if($item->reviews->count()):?>
-                        <div id="product_comments_block_extra" class="no-print" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                           <div class="comments_note clearfix">
-                              <span><?php echo $lang["Rating"]?>&nbsp;</span>
-                              <div class="star_content clearfix">
-                                 <?php for ($i=0; $i < 5; $i++):?>
-                                    <div class="star <?php echo ($i < $item->rating()) ? "star_on" : ""?> "></div>
-                                 <?php endfor;?>
-                                 <meta itemprop="worstRating" content = "0" />
-                                 <meta itemprop="ratingValue" content = "<?php echo $item->rating() ?>" />
-                                 <meta itemprop="bestRating" content = "5" />
+                                             <div id="cartAdd">
+                                             <div class="button"><a href="<?php echo url::base()?>create_order/<?php echo $item->id?>"><span class="cssButton button_add_to_cart" onmouseover="this.className='cssButtonHover button_add_to_cart button_add_to_cartHover'" onmouseout="this.className='cssButton button_add_to_cart'" style="width: 80px;" ><?php echo $lang["zamovutu"]?></span></a></div>
+	 
+                                             </div>
+                                             <div id="productDescription" class="description biggerText">
+                                             <strong><?php echo $lang["desc"]?>: </strong>
+                                                <?php echo $item->desc();?>
+                                             </div>
+                                          </div>
+                                    </div>
+                                    <div id="social">
+                                       <!-- bof Social Media Icons -->
+                                       <div id="socialIcons" class="fright">
+                                          <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/tweet_button.d58098f8a7f0ff5a206e7f15442a6b30.en.html#_=1415537830157&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26cPath%3D3%26products_id%3D10&amp;size=m&amp;text=adipisicing%20elit%20%5BModel1%5D%20-%20%2432.00%20%3A%20Zen%20Cart!%2C%20The%20Art%20of%20E-commerce&amp;url=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26products_id%3D10" class="twitter-share-button fleft twitter-tweet-button twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 108px; height: 20px;"></iframe>
+                                          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                                          <div class="fleft">
+                                             <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1415537829002" name="I0_1415537829002" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Flivedemo00.template-help.com&amp;url=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26products_id%3D10&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.ru.e1ClpYFZPu0.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCM38lXFnB_VRk1rilIEWufmyWaXoA#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1415537829002&amp;parent=http%3A%2F%2Flivedemo00.template-help.com&amp;pfname=&amp;rpctoken=79088135" data-gapiattached="true" title="+1"></iframe></div>
+                                          </div>
+                                          <div class="fleft">
+                                             <fb:like send="false" layout="button_count" width="150" show_faces="false" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26cPath%3D3%26products_id%3D10&amp;layout=button_count&amp;locale=en_GB&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=150"><span style="vertical-align: bottom; width: 78px; height: 20px;"><iframe name="f21e9b37b" width="150px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/plugins/like.php?app_id=&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FQjK2hWv6uak.js%3Fversion%3D41%23cb%3Df230688638%26domain%3Dlivedemo00.template-help.com%26origin%3Dhttp%253A%252F%252Flivedemo00.template-help.com%252Ff14de2a3ec%26relation%3Dparent.parent&amp;href=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26cPath%3D3%26products_id%3D10&amp;layout=button_count&amp;locale=en_GB&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=150" style="border: none; visibility: visible; width: 78px; height: 20px;" class=""></iframe></span></fb:like>
+                                          </div>
+                                          <div class="pint">
+                                             <a class="PIN_1415537829574_pin_it_button_20 PIN_1415537829574_pin_it_button_en_20_gray PIN_1415537829574_pin_it_button_inline_20 PIN_1415537829574_pin_it_beside_20" data-pin-href="//www.pinterest.com/pin/create/button/?guid=2YitSmnEGojQ-1&amp;url=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Findex.php%3Fmain_page%3Dproduct_info%26amp%3BcPath%3D3%26amp%3Bproducts_id%3D10&amp;media=http%3A%2F%2Flivedemo00.template-help.com%2Fzencart_51374%2Fimages%2F10-3.png&amp;description=adipisicing%20elit" data-pin-log="button_pinit" data-pin-config="beside"><span class="PIN_1415537829574_hidden" id="PIN_1415537829574_pin_count_0"><i></i></span></a>
+                                          </div>
+                                       </div>
+                                       <!-- eof Social Media Icons -->
+                                    </div>
+                                 </div>
                               </div>
                            </div>
-                           <!-- .comments_note -->
-                           <ul class="comments_advices">
-                              <li>
-                                 <a href="#idTab5" class="reviews" title="<?php echo $lang["read_reviews"]?>">
-                                 <?php echo $lang["read_reviews"]?> (<span itemprop="reviewCount"><?php echo $item->reviews->count()?></span>)
-                                 </a>
-                              </li>
-                           </ul>
                         </div>
-                      <?php endif;?>
-                   </div>
-                   <!-- end center infos-->
-                   <!-- pb-right-column-->
-                   <div class="pb-right-column col-xs-12  col-sm-4 col-md-3">
-                      <!-- add to cart form-->
-                      <form id="buy_block" action="<?php echo url::base()?>to_card/<?php echo $item->id?>" method="post">
-                         <div class="box-info-product">
-                            <div class="content_prices clearfix">
-                               <!-- prices -->
-                               <?php if($item->wholesale_price > 0 && $logged_in && $user->is_wholesale()):?>
-                									<div class="price">
-                									   <p class="our_price_display" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                									      <link itemprop="availability" href="http://schema.org/InStock">
-                									      <span id="our_price_display" itemprop="price"><?php echo $item->wholesale_price." ".$lang["currencies"][$active_currency]?></span>
-                									   </p>
-                									</div>
-    							                <p class="pack_price">
-                                       <?php echo $lang["Instead_of"]?>
-                                       <span style="text-decoration: line-through;"><?php echo $item->price." ".$lang["currencies"][$active_currency]?></span>
-                                  </p>
-                               <?php elseif($item->has_sale):?>
-
-	                               <div class="price">
-	                                  <p class="our_price_display" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-	                                     <link itemprop="availability" href="http://schema.org/InStock"/>
-	                                     <span id="our_price_display" itemprop="price"><?php echo $item->sale_price." ".$lang["currencies"][$active_currency]?> </span>
-	                                  </p>
-	                                  <p id="reduction_percent" >
-	                                     <span id="reduction_percent_display">
-	                                     -<?php echo ceil(($item->price - $item->sale_price)/($item->price/100))?>%									</span>
-	                                  </p>
-	                                  <p id="old_price">
-	                                     <span id="old_price_display"><?php echo $item->price." ".$lang["currencies"][$active_currency]?>  </span>
-	                                     <!--  -->
-	                                  </p>
-	                               </div>
-
-                               <?php else:?>
-
-              									<div class="price">
-              									   <p class="our_price_display" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-              									      <link itemprop="availability" href="http://schema.org/InStock">
-              									      <span id="our_price_display" itemprop="price"><?php echo $item->price." ".$lang["currencies"][$active_currency]?></span>
-              									   </p>
-              									</div>
-
-                               <?php endif;?>
-                               <!-- end prices -->
-                               
-                               <div class="clear"></div>
-                            </div>
-                            <!-- end content_prices -->
-                            <div class="product_attributes clearfix">
-                               <!-- quantity wanted -->
-                               <p id="quantity_wanted_p">
-                                  <label><?php echo $lang["Quantity"]?></label>
-                                  <input type="text" name="qty" readonly="readonly" id="quantity_wanted" class="text" value="1" />
-                                  <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
-                                  <span>
-                                  <i class="fa fa-minus"></i>
-                                  </span>
-                                  </a>
-                                  <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up">
-                                  <span>
-                                  <i class="fa fa-plus"></i>
-                                  </span>
-                                  </a>
-                                  <span class="clearfix"></span>
-                               </p>
-                            </div>
-                            <!-- end product_attributes -->
-                            <div class="box-cart-bottom">
-                               <div>
-                                  <p id="add_to_cart" class="buttons_bottom_block no-print" >
-                                     <button href="<?php echo url::base()."to_card/".$item->id; ?>" type="submit" name="Submit" class="exclusive btn btn-default ajax_add_to_cart_button">
-                                     <span><?php echo $lang["add_to_card"]?></span>
-                                     </button>
-                                  </p>
-                               </div>
-                            </div>
-                            <!-- end box-cart-bottom -->
-                         </div>
-                         <!-- end box-info-product -->
-                      </form>
-                   </div>
-                   <!-- end pb-right-column-->
-                </div>
-                <!-- end primary_block -->
-                <!-- More info -->
-                <section class="page-product-box">
-                   <h3 class="page-product-heading"><?php echo $lang["opus"]?></h3>
-                   <!-- full description -->
-                   <div  class="rte">
-                      <p><?php echo $item->desc()?></p>
-                   </div>
-                </section>
-                <!--end  More info -->
-                <!--HOOK_PRODUCT_TAB -->
-
-                <section class="page-product-box">
-                   <h3 id="#idTab5" class="idTabHrefShort page-product-heading"><?php echo $lang["rewievs"]?></h3>
-                   <div id="idTab5">
-                      <div id="product_comments_block_tab">
-                      <?php foreach($item->reviews as $review):?>
-	                         <div class="comment row" itemprop="review" itemscope itemtype="http://schema.org/Review">
-	                            <div class="comment_author col-sm-2">
-	                               <span><?php echo $lang["Grade"]?>&nbsp;</span>
-	                               <div class="star_content clearfix"  itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-					                  <?php for ($i=0; $i < 5; $i++):?>
-					                     <div class="star <?php echo ($i < $review->rating) ? "star_on" : ""?> "></div>
-					                  <?php endfor;?>
-	                                  <meta itemprop="worstRating" content = "0" />
-	                                  <meta itemprop="ratingValue" content = "<?php echo $review->rating;?>" />
-	                                  <meta itemprop="bestRating" content = "5" />
-	                               </div>
-	                               <div class="comment_author_infos">
-	                                  <strong itemprop="author"><?php echo $review->author;?></strong>
-	                                  <em><?php echo date("d.m.Y",$review->created_at);?></em>
-	                               </div>
-	                            </div>
-	                            <!-- .comment_author -->
-	                            <div class="comment_details col-sm-10">
-	                               <p itemprop="reviewBody"><?php echo $review->text;?></p>
-	                            </div>
-	                            <!-- .comment_details -->
-	                         </div>
-                  		<?php endforeach;?>
-                      <p class="align_center">
-                        <a id="new_comment_tab_btn" class="btn btn-default btn-sm open-comment-form" href="#new_comment_form" title="<?php echo $lang["write_review"]?>">
-                          <span><?php echo $lang["write_review"]?></span>
-                        </a>
-                      </p>
-                         <!-- .comment -->
-                      </div>
-                      <!-- #product_comments_block_tab -->
-                   </div>
-                   <!-- Fancybox -->
-                   <div style="display:none;">
-                      <div id="new_comment_form">
-                         <form id="id_new_comment_form" action="<?php echo url::base()."set_comment/".$item->id?>">
-                            <input type="hidden" name="feedback[good_id]" value="<?php echo $item->id?>"/>
-                            <h2 class="page-subheading"><?php echo $lang["write_reviews"]?></h2>
-                            <div class="row">
-                               <div class="product clearfix  col-xs-12 col-sm-6">
-                                  <img src="<?php echo $item->main_image("sub")?>" alt="<?php echo $item->name()?>" />
-                                  <div class="product_desc">
-                                     <p class="product_name">
-                                        <strong><?php echo $item->name()?></strong>
-                                     </p>
-                                     <p><?php echo $item->desc()?></p>
-                                  </div>
-                               </div>
-                               <div class="new_comment_form_content col-xs-12 col-sm-6">
-                                  <h2><?php echo $lang["your_reviews"]?></h2>
-                                  <div id="new_comment_form_error" class="error alert alert-danger" style="display: none; padding: 15px 25px">
-                                     <ul></ul>
-                                  </div>
-                                  <ul id="criterions_list">
-                                     <li>
-                                        <label><?php echo $lang["quality"]?>:</label>
-                                        <div class="star_content">
-                                           <input class="star" type="radio" name="feedback[rating]" value="1" />
-                                           <input class="star" type="radio" name="feedback[rating]" value="2" />
-                                           <input class="star" type="radio" name="feedback[rating]" value="3" />
-                                           <input class="star" type="radio" name="feedback[rating]" value="4" checked="checked" />
-                                           <input class="star" type="radio" name="feedback[rating]" value="5" />
-                                        </div>
-                                        <div class="clearfix"></div>
-                                     </li>
-                                  </ul>
-                                  <label for="comment_title">
-                                  <?php echo $lang["author"]?>: <sup class="required">*</sup>
-                                  </label>
-                                  <input id="comment_title" name="feedback[author]" type="text" value="" required="required"/>
-                                  <label for="comment_title">
-                                  <?php echo $lang["email"]?>: <sup class="required">*</sup>
-                                  </label>
-                                  <input id="comment_email" name="feedback[email]" type="email" value=""  required="required"/>
-                                  <label for="content">
-                                  <?php echo $lang["Comment"]?>: <sup class="required">*</sup>
-                                  </label>
-                                  <textarea id="content" name="feedback[text]"  required="required"></textarea>
-                                  <div id="new_comment_form_footer">
-                                     <input id="id_product_comment_send" name="id_product" type="hidden" value='1' />
-                                     <p class="fl required"><sup>*</sup> <?php echo $lang["Required"]?></p>
-                                     <p class="fr">
-                                        <button id="submitNewMessage" name="submitMessage" type="submit" class="btn btn-default btn-sm">
-                                        <span><?php echo $lang["send"]?></span>
-                                        </button>&nbsp;
-                                        <?php echo $lang["or"]?>&nbsp;
-                                        <a class="closefb" href="#" title="<?php echo $lang["send"]?>">
-                                        <?php echo $lang["cancel"]?>
-                                        </a>
-                                     </p>
-                                     <div class="clearfix"></div>
-                                  </div>
-                                  <!-- #new_comment_form_footer -->
-                               </div>
-                            </div>
-                         </form>
-                         <!-- /end new_comment_form_content -->
-                      </div>
-                   </div>
-                   <!-- End fancybox -->
-                </section>
-                <!--end HOOK_PRODUCT_TAB -->
-                <section class="page-product-box blockproductscategory">
-                   <h3 class="productscategory_h3 page-product-heading"><?php echo $lang["same_products"]?>:</h3>
-                   <div id="productscategory_list" class="clearfix">
-                      <ul id="bxslider1" class="bxslider clearfix">
-                      	<?php foreach($active_category->limit(20)->orderby(null,"RAND()")->goods as $good):?>
-	                         <li class="product-box item">
-	                            <a href="<?php echo $good->url()?>" class="lnk_img product-image" title="<?php echo $good->name()?>">
-	                            <img src="<?php echo $good->main_image("same")?>" alt="<?php echo $good->name()?>" /></a>
-	                            <h5 class="product-name">
-	                               <a href="<?php echo $good->url()?>" title="<?php echo $good->name()?>"><?php echo text::limit_chars($good->name(),15); ?></a>
-	                            </h5>
-	                            <p class="price_display">
-		                            <?php if($good->wholesale_price > 0  && $logged_in && $user->is_wholesale()):?>
-		                            	<span class="price"><?php echo $good->wholesale_price." ".$lang["currencies"][$active_currency]?>  </span>
-		                            	<p class="pack_price">
-                                        	<?php echo $lang["Instead_of"]?>
-                                			<span style="text-decoration: line-through;"><?php echo $good->price." ".$lang["currencies"][$active_currency]?></span>
-                                    	</p>
-		                            <?php elseif($good->has_sale):?>
-		                            	<span class="price special-price"><?php echo $good->sale_price." ".$lang["currencies"][$active_currency]?>  </span>
-		                                <span class="price-percent-reduction small">-<?php echo ceil(($good->price - $good->sale_price)/($good->price/100))?>%</span><br/>                          
-		                                <span class="old-price"><?php echo $good->price." ".$lang["currencies"][$active_currency]?>  </span>
-		                            <?php else:?>
-		                            	<span class="price"><?php echo $good->price." ".$lang["currencies"][$active_currency]?>  </span><br/>
-		                            <?php endif;?>                         
-	                            </p>
-	                         </li>
-                     	<?php endforeach;?>
-                      </ul>
-                   </div>
-                </section>
-                <!-- description & features -->
-             </div>
-             <!-- itemscope product wrapper -->
-          </div>
-         <!-- #center_column -->
+                        <div class="clear"></div>
+                        <!--eof content_center--> 
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
       </div>
-      <!-- .row -->
    </div>
-   <!-- #columns -->  
 </div>
 <?php include Kohana::find_file("views","footer");?>
-
-
-
-
-
-
-
-
-
-

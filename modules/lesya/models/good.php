@@ -15,6 +15,10 @@ class Good_Model  extends ORM{
 		return $this->sizes;
 	}
 
+	public function price(){
+		return $this->price;
+	}
+
 	public function size_names(){
 		$sizes = array();
 		foreach($this->size_counts as $pos){
@@ -33,17 +37,7 @@ class Good_Model  extends ORM{
 		parent::save();
 	}
 
-	public function price($user){
-		if($this->wholesale_price > 0 && $user &&  $user->is_wholesale()){
-			return $this->wholesale_price;
-		}
-		elseif ($this->has_sale && $this->sale_price > 0) {
-			return $this->sale_price;
-		}
-		else{
-			return $this->price;
-		}
-	}
+
 
 	public function name(){
 		$field = "name_".Router::$current_language; 

@@ -122,7 +122,7 @@ HR {
         }
 
 .messageStackSuccess {
-	background:url(../images/message-bg.gif) repeat-x 0 0;
+	background:url(/img/front/message-bg.gif) repeat-x 0 0;
 	width:350px;
 	height:46px;
 	left:50%;

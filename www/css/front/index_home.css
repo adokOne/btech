@@ -3,7 +3,7 @@
 }
 .theme-default .nivoSlider {
 	position:relative;
-	background:#fff url("../images/loading.gif") no-repeat 50% 50%;
+	background:#fff url("/img/front/loading.gif") no-repeat 50% 50%;
 	overflow: hidden;
 	max-height: 380px;
 }
@@ -27,7 +27,7 @@
 	display:inline-block;
 	width:26px;
 	height:26px;
-	background:url("../images/default-bullets.png") no-repeat;
+	background:url("/img/front/default-bullets.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin: 0 2px;
@@ -41,7 +41,7 @@
 	display:block;
 	width:26px;
 	height:26px;
-	background:url("../images/default-arrows.png") no-repeat;
+	background:url("/img/front/default-arrows.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	opacity: 0;
@@ -58,11 +58,11 @@ transition: all 0.3s ease 0s;
 	left:15.5%;
 }
 .theme-default a.nivo-nextNav:hover {
-	background:url("../images/default_arrows_hover.png") no-repeat;
+	background:url("/img/front/default_arrows_hover.png") no-repeat;
 	background-position:-27px 0;
 } 
 .theme-default a.nivo-prevNav:hover {
-	background:url("../images/default_arrows_hover.png") no-repeat;
+	background:url("/img/front/default_arrows_hover.png") no-repeat;
 	background-position:0px 0;
 }
 
@@ -98,7 +98,7 @@ transition: all 0.3s ease 0s;
 }
 .theme-light .nivoSlider {
 	position:relative;
-	background:#fff url("../images/loading.gif") no-repeat 50% 50%;
+	background:#fff url("/img/front/loading.gif") no-repeat 50% 50%;
     margin-bottom:10px;
     overflow: visible;
 }
@@ -123,7 +123,7 @@ transition: all 0.3s ease 0s;
 	display:inline-block;
 	width:10px;
 	height:10px;
-	background:url("../images/light-bullets.png") no-repeat;
+	background:url("/img/front/light-bullets.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin: 0 2px;
@@ -136,7 +136,7 @@ transition: all 0.3s ease 0s;
 	display:block;
 	width:30px;
 	height:30px;
-	background: url("../images/light-arrows.png") no-repeat;
+	background: url("/img/front/light-arrows.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	top: auto;
@@ -190,7 +190,7 @@ transition: all 0.3s ease 0s;
 }
 .theme-dark .nivoSlider {
 	position:relative;
-	background:#fff url("../images/loading.gif") no-repeat 50% 50%;
+	background:#fff url("/img/front/loading.gif") no-repeat 50% 50%;
     margin-bottom:10px;
     overflow: visible;
 }
@@ -215,7 +215,7 @@ transition: all 0.3s ease 0s;
 	display:inline-block;
 	width:10px;
 	height:10px;
-	background:url("../images/dark-bullets.png") no-repeat 0 2px;
+	background:url("/img/front/dark-bullets.png") no-repeat 0 2px;
 	text-indent:-9999px;
 	border:0;
 	margin: 0 2px;
@@ -228,7 +228,7 @@ transition: all 0.3s ease 0s;
 	display:block;
 	width:30px;
 	height:30px;
-	background: url("../images/dark-arrows.png") no-repeat;
+	background: url("/img/front/dark-arrows.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	top: auto;
@@ -283,7 +283,7 @@ transition: all 0.3s ease 0s;
 }
 .theme-bar .nivoSlider {
 	position:relative;
-	background:#fff url("../images/loading.gif") no-repeat 50% 50%;
+	background:#fff url("/img/front/loading.gif") no-repeat 50% 50%;
 }
 .theme-bar .nivoSlider img {
 	position:absolute;
@@ -328,7 +328,7 @@ transition: all 0.3s ease 0s;
 	display:inline-block;
 	width:22px;
 	height:22px;
-	background:url("../images/default-bullets.png") no-repeat;
+	background:url("/img/front/default-bullets.png") no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin: 5px 2px 0 2px;
