@@ -54,7 +54,7 @@
                <li><a class="" href="<?php echo url::base()?>"><?php echo Kohana::lang("global.home")?></a></li>
                <li><a class="" href="<?php echo url::base()?>pages/about"><?php echo Kohana::lang("global.about")?></a></li>
                <li><a class="" href="<?php echo url::base()?>pages/delivery"><?php echo Kohana::lang("global.delivery")?></a></li>
-               <!-- <li><a class="" href="<?php echo url::base()?>feedbacks"><?php echo Kohana::lang("global.feedbacks")?></a></li> -->
+               <li><a class="" href="<?php echo url::base()?>zrobu_sam"><?php echo Kohana::lang("global.zrobu_sam")?></a></li>
                <li><a class="" href="<?php echo url::base()?>contacts"><?php echo Kohana::lang("global.contacts")?></a></li>
             </ul>
          </div>
@@ -86,7 +86,7 @@
                            <li><a class="active" href="<?php echo url::base()?>"><i class="icon-home"></i><?php echo Kohana::lang("global.home")?></a></li>
                            <li><a class="" href="<?php echo url::base()?>pages/about"><i class="icon-home"></i><?php echo Kohana::lang("global.about")?></a></li>
                            <li><a class="" href="<?php echo url::base()?>pages/delivery"><i class="icon-home"></i><?php echo Kohana::lang("global.delivery")?></a></li>
-                           <!-- <li><a class="" href="<?php echo url::base()?>feedbacks"><i class="icon-home"></i><?php echo Kohana::lang("global.feedbacks")?></a></li> -->
+                           <li><a class="" href="<?php echo url::base()?>zrobu_sam"><?php echo Kohana::lang("global.zrobu_sam")?></a></li>
                            <li><a class="" href="<?php echo url::base()?>contacts"><i class="icon-home"></i><?php echo Kohana::lang("global.contacts")?></a></li>
                         </ul>
                         <div class="clear"></div>

@@ -25,14 +25,29 @@
 							<fieldset>
 								
 								<section class="col col-6">
+								<label class="label">Название</label>
 									<?php foreach(Kohana::config('multi_lang.allowed_languages') as $k=>$v): $f = "name_".$k;?>
 										<label class="input lang lang_<?php echo $k;?>"> <i class="icon-append fa fa-tag"></i>
 											<input class="name" required="required" type="text" name="object[name_<?php echo $k;?>]" placeholder="Название" value="<?php echo $object->$f?>">
 										</label>
 									<?php endforeach;?>
 								</section>
+								
+								<section class="col col-6">
+								<label class="label">Цена</label>
+										<label class="input"> <i class="icon-append fa fa-tag"></i>
+											
+											<input required="required" type="text" name="object[price]" placeholder="Цена" value="<?php echo $object->price ? $object->price : ""?>">
+										</label>
+								</section>
 							</fieldset>
 							<fieldset>
+								<section class="col col-6">
+									<label class="label">Отображать в "сделай сам"?</label>
+									<label class="checkbox">
+									<input type="checkbox" name="object[show_as_complex]"  value="1" <?php echo $object->show_as_complex ? 'checked="checked"' : "" ?> /><i></i>
+									</label>
+								</section>
 								<section class="col col-6" style="text-align: center;">
 									<img style="-webkit-border-radius: 500px;-moz-border-radius: 500px;border-radius: 500px;"src="<?php echo url::base().$object->main_image()?>">
 									<label for="file" class="input input-file">

@@ -1,6 +1,6 @@
 <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="">
 				<header role="heading">
-					<h2><?php echo $admin_lang["slbl_list"]?></h2>
+					<h2>Ингредиенты</h2>
 
 					<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
 			    </header>
@@ -21,7 +21,7 @@
 	
 					        <thead>
 					            <tr role="row">
-					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["lables"]["name"]?></th>
+					            	<th tabindex="0" rowspan="1" colspan="1">Название</th>
 					            	<th tabindex="0" rowspan="1" colspan="1">Картинка</th>
 					            	<th tabindex="0" rowspan="1" colspan="1"><?php echo $admin_lang["users"]["actions"]?></th>
 					            </tr>

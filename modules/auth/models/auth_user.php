@@ -27,17 +27,17 @@ class Auth_User_Model extends ORM {
 	 * @param  boolean  save the record when validation succeeds
 	 * @return boolean
 	 */
-	public function validate(array & $array, $save = FALSE)
-	{
-		$array = Validation::factory($array)
-			->pre_filter('trim')
-			->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
-			->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
-			->add_rules('password', 'required', 'length[5,42]')
-			->add_rules('password_confirm', 'matches[password]');
+	// public function validate(array & $array, $save = FALSE)
+	// {
+	// 	$array = Validation::factory($array)
+	// 		->pre_filter('trim')
+	// 		->add_rules('email', 'required', 'length[4,127]', 'valid::email', array($this, 'email_available'))
+	// 		->add_rules('username', 'required', 'length[4,32]', 'chars[a-zA-Z0-9_.]', array($this, 'username_available'))
+	// 		->add_rules('password', 'required', 'length[5,42]')
+	// 		->add_rules('password_confirm', 'matches[password]');
 
-		return parent::validate($array, $save);
-	}
+	// 	return parent::validate($array, $save);
+	// }
 
 	/**
 	 * Validates login information from an array, and optionally redirects

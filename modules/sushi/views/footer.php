@@ -12,7 +12,7 @@
         <h3><?php echo Kohana::lang("global.customer_service")?></h3>
         <ul>
             <li><a href="<?php echo url::base();?>contacts"><?php echo Kohana::lang("global.contacts")?></a></li>
-            <!-- <li><a href="<?php echo url::base();?>feedbacks"><?php echo Kohana::lang("global.feedbacks")?></a></li> -->
+            <li><a href="<?php echo url::base();?>feedbacks"><?php echo Kohana::lang("global.feedbacks")?></a></li>
         </ul>
       </div>
       <div class="span2">

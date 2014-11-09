@@ -122,7 +122,8 @@ class picenigne {
 	}
 	public static function addSuffix($filename, $suffix){	
 		$last_point = strrpos($filename, ".");
-		$extension = end(explode(".", $filename));
+		$f = explode(".", $filename);
+		$extension = end($f);
 		$res = substr($filename, 0, $last_point);
 		$res = $res . $suffix . '.' . $extension;
 		

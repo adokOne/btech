@@ -67,11 +67,62 @@ class Index_Controller extends Controller {
     Router::$title = Kohana::lang("global.meta_desc");
   }
 
+  public function zrobu_sam(){
+    if(isset($_POST["order"])){
+      $this->do_order();
+    }
+    $osnovu =  ORM::factory("osnova")->find_all();
+    $ingredients = ORM::factory("ingredient")->where("show_as_complex",1)->find_all();
+    $view = new View("zrobu_sam");
+    $view->osnovu = $osnovu;
+    $view->ingredients = $ingredients;
+    $view->render(true);
+  }
+
+  private function do_order(){
+    $desc = "Заказ ’сделай сам’";
+    $order_ = $this->input->post("order",array());
+    $order = new Sam_Order_Model();
+    $order->osnova_id = $order_["osnova"];
+    $order->name      = $order_["name"];
+    $order->phone     = $order_["phone"];
+    $order->email     = $order_["email"];
+    $order->address   = $order_["address"];
+    $order->comment   = $order_["comment"];
+    $order->save();
+    foreach($order_["ingridient"] as $id =>$count){
+      if($count < 1){continue;}
+      $position = new Sam_Position_Model();
+      $position->ingredient_id = $id;
+      $position->count = $count;
+      $position->sam_order_id = $order->id;
+      $position->save();
+    }
+
+    $this->_send_sms($desc);
+    url::redirect(url::base()."thanks");
+  }
+
+  public function feedbacks(){
+    $feedback = $this->input->post("feedback",array());
+    if($feedback){
+      $item = new Feedback_Model();
+      foreach($feedback as $k=>$v){
+        $item->$k = strip_tags($v);
+      }
+      $item->save();
+      url::redirect(url::current());
+    }
+    $view = new View("feedbacks");
+    $view->feedbacks = ORM::factory("feedback")->orderby("id","DESC")->find_all();
+    $view->render(true);
+  }
+
   public function index(){
 
     $view = new View("index");
     $view->items  = ORM::factory("good")->where("active",1)->where("show_on_main",1)->find_all();
-    $view->feedbacks = ORM::factory("feedback")->limit(5)->find_all();
+    
     $view->populars  = ORM::factory("good")->where("active",1)->where("show_as_popular",1)->limit(3)->find_all();
     $view->render(true);
   }
@@ -158,7 +209,7 @@ count($this->cart["items"]) || Kohana::show_404();
   }
 
   public function thanks(){
-    in_array(request::referrer(), array("checkout")) || Kohana::show_404();
+    in_array(request::referrer(), array("checkout","zrobu_sam")) || Kohana::show_404();
     $page = ORM::factory("page")->where("seo_name","thanks")->find();
     $view = new View("thanks");
     $view->body_cls = "checkout-checkout";

@@ -11,15 +11,15 @@ class Auth_Role_Model extends ORM {
 	 * @param  boolean  save the record when validation succeeds
 	 * @return boolean
 	 */
-	public function validate(array & $array, $save = FALSE)
-	{
-		$array = Validation::factory($array)
-			->pre_filter('trim')
-			->add_rules('name', 'required', 'length[4,32]')
-			->add_rules('description', 'length[0,255]');
+	// public function validate(array & $array, $save = FALSE)
+	// {
+	// 	$array = Validation::factory($array)
+	// 		->pre_filter('trim')
+	// 		->add_rules('name', 'required', 'length[4,32]')
+	// 		->add_rules('description', 'length[0,255]');
 
-		return parent::validate($array, $save);
-	}
+	// 	return parent::validate($array, $save);
+	// }
 
 	/**
 	 * Allows finding roles by name.

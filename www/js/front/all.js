@@ -8,6 +8,7 @@ $.Controller("All",{
     this.element.find("form").each(function(){self.setup_validation($(this))});
     if($("#phone").size())
       $("#phone").mask("(999) 999-99-99")
+    this.element.find(".addToCart").attr("disabled","disabled")
   },
   ".icon-remove-sign -> click":function(ev){
     ev.preventDefault();
@@ -75,6 +76,51 @@ $.Controller("All",{
       }
     })
   },
+  ".count input[type=button] -> click":function(ev){
+    var el = $(ev.target);
+    var idx = el.parent().find("input[type=button]").index(el)
+    var inp = el.siblings("input[type=text]");
+    var val = Number(inp.val());
+    if(val == 0 &&  idx == 1){
+      return;
+    }
+    if(idx == 0){
+      inp.val(val + 1);
+    }
+    if(val >= 1 &&  idx == 1){
+      inp.val(val - 1);
+    }
+    this.set_price();
+  },
+  ".osnova -> change":function(ev){
+    this.set_price();
+  },
+  set_price:function(){
+    var btn_enable = false;
+    var osn_prc = this.element.find("input:checked.osnova").data("price")
+    this.element.find(".ingridient").each(function(){
+      var el = $(this);
+      osn_prc += (Number(el.data("price")) * Number(el.val()))
+      if(Number(el.val())>0){
+        btn_enable = true
+      }
+    });
+    if(btn_enable){
+      this.element.find(".do_order").removeClass("disabled")
+      
+    }
+    else{
+      this.element.find(".do_order").addClass("disabled")
+    }
+    this.element.find(".final_proce").text(osn_prc)
+  },
+  ".do_order -> click":function(ev){
+    var el = $(ev.target).hasClass("do_order") ? $(ev.target) : $(ev.target).parent()
+    if(el.hasClass("disabled")){
+      return;
+    }
+    el.parents("form").submit();
+  },
   submit_form:function(form){
     $.ajax({
       url:form.attr("action"),
@@ -83,7 +129,6 @@ $.Controller("All",{
       success:function(resp){
         console.log(resp);
         if(resp.success){
-          console.log(resp,"qwdqw");
           window.location.href = resp.href;
         }
       }

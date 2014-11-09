@@ -33,6 +33,7 @@ $lang = array(
   "phone" => "Телефон",
   "fio" => "Имя",
   "email" => "Email",
+  "zrobu_sam" => "Суші 'Зроби Сам'",
   "message" => "Сообщение",
   "send" => "Отправить",
   "location" => "Ищите Нас",

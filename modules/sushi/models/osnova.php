@@ -2,7 +2,7 @@
 
 
 class Osnova_Model  extends ORM{
-	protected  $has_and_belongs_to_many = array("goods");
+	protected  $belongs_to = array("sam_order");
    public    $img_dir = "upload/osnova/";
 	public function name(){
 		$field = "name_".Router::$current_language; 

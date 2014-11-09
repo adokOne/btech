@@ -18,3 +18,6 @@ $config["thanks"] = "index/thanks";
 $config["blog/(.*)"] = "index/blog/$1";
 $config["gifts"] = "index/page/gifts";
 $config["specials"] = "index/specials";
+
+$config["feedbacks"] = "index/feedbacks";
+$config["zrobu_sam"] = "index/zrobu_sam";
