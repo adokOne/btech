@@ -1,0 +1,267 @@
+
+/* ----------------------- BOXES ------------------------- */
+
+.box {
+	margin-bottom:30px;
+}
+.box-head {	
+	color:#000;
+	padding: 0;
+	font: 300 24px/24px 'Roboto', Arial;
+	margin-bottom:27px;
+	text-align: center;
+}
+.box-head a {
+	text-decoration:none;
+}
+.box-head a:hover {}
+.box-body {}
+.box-body ul {
+	margin:0; 
+	padding:0; 
+	list-style:none;
+}
+.box-body ul li {}
+.box-body ul li a {
+	font-size: 16px;
+	line-height: 26px;
+	color: #777;
+	text-decoration:none;
+	text-transform:none;
+}
+.box-body ul li.category-products a:hover,
+.box-body ul li .category-subs-parent-selected,
+.box-body ul li .category-subs-selected,
+.box-body ul li a:hover {
+	color:#0a93f3;
+}
+
+.box-body ol {
+	margin:0; 
+	padding:0; 
+	list-style:none;
+}
+.box-body ol li {}
+.box-body ol li a {
+	font-size: 16px;
+	line-height: 26px;
+	color: #777;
+	text-decoration:none;
+	text-transform:none;
+}
+.box-body ol li a:hover {
+	color:#0a93f3;
+}
+
+
+/* ----------------------- LISTING BOXES ------------------------- */
+
+
+#categories .box-body ul li.category-products a{font-size: 13px; line-height: 24px;}
+
+#moreinformation {}
+
+#information {}
+
+#bestsellers {}
+
+#ezpages {}
+
+
+#orderhistory {}
+#orderhistory .box-body img {
+	background:#FFFFFF; 
+	padding:2px; 
+	border:1px solid #AAAAAA; 
+	vertical-align:middle; 
+	margin:2px 0px 2px 0px;
+}
+#orderhistory .no-bg{
+	background:none; padding:0;
+}
+#orderhistory a{
+	display:inline; 
+	background:none; 
+	padding:0;
+}
+
+
+/* ----------------------- BANNER BOXES ------------------------- */
+
+#bannerbox {}
+
+#bannerbox2 {}
+
+#bannerboxall {}
+
+
+
+/* ----------------------- PRODUCT BOXES ------------------------- */
+
+#featured a img, 
+#whatsnew a img, 
+#specials a img, 
+#reviews a img, 
+#manufacturerinfo img, 
+#productnotifications img {
+	margin:0 0 8px;
+}
+
+#reviews img {
+	margin:5px 0 0;
+}
+
+
+
+#featured {}
+#featured .box-body{}
+#featured .box-body .prod-info{}
+#featured .box-body .name{}
+#featured .box-body .name:hover{}
+#featured .box-body .normalprice {}
+#featured .box-body .productSpecialPrice, 
+#featured .box-body .productSalePrice, 
+#featured .box-body .productSpecialPriceSale {}
+
+
+#whatsnew {}
+#whatsnew .box-body{}
+#whatsnew .box-body .prod-info{}
+#whatsnew .box-body .name{}
+#whatsnew .box-body .name:hover{}
+#whatsnew .box-body .normalprice {}
+#whatsnew .box-body .productSpecialPrice, 
+#whatsnew .box-body .productSalePrice, 
+#whatsnew .box-body .productSpecialPriceSale {}
+
+
+#specials {}
+#specials .box-head a,	
+#reviews .box-head a,
+#featured .box-head a{	
+	color:#000;
+	padding: 0;
+	font: 300 24px/24px 'Roboto', Arial;
+	margin-bottom:27px;
+	text-align: center;
+}
+#specials .box-head a:hover,
+#reviews .box-head a:hover {color: #0a93f3;}
+#specials .box-body{}
+#specials .box-body .prod-info{}
+#specials .box-body .name{}
+#specials .box-body .name:hover{}
+#specials .box-body .normalprice {}
+#specials .box-body .productSpecialPrice, 
+#specials .box-body .productSalePrice, 
+#specials .box-body .productSpecialPriceSale {}
+
+
+#reviews {}
+#reviews .box-body{
+	text-align:center;
+}
+
+#manufacturerinfo {}
+
+
+#productnotifications {}
+#productnotifications .box-body{
+	text-align:center;
+}
+
+
+
+
+/* ----------------------- FORM BOXES ------------------------- */
+
+#search {}
+#search .box-body{
+	overflow:hidden;
+}
+#search .advsearch{
+	color:#777;
+	font-size:13px;
+	line-height:24px;
+	text-transform:lowercase;
+	float:left;
+	display:inline-block;
+}
+#search .advsearch:hover{
+	color: #0a93f3;
+}
+#search input{
+	border:solid 0px; 
+	padding:0; 
+	vertical-align:middle; 
+	float:left; 
+	display:block; 
+	text-indent:-1000px; 
+	cursor: pointer;
+}
+#search .input1{
+	border:solid 1px #ccc;
+	color: #777;
+	margin-right:2px;
+	width:209px!important;
+	cursor:text;
+	padding: 2px 30px 4px 8px; 
+	float:left;
+	background:#fff;
+	text-indent:0;
+	height:18px!important;
+}
+
+
+#manufacturers {}
+#manufacturers .box-body {
+	text-align:center;
+}
+
+
+#currencies {}
+#currencies .box-body {
+	text-align:center;
+}
+#currencies select{
+	width:90%;
+}
+
+#recordcompanies {}
+#recordcompanies .box-body {
+	text-align:center;
+}
+
+
+#musicgenres {}
+#musicgenres .box-body {
+	text-align:center;
+}
+
+
+
+/* ----------------------- TEXT BOXES ------------------------- */
+
+#languages {}
+#languages .box-body {
+	text-align:center;
+}
+
+
+#whosonline {}
+#whosonline .box-body {
+	text-align:center;
+}
+
+
+#documentcategories {}
+
+
+#shoppingcart {}
+#shoppingcart .cart_line {}
+#shoppingcart #cartBoxEmpty {
+	text-align:center;
+}
+#shoppingcart li a{
+	padding:0; background:none;
+}
