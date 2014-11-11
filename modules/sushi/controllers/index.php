@@ -67,6 +67,16 @@ class Index_Controller extends Controller {
     Router::$title = Kohana::lang("global.meta_desc");
   }
 
+  private function _send_mail($desc,$order){
+    $mail = "email: ".$order->email."<br/>";
+    $mail .= "name: ".$order->name."<br/>";
+    $mail .= "phone: ".$order->phone."<br/>";
+    $mail .= "address: ".$order->address."<br/>";
+    $mail .= "comment: ".$order->comment."<br/>";
+    $mail .= $desc;
+    email::send( Kohana::config("core.support_mail"),  Kohana::config("email.sender"), Kohana::lang("global.contact_subj"), $mail, true);
+  }
+
   public function zrobu_sam(){
     if(isset($_POST["order"])){
       $this->do_order();
@@ -80,7 +90,7 @@ class Index_Controller extends Controller {
   }
 
   private function do_order(){
-    $desc = "Заказ ’сделай сам’";
+    $desc = array("Заказ ’сделай сам’");
     $order_ = $this->input->post("order",array());
     $order = new Sam_Order_Model();
     $order->osnova_id = $order_["osnova"];
@@ -90,6 +100,7 @@ class Index_Controller extends Controller {
     $order->address   = $order_["address"];
     $order->comment   = $order_["comment"];
     $order->save();
+    $desc[] = $order->osnova->name();
     foreach($order_["ingridient"] as $id =>$count){
       if($count < 1){continue;}
       $position = new Sam_Position_Model();
@@ -97,9 +108,11 @@ class Index_Controller extends Controller {
       $position->count = $count;
       $position->sam_order_id = $order->id;
       $position->save();
+      $desc[] = $position->ingredient->name()." x ".$count;
     }
 
-    $this->_send_sms($desc);
+    $this->_send_sms(implode("|", $desc));
+    $this->_send_mail(implode("<br/>", $desc),$order);
     url::redirect(url::base()."thanks");
   }
 
@@ -201,10 +214,10 @@ count($this->cart["items"]) || Kohana::show_404();
       }
       $item->save();
     }
-    $desc = implode("|", $desc);
     Session::instance()->destroy();
     echo json_encode($json);
-    $this->_send_sms($desc);
+    $this->_send_sms(implode("|", $desc));
+    $this->_send_mail(implode("<br/>", $desc),$item);
 
   }
 
