@@ -56,6 +56,7 @@
                            <tr>
                               <th class="cart_product first_item"><?php echo $lang["img"]?></th>
                               <th class="cart_description item"><?php echo $lang["prod_name"]?></th>
+                              <th class="cart_description item"><?php echo $lang["size"]?></th>
                               <th class="cart_unit item"><?php echo $lang["unit_price"]?></th>
                               <th class="cart_quantity item"><?php echo $lang["Quantity"]?></th>
                               <th class="cart_total item"><?php echo $lang["total"]?></th>
@@ -83,6 +84,11 @@
                                  <td class="cart_description">
                                     <p class="product-name">
                                        <a href="<?php echo $item->good->url() ?>"><?php echo $item->good->name() ?></a>
+                                    </p>
+                                 </td>
+                                 <td class="cart_description">
+                                    <p class="product-name">
+                                       <?php echo $item->size ?>
                                     </p>
                                  </td>
                                  <td class="cart_unit" data-title="<?php echo $lang["unit_price"]?>">
