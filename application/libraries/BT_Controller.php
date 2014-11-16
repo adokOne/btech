@@ -123,9 +123,9 @@ change_order
 */
   protected function _send_email($data,$email,$type="register"){
     $tags  = array_keys(Kohana::config("email_tags.{$type}"));
-    $email = ORM::factory("page")->where(array("type"=>"email","seo_name"=>$type))->find();
-    $body  = str_replace($tags,$data, $email->text());
-    $subject = $email->name()." ".Kohana::config("core.site_name");
+    $page = ORM::factory("page")->where(array("type"=>"email","seo_name"=>$type))->find();
+    $body  = str_replace($tags,$data, $page->text());
+    $subject = $page->name()." ".Kohana::config("core.site_name");
     email::send($email, Kohana::config("email.sender"), $subject, $body ,true);
   }
 
