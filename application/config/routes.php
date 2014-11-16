@@ -20,3 +20,4 @@ $config["checkout"] = "index/checkout";
 $config["process_order/(\d)"] = "index/process_order/$1";
 
 $config["thanks"] = "index/thanks";
+$config["news/(.*)"] = "news/show/$1";

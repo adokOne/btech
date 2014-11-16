@@ -118,6 +118,9 @@
                                              <a  href="<?php echo url::base()?>users/account" title="<?php echo $user->name?>"><?php echo $user->name?></a>
                                           </div>
                                        <?php endif;?>
+                                       <div class="header_user_info">
+                                          <a  href="<?php echo url::base()?>news" title="<?php echo $lang["news"]?>"><?php echo $lang["news"]?></a>
+                                       </div>
                                        <!-- /Block usmodule NAV --><!-- Block currencies module -->
 <!--                                        <div id="currencies-block-top">
                                           <form id="setCurrency" action="<?php echo url::current()?>" method="post">

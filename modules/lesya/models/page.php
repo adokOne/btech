@@ -38,6 +38,6 @@ class Page_Model  extends ORM{
 	}
 
 	private function generate_seo(){
-		return text::ru2Lat($this->name_ru);
+		return text::ru2Lat($this->name_uk);
 	}
 }
