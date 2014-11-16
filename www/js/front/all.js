@@ -2,7 +2,8 @@ $.Controller("All",{
   cart_item_template:null,
   ".size -> click":function(ev){
     var el = $(ev.target)
-    
+    ev.preventDefault();
+    el.toggleClass("clicked")
     if(this.enabled_sizes.hasOwnProperty(el.data("name"))){
       delete this.enabled_sizes[el.data("name")];
     }

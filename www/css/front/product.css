@@ -2,7 +2,10 @@
 /* primary_block ***************************************************************************** */
 .primary_block {
   margin-bottom: 40px; }
-
+.clicked{
+  background: #cccccc;
+border-color: #bfbfbf;
+}
 .top-hr {
   background: #d6d4d4;
   height: 1px;
