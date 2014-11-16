@@ -54,6 +54,7 @@ class Index_Controller extends Controller {
         $position->order_id = $item->id;
         $position->good_id  = $good["id"];
         $position->count    = $good["count"];
+        $position->size     = $good["size"];
         $position->save();
         $desc[] = $good["name"]." x ".$good["count"];
       }
@@ -204,26 +205,30 @@ class Index_Controller extends Controller {
     is_numeric($id) || die(json_encode(array("success"=>false)));
     $sizes = $this->input->get("sizes",array(array("size"=>"L","count"=>1)));
     foreach($sizes as $qty){
-      var_dump($qty);die;
-    }
-    for ($i=0; $i < $qty; $i++) { 
       $obj = ORM::factory("good")->find($id);
       $obj->id || die(json_encode(array("success"=>false)));
       if(!$data = Session::instance()->get($this->session_key)){
-        $data  = array("ids"=>array($obj->id),"items"=>array(array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>1,"name"=>$obj->name())),"total"=>$obj->price($this->user));
+        $data  = array("ids"=>array($obj->id),"items"=>array(array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>$qty["count"],"size"=>$qty["size"],"name"=>$obj->name())),"total"=>($obj->price($this->user) * $qty["count"]));
       }
       else{
+        
         if(in_array($obj->id, $data["ids"])){
+          $succes_add = false;
           foreach($data["items"] as &$item){
-            if($obj->id == $item["id"]){
-              $item["count"] =  $item["count"] + 1;
+            if($obj->id == $item["id"] && $item["size"]==$qty["size"]){
+              $item["count"] =  $item["count"] + $qty["count"];
+              $succes_add = true;
             }
+          }
+          if(!$succes_add){
+            array_push($data["items"], array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>$qty["count"],"size"=>$qty["size"],"name"=>$obj->name()));
           }
         }
         else{
-          array_push($data["items"], array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>1,"name"=>$obj->name()));
+          array_push($data["items"], array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>$qty["count"],"size"=>$qty["size"],"name"=>$obj->name()));
         }
-        $data["total"] =  $data["total"] + $obj->price($this->user);
+
+        $data["total"] =  $data["total"] + ($obj->price($this->user) * $qty["count"]);
         array_push($data["ids"] , $obj->id);
       }
       Session::instance()->set($this->session_key,$data);
@@ -236,17 +241,17 @@ class Index_Controller extends Controller {
     is_numeric($id) || die(json_encode(array("success"=>false)));
     $obj = ORM::factory("good")->find($id);
     $obj->id || die(json_encode(array("success"=>false)));
-    $qty = intval($this->input->get("qty",1));
-    for ($i=0; $i < $qty; $i++) { 
+    $sizes = $this->input->get("sizes",array(array("size"=>"L","count"=>1)));
+    foreach($sizes as $qty){
       if(!$data = Session::instance()->get($this->session_key)){
         $data  = array("ids"=>array(),"items"=>array(),"total"=>0);
       }
       else{
         if(count($data["items"])){
           foreach($data["items"] as &$item){
-            if($obj->id == $item["id"]){
+            if($obj->id == $item["id"] && $item["size"]==$qty["size"]){
               if($item["count"] > 1){
-                $item["count"] = $item["count"] - 1;
+                $item["count"] = $item["count"] - $qty["count"];
               }
               else{
                 $item = array();

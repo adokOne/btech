@@ -209,7 +209,7 @@
                                                                         </span>
                                                                      </div>
                                                                      <span class="remove_link">
-                                                                        <a  class="remove" data-id="<?php echo $prod["id"];?>" href="<?php echo url::base()."delete_from_cart/".$prod["id"];?>" rel="nofollow">&nbsp;</a>
+                                                                        <a  class="remove" data-id="<?php echo $prod["id"];?>" data-size="<?php echo $prod["size"];?>" href="<?php echo url::base()."delete_from_cart/".$prod["id"];?>" rel="nofollow">&nbsp;</a>
                                                                      </span>
                                                                   </dt>
                                                                <?php endforeach;?>

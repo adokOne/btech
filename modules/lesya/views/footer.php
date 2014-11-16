@@ -124,14 +124,14 @@
                            <div class="cart-info">
                               <div class="product-name">
                                  <span class="quantity-formated">
-                                 <span class="quantity">%count%</span>&nbsp;x&nbsp;
+                                 <span class="quantity">%count% %size%</span>&nbsp;&nbsp;x&nbsp;
                                  </span>
                                  <a class="cart_block_product_name" href="/product/%seo%-%id%" title="%name%">%name%</a>
                               </div>
                               <span class="price">%price% грн.</span>
                            </div>
                            <span class="remove_link">
-                           <a class="remove" data-id="%id%" rel="nofollow">&nbsp;</a>
+                           <a class="remove" data-id="%id%" data-size="%size%"  rel="nofollow">&nbsp;</a>
                            </span>
                         </dt>
                      </div>

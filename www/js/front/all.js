@@ -153,7 +153,11 @@ $.Controller("All",{
       success:function(resp){
         if(resp.success){
           self.element.find(".cart_block_list .products").empty();
-          self.quantity_wanted.val(1);
+          self.element.find(".prod_qty").remove();
+          self.enabled_sizes = {}
+          self.element.find("#quantity_wanted_p,#add_to_cart").hide()
+          self.element.find("#sfwefwefwe").show()
+
           for(i in resp.items){
             var block = self.parent.cart_item_template;
             block = block.replace("%id%",resp.items[i].id);
@@ -165,6 +169,8 @@ $.Controller("All",{
             block = block.replace("%seo%",resp.items[i].id);
             block = block.replace("%seo%",resp.items[i].id);
             block = block.replace("%price%",resp.items[i].price);
+            block = block.replace("%size%",resp.items[i].size);
+            block = block.replace("%size%",resp.items[i].size);
             block = block.replace("%count%",resp.items[i].count);
             block = block.replace("%name%",resp.items[i].name);
             block = block.replace("%name%",resp.items[i].name);
@@ -173,21 +179,24 @@ $.Controller("All",{
             self.element.find(".cart_block_list .products").append($(block));
           }
           var total_el = self.element.find(".ajax_cart_quantity");
-          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.ids.length));
+          total_el.text(sprintf(total_el.text().replace(/[0-9]+/g, "%s") ,resp.items.length));
           self.element.find(".cart_block_total, .ajax_block_cart_total").text(self.element.find(".cart_block_total").text().replace(/[0-9]+/g,resp.total));
           self.element.find(".cart-buttons").removeClass("hidden");
           self.element.find(".cart_block_no_products").addClass("hidden");
         }
       }
     })
+    this.enabled_sizes = self.enabled_sizes;
   },
   ".remove -> click":function(ev){
     ev.preventDefault();
     var el = $(ev.target).hasClass("remove") ? $(ev.target) : $(ev.target).parents(".remove");
     var self = this;
+    console.log(el.data("size"))
+    var sizes = [{size:el.data("size"),count:1}]
     $.ajax({
       url:"/delete_from_cart/" + el.data("id"),
-      data:{qty:el.data("count")},
+      data:{sizes:sizes},
       dataType:"json",
       success:function(resp){
         if(resp.success){
@@ -201,6 +210,8 @@ $.Controller("All",{
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%id%",resp.items[i].id);
             block = block.replace("%seo%",resp.items[i].id);
+            block = block.replace("%size%",resp.items[i].size);
+            block = block.replace("%size%",resp.items[i].size);
             block = block.replace("%seo%",resp.items[i].id);
             block = block.replace("%price%",resp.items[i].price);
             block = block.replace("%count%",resp.items[i].count);

@@ -24,6 +24,7 @@
                      <tr>
                         <th class="cart_product first_item"><?php echo $lang["img"]?></th>
                         <th class="cart_description item"><?php echo $lang["prod_name"]?></th>
+                        <th class="cart_description item"><?php echo $lang["size"]?></th>
                         <th class="cart_unit item"><?php echo $lang["unit_price"]?></th>
                         <th class="cart_quantity item"><?php echo $lang["Quantity"]?></th>
                         <th class="cart_total item"><?php echo $lang["total"]?></th>
@@ -53,6 +54,11 @@
                                  <a href="<?php echo url::base()."product/".$item["seo"]."-".$item["id"]?>"><?php echo $item["name"]?></a>
                               </p>
                            </td>
+                           <td class="cart_description">
+                              <p class="product-name">
+                                 <?php echo $item["size"]?>
+                              </p>
+                           </td>
                            <td class="cart_unit" data-title="Unit price">
                               <span class="price" id="product_price_<?php $item["id"]?>">
                               <span class="price"><?php echo $item["price"]." ".$lang["currencies"][$active_currency]?></span>
@@ -62,12 +68,12 @@
                               <input type="hidden" value="6" name="quantity_<?php $item["id"]?>_hidden">
                               <input size="2" type="text" autocomplete="off" class="cart_quantity_input form-control grey" value="<?php echo $item["count"]?>" name="quantity_<?php echo $item["id"]?>">
                               <div class="cart_quantity_button clearfix">
-                                 <a rel="nofollow" class="cart_quantity_down del btn btn-default button-minus" id="cart_quantity_down_<?php echo $item["id"]?>" href="<?php echo url::base()."delete_from_cart/".$item["id"]?>" >
+                                 <a rel="nofollow" class="cart_quantity_down del btn btn-default button-minus" id="cart_quantity_down_<?php echo $item["id"]?>" href="<?php echo url::base()."delete_from_cart/".$item["id"]?>?<?php echo http_build_query(array("sizes"=>array(array('size'=>$item['size'],'count'=>1))))  ?>" >
                                  <span>
                                  <i class="fa fa-minus"></i>
                                  </span>
                                  </a>
-                                 <a rel="nofollow" class="cart_quantity_up btn btn-default button-plus" id="cart_quantity_up_<?php echo $item["id"]?>" href="<?php echo url::base()."to_card/".$item["id"]?>">
+                                 <a rel="nofollow" class="cart_quantity_up btn btn-default button-plus" id="cart_quantity_up_<?php echo $item["id"]?>" href="<?php echo url::base()."to_card/".$item["id"]?>?<?php echo http_build_query(array("sizes"=>array(array('size'=>$item['size'],'count'=>1))))  ?>">
                                  <span>
                                  <i class="fa fa-plus"></i>
                                  </span>
@@ -79,7 +85,7 @@
                            </td>
                            <td class="cart_delete text-center" >
                               <div>
-                                 <a rel="nofollow" data-count="<?php echo $item["count"];?>"  class=" del cart_quantity_delete" id="<?php $item["id"]?>" href="<?php echo url::base()."delete_from_cart/".$item["id"]?>">
+                                 <a rel="nofollow" data-count="<?php echo $item["count"];?>"  class=" del cart_quantity_delete" id="<?php $item["id"]?>" href="<?php echo url::base()."delete_from_cart/".$item["id"]?>?<?php echo http_build_query(array("sizes"=>array(array('size'=>$item['size'],'count'=>$item['count']))))  ?>">
                                  <i class="fa fa-trash-o"></i>
                                  </a>
                               </div>
