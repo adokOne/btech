@@ -6,8 +6,8 @@
 
 				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
 				<div class="widget-toolbar" role="menu">
-					<a  href="javascript:void(0);" class="active btn-warning btn button-icon jarviswidget-toggle-btn">RU</a>
-					<a  href="javascript:void(0);" class="btn-warning btn button-icon jarviswidget-toggle-btn" style="margin-left:10px;">UK</a>
+					<a  href="javascript:void(0);" class="btn-warning btn button-icon jarviswidget-toggle-btn">RU</a>
+					<a  href="javascript:void(0);" class="active btn-warning btn button-icon jarviswidget-toggle-btn" style="margin-left:10px;">UK</a>
 				</div>
 				</header>
 
@@ -61,16 +61,6 @@
 											<input required="required" type="text" name="object[artikul]" placeholder="Артикул" value="<?php echo $object->artikul?>">
 										</label>
 									</section>
-									<section class="col col-6">
-										<label class="label">Категория</label>
-										<label class="select">
-											<select name="object[category_id]">
-												<?php foreach($categories as $cat):?>
-												<option <?php echo $object->category_id == $cat->id ? "selected" : ""?> value="<?php echo $cat->id?>"><?php echo $cat->name();?></option>
-												<?php endforeach;?>
-											</select>
-										</label>
-									</section>
 							</fieldset>
 							<fieldset>
 									<section class="col col-6">
@@ -113,6 +103,22 @@
 							</fieldset>
 							<fieldset>
 								<section>
+									<label class="label">Категории</label>
+									<div class="inline-group">
+										<?php foreach($categories as $category):?>
+											<label class="checkbox">
+												<input type="checkbox" name="object[categories][<?php echo $category->id?>]"  <?php echo $object->has($category) ? 'checked' : ""?>>
+												<i></i>
+												<?php echo $category->name()?>
+											</label>
+										<?php endforeach;?>
+									</div>
+								</section>
+							</fieldset>
+
+
+							<fieldset>
+								<section>
 									<label class="label">Доступные размеры</label>
 									<div class="inline-group">
 										<?php foreach($lables as $item):?>
@@ -123,7 +129,7 @@
 												</label>
 											</div>
 											<div class="col col-2">
-														<label class="select">
+														<label class="select" style="width: 50px;">
 															<select name="object[sizes][count][<?php echo $item->id?>]" class="input-sm">
 																<?php for($i=0;$i<100;$i++):?>
 																	<option <?php echo array_key_exists($item->id, $object->sizes()) && $object->sizes[$item->id] == $i ? 'selected="selected"' : ""?> value="<?php echo $i?>"><?php echo $i?></option>
@@ -131,6 +137,51 @@
 															</select><i></i> 
 														</label>
 													</div>
+										<?php endforeach;?>
+									</div>
+								</section>
+
+							</fieldset>
+							<fieldset>
+								<section>
+									<label class="label">Рукава</label>
+									<div class="inline-group">
+										<?php foreach($rukavs as $role):?>
+											<label class="checkbox">
+												<input type="checkbox" name="object[rukavs][<?php echo $role->id?>]"  <?php echo $object->has($role) ? 'checked' : ""?>>
+												<i></i>
+												(<?php echo $role->name()?>)
+											</label>
+										<?php endforeach;?>
+									</div>
+								</section>
+
+							</fieldset>
+							<fieldset>
+								<section>
+									<label class="label">Кольора</label>
+									<div class="inline-group">
+										<?php foreach($colors as $role):?>
+											<label class="checkbox">
+												<input type="checkbox" name="object[colors][<?php echo $role->id?>]"  <?php echo $object->has($role) ? 'checked' : ""?>>
+												<i></i>
+												(<?php echo $role->name()?>) 
+											</label>
+										<?php endforeach;?>
+									</div>
+								</section>
+
+							</fieldset>
+							<fieldset>
+								<section>
+									<label class="label">Типи</label>
+									<div class="inline-group">
+										<?php foreach($types as $role):?>
+											<label class="checkbox">
+												<input type="checkbox" name="object[types][<?php echo $role->id?>]"  <?php echo $object->has($role) ? 'checked' : ""?>>
+												<i></i>
+												(<?php echo $role->name()?>)
+											</label>
 										<?php endforeach;?>
 									</div>
 								</section>

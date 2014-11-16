@@ -1,16 +1,75 @@
 $.Controller("All",{
   cart_item_template:null,
+  ".size -> click":function(ev){
+    var el = $(ev.target)
+    
+    if(this.enabled_sizes.hasOwnProperty(el.data("name"))){
+      delete this.enabled_sizes[el.data("name")];
+    }
+    else{
+      this.enabled_sizes[el.data("name")] = el.data("id")
+    }
+    this.element.find(".prod_qty").remove()
+    if(Object.keys(this.enabled_sizes).length){
+      this.element.find("#quantity_wanted_p,#add_to_cart").show()
+      this.element.find("#sfwefwefwe").hide()
+      for (var prop in this.enabled_sizes) {
+        var block = this.qty_template.clone();
+        block.find(".size_name").text(prop)
+        this.element.find("#quantity_wanted_p").append(block)
+      };
+      
+    }
+    else{
+      this.element.find("#quantity_wanted_p,#add_to_cart").hide()
+      this.element.find("#sfwefwefwe").show()
+    }
+  },
+  ".size_btn -> click":function(ev){
+    ev.preventDefault();
+  },
+  ".same_addr -> change":function(ev){
+    var val = Number($(ev.target).val());
+    if(val){
+      this.element.find(".addr_int").removeAttr("disabled");
+    }
+    else{
+      this.element.find(".addr_int").attr("disabled","disabled");
+      this.element.find(".addr_int").focus();
+    }
+  },
+  ".chck_btn -> click":function(ev){
+    var el = $(ev.target);
+    var adr_val = Number(this.element.find(".same_addr:checked").val());
+    var addr_el = this.element.find(".addr_int")
+    if(adr_val && addr_el.val().length < 10){
+      ev.preventDefault();
+    }
+    else if(adr_val && addr_el.val().length > 10){
+      var url = el.attr("href");
+      var base =  url.split("?")[0];
+      var new_url = base + "?address=" + addr_el.val();
+      ev.preventDefault();
+      window.location.href = new_url
+    }
+    else{
+    }
+    
+  },
   init:function(){
     var self = this;
+    this.enabled_sizes = {}
     this.notification = this.element.find("#layer_cart");
     this.parent.cart_item_template = this.element.find("#prod_template").html();
     this.element.find("#prod_template").remove();
-    this.quantity_wanted = this.element.find("#quantity_wanted");
+    this.quantity_wanted = this.element.find("#quantity_wanted_");
     this.element.find("form").each(function(){self.setup_validation($(this))});
     this.create_account_error = this.element.find("#create_account_error").clone();
     this.element.find("#create_account_error").remove();
     if($("#phone").size())
       $("#phone").mask("(999) 999-99-99")
+    this.qty_template = this.element.find(".prod_qty").clone()
+    this.element.find(".prod_qty").remove()
   },
   "#submitNewMessage -> click":function(ev){
     ev.preventDefault();
@@ -33,14 +92,17 @@ $.Controller("All",{
   },
   ".product_quantity_up -> click":function(ev){
     ev.preventDefault();
-    this.quantity_wanted.val(Number(this.quantity_wanted.val()) + 1);
-    this.quantity_wanted.change();
+    var inp =  $(ev.target).parents(".prod_qty").find("input[type=text]");
+    inp.val(Number(inp.val()) + 1);
+   // this.quantity_wanted.val(Number(this.quantity_wanted.val()) + 1);
+    inp.change();
   },
   ".product_quantity_down -> click":function(ev){
     ev.preventDefault();
-    if(Number(this.quantity_wanted.val()) > 1){
-      this.quantity_wanted.val(Number(this.quantity_wanted.val()) - 1);
-      this.quantity_wanted.change();
+    var inp =  $(ev.target).parents(".prod_qty").find("input[type=text]");
+    if(Number(inp.val()) > 1){
+      inp.val(Number(inp.val()) - 1);
+      inp.change();
     }
     
   },
@@ -78,9 +140,15 @@ $.Controller("All",{
     ev.preventDefault();
     var self = this;
     var el = $(ev.target).hasClass("ajax_add_to_cart_button") ? $(ev.target) : $(ev.target).parents(".ajax_add_to_cart_button");
+    var sizes = []
+    this.element.find(".prod_qty").find(".text").each(function(){
+      var el = $(this);
+      var size_ = el.siblings(".size_btn").find(".size_name").text()
+      sizes.push({size:size_,count:el.val()})
+    })
     $.ajax({
       url:el.attr("href"),
-      data:{qty:self.quantity_wanted.val()},
+      data:{sizes:sizes},
       dataType:"json",
       success:function(resp){
         if(resp.success){

@@ -5,7 +5,8 @@ class Good_Model  extends ORM{
     protected $has_one = array("label");
     public    $img_dir = "/upload/goods/";
     protected $has_many = array("positions","size_counts","reviews");
-    protected $belongs_to = array("category");
+    protected $has_and_belongs_to_many = array("rukavs","colors","types","categories");
+    #protected $belongs_to = array("category");
 	public 	$sizes = array();
 	public function sizes(){
 		$this->sizes = array();
@@ -32,9 +33,16 @@ class Good_Model  extends ORM{
 	    }
 		parent::save();
 	}
-
+	public function cats(){
+		$categories = array();
+		foreach($this->categories as $category){
+			$categories[] = $category->name();
+		}
+		return $categories;
+	}
 	public function price($user){
 		if($this->wholesale_price > 0 && $user &&  $user->is_wholesale()){
+			
 			return $this->wholesale_price;
 		}
 		elseif ($this->has_sale && $this->sale_price > 0) {

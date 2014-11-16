@@ -98,7 +98,26 @@
             </p>
             <!-- End Shopping Cart -->
             <!-- Payment -->
+            <h1 class="page-heading step-num"><?php echo $lang["choose_delivery"]?></h1>
+            <div id="" class="opc-main-block" style="margin-bottom: 30px">
+            <div class="radio addressesAreEquals">
+            <div class="left" style="float:left">
+               <input class="same_addr" type="radio" name="same" id="addressesAreEquals" value="0" checked="checked" />
+            <label for="addressesAreEquals"><?php echo $lang["use_my_address"]?><br/><small><?php echo $user->address?></small></label>
+            </div>
+            
+            
+             <div class="right" style="float:left;margin-left: 50px;">
+            <input class="same_addr" type="radio" name="same" id="new_address" value="1" />
+            <label for="new_address"><?php echo $lang["use_new_address"]?></label>
+            <br/><input   style="opacity: 1;width:100%;height: 28px;border: 1px solid #d6d4d4;" class="input form-control grey addr_int" type="text" disabled="disabled" name="address" />
+            </div>
+            <div class="clear"></div>
+            </div>
+
+            </div>
             <h1 class="page-heading step-num"><?php echo $lang["choose_pay"]?></h1>
+
             <div id="opc_payment_methods" class="opc-main-block">
                <div id="opc_payment_methods-overlay" class="opc-overlay" style="display: none;"></div>
                <div class="paiement_block">
@@ -108,7 +127,7 @@
                         <div class="row">
                            <div class="col-xs-12 col-md-12">
                               <p class="payment_module">
-                                 <a class="bankwire" href="<?php echo url::base()?>process_order/1" title="Оплата банковским переводом">
+                                 <a class="bankwire chck_btn" href="<?php echo url::base()?>process_order/1" data-address="" title="Оплата банковским переводом">
                                     <?php echo $lang["bank_transfer"];?>
                                  </a>
                               </p>
@@ -117,7 +136,7 @@
                         <div class="row">
                            <div class="col-xs-12 col-md-12">
                               <p class="payment_module">
-                                 <a class="cheque" href="<?php echo url::base()?>process_order/2" title="Оплата чеком">
+                                 <a class="cheque chck_btn" href="<?php echo url::base()?>process_order/2" data-address="" title="Оплата чеком">
                                  <?php echo $lang["nova_poshta_pay"];?>
                                  </a>
                               </p>
@@ -126,7 +145,7 @@
                         <div class="row">
                            <div class="col-xs-12 col-md-12">
                               <p class="payment_module">
-                                 <a class="cash" href="<?php echo url::base()?>process_order/3" title="Оплата чеком">
+                                 <a class="cash chck_btn" href="<?php echo url::base()?>process_order/3" data-address="" title="Оплата чеком">
                                  <?php echo $lang["lviv_pay"];?>
                                  </a>
                               </p>

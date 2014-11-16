@@ -79,7 +79,7 @@ class Controller extends Controller_Core {
        js::add($js);
        css::add($css);
     }
-   
+  # $this->_send_email();
 		
 	}
 
@@ -113,6 +113,20 @@ class Controller extends Controller_Core {
   public function error_page(){
     $view = new View("_kohana_error_disabled");
     $view->render(true);
+  }
+
+/*
+new_order
+register
+pass_recovery
+change_order
+*/
+  protected function _send_email($data,$email,$type="register"){
+    $tags  = array_keys(Kohana::config("email_tags.{$type}"));
+    $email = ORM::factory("page")->where(array("type"=>"email","seo_name"=>$type))->find();
+    $body  = str_replace($tags,$data, $email->text());
+    $subject = $email->name()." ".Kohana::config("core.site_name");
+    email::send($email, Kohana::config("email.sender"), $subject, $body ,true);
   }
 
 

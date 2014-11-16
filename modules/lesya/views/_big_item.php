@@ -45,7 +45,14 @@
             <span class="grid-desc"><?php echo text::limit_chars($item->anons(),60);  ?></span>
          </p>
          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="content_price">
-          <?php if($item->has_sale):  ?>
+         <?php if($item->wholesale_price > 0 && $logged_in && $user->is_wholesale()):?>
+            <span itemprop="price" class="price product-price product-price-new ">
+               <?php echo $item->wholesale_price." ".$lang["currencies"][$active_currency]?>                         
+            </span>
+            <span class="old-price product-price">
+             <?php echo $item->price." ".$lang["currencies"][$active_currency]?>  
+            </span>
+         <?php elseif($item->has_sale):  ?>
             <span itemprop="price" class="price product-price product-price-new ">
                <?php echo $item->sale_price." ".$lang["currencies"][$active_currency]?>                         
             </span>

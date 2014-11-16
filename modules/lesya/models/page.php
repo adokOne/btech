@@ -31,7 +31,7 @@ class Page_Model  extends ORM{
 	}
 
 	public function save(){
-		if(!strlen($this->seo_name)){
+		if(is_null($this->seo_name) && $this->type !="email" || !strlen($this->seo_name) && $this->type !="email"){
 			$this->seo_name = $this->generate_seo();
 		}
 		parent::save();

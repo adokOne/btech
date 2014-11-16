@@ -23,6 +23,9 @@ class Goods_Admin extends Admin_Controller {
 		$view = new View("goods/edit");
 		$view->object =  new Good_Model();
 		$view->lables = ORM::factory("size")->find_all();
+		$view->rukavs = ORM::factory("rukav")->find_all();
+		$view->colors = ORM::factory("color")->find_all();
+		$view->types  = ORM::factory("type")->find_all();
 		$view->categories = ORM::factory("category")->where("id != 1")->find_all();
 		$this->view->content = $view->render(false);
 		$this->view->render(true);
@@ -35,6 +38,9 @@ class Goods_Admin extends Admin_Controller {
 		$view->object =  $object ;
 		$view->categories = ORM::factory("category")->where("id != 1")->find_all();
 		$view->lables = ORM::factory("size")->find_all();
+		$view->rukavs = ORM::factory("rukav")->find_all();
+		$view->colors = ORM::factory("color")->find_all();
+		$view->types  = ORM::factory("type")->find_all();
 		$this->view->content = $view->render(false);
 		$this->view->render(true);
 
@@ -43,10 +49,20 @@ class Goods_Admin extends Admin_Controller {
 		$object = (object)$this->input->post("object");
 		$sizes  = $object->sizes;
 		unset($object->sizes);
+		$categories  = !isset($object->categories) ? array() : ORM::factory("category")->where("id IN (".implode(",", array_keys($object->categories)).")")->find_all();
+		if(isset($object->categories)) unset($object->categories);
+		$types  = !isset($object->types) ? array() : ORM::factory("type")->where("id IN (".implode(",", array_keys($object->types)).")")->find_all();
+		if(isset($object->types)) unset($object->types);
+		$colors  = !isset($object->colors) ? array() : ORM::factory("color")->where("id IN (".implode(",", array_keys($object->colors)).")")->find_all();
+		if(isset($object->colors)) unset($object->colors);
+		$rukavs  = !isset($object->rukavs) ? array() : ORM::factory("rukav")->where("id IN (".implode(",", array_keys($object->rukavs)).")")->find_all();
+		if(isset($object->rukavs)) unset($object->rukavs);
 		$item   = $object->id ? ORM::factory("good")->find($object->id) : new Good_Model();
+
 		foreach ($object as $attr => $value) {
 			$item->$attr = $value;
 		}
+
 		$item->has_sale = isset($object->has_sale) ? 1 : 0;
 		$item->show_on_main = isset($object->show_on_main) ? 1 : 0;
 		$item->active = isset($object->active) ? 1 : 0;
@@ -62,6 +78,38 @@ class Goods_Admin extends Admin_Controller {
 			}
 			$item->save();
 		}
+		foreach(ORM::factory('rukav')->find_all() as $item_){
+			$item->remove($item_);
+		}
+		foreach($rukavs as $item_){
+			$item->add($item_);
+		}
+
+
+		foreach(ORM::factory('type')->find_all() as $item_){
+			$item->remove($item_);
+		}
+		foreach($types as $item_){
+			$item->add($item_);
+		}
+
+		foreach(ORM::factory('color')->find_all() as $item_){
+			$item->remove($item_);
+		}
+		foreach($colors as $item_){
+			$item->add($item_);
+		}
+
+		foreach(ORM::factory('category')->find_all() as $item_){
+			$item->remove($item);
+		}
+
+		foreach($categories as $item_){
+			$item->add($item_);
+		}
+
+		$item->save();
+
 		if(isset($_FILES["pic"])){
 			$this->upload_pictures($item);
 		}

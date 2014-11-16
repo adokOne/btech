@@ -2,7 +2,7 @@
 
 
 class Category_Model  extends ORM_Tree{
-	protected $has_many = array("goods");
+	protected $has_and_belongs_to_many = array("goods");
 	protected $ORM_Tree_children = "categories";
 	protected $parent_key = 'parent_id';
   public    $img_dir = "/upload/categories/";

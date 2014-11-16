@@ -90,10 +90,11 @@
                          <span><?php echo $lang["availible_sizes"];?></span>  
                       </p>
                       <p class="socialsharing_product list-inline no-print">
-                         <?php foreach($item->size_names() as $size):?>
-                           <button type="button" class="btn btn-default btn-twitter">
+                         <?php $av_sizes = $item->sizes(); foreach( ORM::factory("size")->find_all()  as $size):?>
+                           <button data-id="<?php echo $size->id?>" data-name="<?php echo $size->name?>" style="<?php echo isset($av_sizes[$size->id]) && $av_sizes[$size->id] ? "" : " text-decoration: line-through;"?>" <?php echo isset($av_sizes[$size->id]) && $av_sizes[$size->id]? "" : "disabled='disabled'"?> type="button" class="size btn btn-default btn-twitter">
                               <i class="icon-twitter"></i><?php echo $size->name?>
                            </button>
+                           <small style="color:green"><?php echo  isset($av_sizes[$size->id]) && $av_sizes[$size->id] ? $av_sizes[$size->id] : ""?></small>
                          <?php endforeach;?>
                       </p>
 
@@ -176,26 +177,39 @@
                             <!-- end content_prices -->
                             <div class="product_attributes clearfix">
                                <!-- quantity wanted -->
-                               <p id="quantity_wanted_p">
+                               <p id="quantity_wanted_p" style="display:none">
                                   <label><?php echo $lang["Quantity"]?></label>
-                                  <input type="text" name="qty" readonly="readonly" id="quantity_wanted" class="text" value="1" />
-                                  <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
-                                  <span>
-                                  <i class="fa fa-minus"></i>
+                                  <span class="prod_qty">
+                                    <input type="text" name="qty" readonly="readonly" id="quantity_wanted_" class="text" value="1" />
+                                    <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
+                                    <span>
+                                    <i class="fa fa-minus"></i>
+                                    </span>
+                                    </a>
+                                    <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up">
+                                    <span>
+                                    <i class="fa fa-plus"></i>
+                                    </span>
+                                    
+                                    </a>
+                                    <a href="#" data-field-qty="qty" class="btn btn-default button-plus  size_btn">
+                                    <span>
+                                    <i class="fa size_name">XL</i>
+                                    </span>
+                                    </a>
+                                    <span class="clearfix"></span>
+                                    <br/>
                                   </span>
-                                  </a>
-                                  <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up">
-                                  <span>
-                                  <i class="fa fa-plus"></i>
-                                  </span>
-                                  </a>
-                                  <span class="clearfix"></span>
+                               </p>
+
+                               <p id="sfwefwefwe" >
+                                Оберіть розмір і кількість
                                </p>
                             </div>
                             <!-- end product_attributes -->
                             <div class="box-cart-bottom">
                                <div>
-                                  <p id="add_to_cart" class="buttons_bottom_block no-print" >
+                                  <p id="add_to_cart" class="buttons_bottom_block no-print" style="display:none">
                                      <button href="<?php echo url::base()."to_card/".$item->id; ?>" type="submit" name="Submit" class="exclusive btn btn-default ajax_add_to_cart_button">
                                      <span><?php echo $lang["add_to_card"]?></span>
                                      </button>

@@ -4,6 +4,11 @@ $lang = array(
     "UAH" => "грн.",
     "USD" => "$",
   ),
+  "choose_delivery" => "Виберіть адресу доставки",
+  "use_my_address" => "Використати адресу вказану в контактинх данних",
+  "use_new_address" => "Ввести нову адресу доставки",
+  "colors" => "Кольора",
+  "types" => "Тип вишивки",
   "categories" => "Категорії",
   "sale" => "Знижки",
   "new" => "Новинка",
@@ -51,7 +56,7 @@ $lang = array(
   "rewievs" => "Відгуки та коментарі",
   "rozmira" => "Розміра",
   "Quantity" => "Кількість",
-  "Instead_of" => "Замість",
+  "Instead_of" => "В роздріб",
   "Rating" => "Рейтинг",
   "Grade" => "Оцінка",
   "same_products" => "Схожі товари",
@@ -144,6 +149,7 @@ $lang = array(
   "rozmir_desc" => "Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "page_nit_avail" => "Эта страница не доступна",
   "page_not_avail_desc" => "К сожалению, но веб-адрес, который вы ввели больше недоступен",
+  "rukav_dlina" => "Довжина рукава",
 
 
 );

@@ -3,7 +3,7 @@
 $config = array(
 	array(
 		"heading" => "Вишивнака ",
-		"pre_heading" => "by Lesya",
+		"pre_heading" => "by Lesia",
 		"desc" => "Сучасний одяг з українською вишивкою",
 		"link" => "#",
 	),

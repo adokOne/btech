@@ -9,7 +9,7 @@ class Index_Controller extends Controller {
   protected $session_key = "order";
   public function __construct(){
     parent::__construct();
-    
+    #Session::instance()->delete($this->session_key);
     View::set_global("lang",Kohana::lang("global"));
     View::set_global("active_currency",cookie::get("active_currency","UAH"));
     $cart       = Session::instance()->get($this->session_key);
@@ -34,13 +34,15 @@ class Index_Controller extends Controller {
 
   public function process_order($pay_id){
     count($this->cart["items"]) || Kohana::show_404();
+    $address = $this->input->get("address",false);
+    $address = $address ? $address : $this->user->address;
     $this->logged_in || Kohana::show_404();
     $item   = new Order_Model();
     $item->user_id  = $this->user->id;
     $item->name     = $this->user->name;
-    $item->phone    = $this->user->id;
+    $item->phone    = $this->user->phone;
     $item->email    = $this->user->email;
-    $item->address  = $this->user->address;
+    $item->address  = $address;
     $item->pay_type = intval($pay_id);
     $item->time     = time();
     $item->total_price = intval($this->cart["total"]);
@@ -58,8 +60,10 @@ class Index_Controller extends Controller {
       $item->save();
     }
     $desc = implode("|", $desc);
-    Session::instance()->destroy($this->session_key);
+    Session::instance()->delete($this->session_key);
     url::redirect(url::base()."thanks");
+    $data = array($item->id,$username,$this->user->email,$item->goods_admin_html());
+    $this->_send_email($data,$this->user->email,"new_order");
     $this->_send_sms($desc);
   }
 
@@ -80,8 +84,11 @@ class Index_Controller extends Controller {
               FROM goods g 
               JOIN size_counts s 
               ON s.good_id = g.id 
+              JOIN categories_goods cg 
+              ON cg.good_id = g.id 
+
               WHERE size_id IN (".implode(",", array_values($_GET["size"])).")
-              AND g.category_id = {$category->id}
+              AND cg.category_id = {$category->id}
               AND g.price >= {$price_min}
               AND g.price <= {$price_max}
               LIMIT {$limit} 
@@ -92,7 +99,9 @@ class Index_Controller extends Controller {
               FROM goods g 
               JOIN size_counts s 
               ON s.good_id = g.id 
-              WHERE g.category_id = {$category->id}
+              JOIN categories_goods cg 
+              ON cg.good_id = g.id 
+              WHERE cg.category_id = {$category->id}
               AND g.price >= {$price_min}
               AND g.price <= {$price_max}
               LIMIT {$limit} 
@@ -117,7 +126,7 @@ class Index_Controller extends Controller {
     $good->id || Kohana::show_404();
     $this->set_categories();
     $view = new View("item");
-    $view->active_category = $good->category;;
+    $view->active_category = $good->categories->current();;
     $view->item = $good;
     $view->render(true);
   }
@@ -193,12 +202,15 @@ class Index_Controller extends Controller {
 
   public function to_card($id){
     is_numeric($id) || die(json_encode(array("success"=>false)));
-    $qty = intval($this->input->get("qty",1));
+    $sizes = $this->input->get("sizes",array(array("size"=>"L","count"=>1)));
+    foreach($sizes as $qty){
+      var_dump($qty);die;
+    }
     for ($i=0; $i < $qty; $i++) { 
       $obj = ORM::factory("good")->find($id);
       $obj->id || die(json_encode(array("success"=>false)));
       if(!$data = Session::instance()->get($this->session_key)){
-        $data  = array("ids"=>array($obj->id),"items"=>array(array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>1,"name"=>$obj->name())),"total"=>$obj->price);
+        $data  = array("ids"=>array($obj->id),"items"=>array(array("seo"=>$obj->seo_name,"price"=>$obj->price($this->user),"id"=>$obj->id,"count"=>1,"name"=>$obj->name())),"total"=>$obj->price($this->user));
       }
       else{
         if(in_array($obj->id, $data["ids"])){

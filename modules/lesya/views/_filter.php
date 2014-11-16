@@ -22,6 +22,64 @@
                   <?php endforeach;?>
                </ul>
             </div>
+            <div class="layered_filter">
+               <div class="layered_subtitle_heading">
+                  <span class="layered_subtitle"><?php echo $lang["rukav_dlina"]?></span>
+               </div>
+               <ul id="ul_layered_manufacturer_0" class="col-lg-12 layered_filter_ul">
+                  <?php foreach(ORM::factory("rukav")->find_all() as $size):?>
+                     <li class="nomargin hiddable col-lg-12">
+                        <div class="checker" id="uniform-layered_manufacturer_<?php echo $size->id?>">
+                           
+                              <input type="checkbox"  <?php echo isset($_GET["rukav"]) && isset($_GET["rukav"][$size->id]) ? "checked" : ""?> class="checkbox" name="rukav[<?php echo $size->id?>]" id="layered_manufacturer_<?php echo $size->id?>" value="<?php echo $size->id?>" />
+                     
+                        </div>
+                        <label for="layered_manufacturer_<?php echo $size->id?>">
+                           <a href="#" rel="nofollow"><?php echo $size->name()?></a>
+                        </label>
+                     </li>
+                  <?php endforeach;?>
+               </ul>
+            </div>
+            <div class="layered_filter">
+               <div class="layered_subtitle_heading">
+                  <span class="layered_subtitle"><?php echo $lang["colors"]?></span>
+               </div>
+               <ul id="ul_layered_manufacturer_0" class="col-lg-12 layered_filter_ul">
+                  <?php foreach(ORM::factory("color")->find_all() as $size):?>
+                     <li class="nomargin hiddable col-lg-12">
+                        <div class="checker" id="uniform-layered_manufacturer_<?php echo $size->id?>">
+                           
+                              <input type="checkbox"  <?php echo isset($_GET["color"]) && isset($_GET["color"][$size->id]) ? "checked" : ""?> class="checkbox" name="color[<?php echo $size->id?>]" id="layered_manufacturer_<?php echo $size->id?>" value="<?php echo $size->id?>" />
+                     
+                        </div>
+                        <label for="layered_manufacturer_<?php echo $size->id?>">
+                           <a href="#" rel="nofollow"><?php echo $size->name()?></a>
+                        </label>
+                     </li>
+                  <?php endforeach;?>
+               </ul>
+            </div>
+            <div class="layered_filter">
+               <div class="layered_subtitle_heading">
+                  <span class="layered_subtitle"><?php echo $lang["types"]?></span>
+               </div>
+               <ul id="ul_layered_manufacturer_0" class="col-lg-12 layered_filter_ul">
+                  <?php foreach(ORM::factory("type")->find_all() as $size):?>
+                     <li class="nomargin hiddable col-lg-12">
+                        <div class="checker" id="uniform-layered_manufacturer_<?php echo $size->id?>">
+                           
+                              <input type="checkbox"  <?php echo isset($_GET["type"]) && isset($_GET["type"][$size->id]) ? "checked" : ""?> class="checkbox" name="type[<?php echo $size->id?>]" id="layered_manufacturer_<?php echo $size->id?>" value="<?php echo $size->id?>" />
+                     
+                        </div>
+                        <label for="layered_manufacturer_<?php echo $size->id?>">
+                           <a href="#" rel="nofollow"><?php echo $size->name()?></a>
+                        </label>
+                     </li>
+                  <?php endforeach;?>
+               </ul>
+            </div>
+
             <div class="layered_price" style="">
                <div class="layered_subtitle_heading">
                   <span class="layered_subtitle"><?php echo $lang["price"]?></span>

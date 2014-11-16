@@ -73,19 +73,21 @@
 	            <div class="content_sortPagiBar clearfix">
 	               <div class="sortPagiBar clearfix">
 	                  <form id="productsSortForm" action="#" class="productsSortForm">
-	                     <div class="select selector1">
-	                        <label for="selectProductSort"><?php echo $lang["sort_by"]?></label>
-	                        <div class="selector" id="uniform-selectProductSort" style="width: 192px;">
-	                           <span style="width: 180px; -webkit-user-select: none;">--</span>
-	                           <select id="selectProductSort" class="selectProductSort form-control">
-	                              <option value="name:asc" selected="selected">--</option>
-	                              <option value="price:asc"><?php echo $lang["price"]?>: <?php echo $lang["lowest_p"]?></option>
-	                              <option value="price:desc"><?php echo $lang["price"]?>: <?php echo $lang["higest_p"]?></option>
-	                              <option value="reference:asc"><?php echo $lang["novinky"]?>: <?php echo $lang["lowest_n"]?></option>
-	                              <option value="reference:desc"><?php echo $lang["novinky"]?>: <?php echo $lang["lowest_n"]?></option>
-	                           </select>
-	                        </div>
-	                     </div>
+
+                        <div class="select selector1">
+                            <label for="selectProductSort"><?php echo $lang["sort_by"]?></label>
+                            <select id="selectProductSort" class="selectProductSort form-control">
+                                <option value="name:asc" selected="selected">--</option>
+                                <option value="price:asc"><?php echo $lang["price"]?>: <?php echo $lang["lowest_p"]?></option>
+                                <option value="price:desc"><?php echo $lang["price"]?>: <?php echo $lang["higest_p"]?></option>
+                                <option value="created_at:asc"><?php echo $lang["novinky"]?>: <?php echo $lang["lowest_n"]?></option>
+                                <option value="created_at:desc"><?php echo $lang["novinky"]?>: <?php echo $lang["higest_n"]?></option>
+                            </select>
+                        </div>
+
+
+
+
 	                  </form>
 	                  <!-- /Sort products -->
 	               </div>

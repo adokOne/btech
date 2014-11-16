@@ -20,11 +20,13 @@ class Users_Controller extends Controller {
 			if($user->id){
 				$pass = $this->generate_password();
 				$user->change_password($pass,$pass);
-				$message = new View("forgot_email");
-				$message->password = $password;
-				$message->email    = $email;
-				$message->name     = $username;
-				email::send($email, Kohana::config("email.sender"), Kohana::lang("global.forgot_email"), $message->render(), true);
+				#$message = new View("forgot_email");
+				#$message->password = $password;
+				#$message->email    = $email;
+				#$message->name     = $username;
+				$data = array($username,$pass,$email);
+				$this->_send_email($data,$email,"pass_recovery");
+				#email::send($email, Kohana::config("email.sender"), Kohana::lang("global.forgot_email"), $message->render(), true);
 				url::redirect(url::base());
 			}
 			
@@ -125,10 +127,10 @@ class Users_Controller extends Controller {
 		}
 		else{
 			$password = $this->generate_password();
-			$message = new View("req_email");
-			$message->password = $password;
-			$message->email    = $email;
-			$message->name     = $username;
+			// $message = new View("req_email");
+			// $message->password = $password;
+			// $message->email    = $email;
+			// $message->name     = $username;
 			
 			$user   = new User_Model();
 			$user->email    = $email;
@@ -141,7 +143,9 @@ class Users_Controller extends Controller {
 				$user->add($item);
 			}
 			if($user->id){
-				email::send($email, Kohana::config("email.sender"), Kohana::lang("global.reg_subj"), $message->render(), true);
+				$data = array($username,$password,$email);
+				$this->_send_email($data,$email,"register");
+				#email::send($email, Kohana::config("email.sender"), Kohana::lang("global.reg_subj"), $message->render(), true);
 			}
 			
 			Auth::instance()->force_login($user);
