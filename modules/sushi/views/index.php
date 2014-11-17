@@ -14,7 +14,7 @@
                        jQuery('#camera_wrap_0').camera({
                          fx: 'stampede',
                          navigation: false,
-                         playPause: true,
+                         playPause: false,
                          thumbnails: false,
                          navigationHover: false,
                          barPosition: 'top',

@@ -10,7 +10,7 @@
             <div class="row">
                <div class="span9  " id="content">
                   <div class="breadcrumb">
-                     <a href="#">Спасибо за заказ!</a>
+                     <a href="#">Дякуємо за замовлення!</a>
                   </div>
                   <h1><?php echo Kohana::lang("global.order_processed")?></h1>
                   <div class="box-container">

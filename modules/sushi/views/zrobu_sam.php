@@ -48,7 +48,7 @@
                                        <?php foreach($osnovu as $i=>$osnova):?>
                                          <tr data-optionid="<?php echo $osnova->id?>" data-optionvalue="<?php echo $osnova->id?>" class="optionRow">
                                             <td class="center">
-                                               <img style="border-radius: 50%;" width="110" height="110" src="<?php echo $osnova->main_image();?>" alt="">
+                                               <img style="border-radius: 50%;" width="200" height="200" src="<?php echo $osnova->main_image();?>" alt="">
                                             </td>
                                             <td width="180"><strong><?php echo $osnova->name();?></strong></td>
                                             <td><?php echo $osnova->price;?> грн.</td>
