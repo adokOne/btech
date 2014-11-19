@@ -806,7 +806,7 @@ class Zend_Http_Client
      * @throws Zend_Http_Client_Exception
      */
     public function request($method = null)
-    {
+    {   
         if (! $this->uri instanceof Zend_Uri_Http) {
             /** @see Zend_Http_Client_Exception */
             require_once 'Zend/Http/Client/Exception.php';
@@ -843,6 +843,7 @@ class Zend_Http_Client
                 $uri, $this->config['httpversion'], $headers, $body);
 
             $response = $this->adapter->read();
+            var_dump( $response);
             if (! $response) {
                 /** @see Zend_Http_Client_Exception */
                 require_once 'Zend/Http/Client/Exception.php';

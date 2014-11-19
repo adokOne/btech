@@ -12,6 +12,8 @@ $config["support_mail"] = "adok@ukr.net";
 $config["order_theme"] = "Новый заказ на Sushi Do";
 $config["g_mail"] = "one.rops@gmail.com";
 $config["g_pass"] = "b1b1b1b1";
+// $config["g_mail"] = "sushidolviv@gmail.com";
+// $config["g_pass"] = "marbels111";
 $config["site_name"] = "Sushi Do";
 
 /**

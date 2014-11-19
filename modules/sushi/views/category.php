@@ -32,7 +32,8 @@
                      <div class="box-content">
                         <div class="box-product">
                            <ul class="row">
-                              <?php foreach($active_category->goods as $k=>$item):?>
+                              <?php function map_good($item){return $item->goods->as_array();};$goods = $active_category->goods->count() ? $active_category->goods : arr::flatten(array_map("map_good",$active_category->children->as_array()))?>
+                              <?php foreach($goods as $k=>$item): ?>
                               <li class="<?php echo in_array($k, array(0,3,6,9,12)) ? "first-in-line" : (in_array($k, array(2,5,8,11,14)) ? "last-in-line" : "" ) ; ?> span3">
                                  <div class="name maxheight-feat">
                                     <a href="<?php echo url::base()."item/".$item->id?>"><?php echo $item->name();?></a>

@@ -5,6 +5,7 @@ class Controller extends Controller_Core {
 		parent::__construct();
 		$this->_set_user();
 		$this->_set_connect();
+		$this->_send_sms("efwef");die;
 		
 	}
 
@@ -22,9 +23,9 @@ class Controller extends Controller_Core {
 	}
 
 	protected function _send_sms($desc){
-			include_once 'GCalendarEvent.php';
-			$event = new GCalendarEvent(Kohana::config("core.g_mail"),Kohana::config("core.g_pass"));
-			$result = $event->addEvent(Kohana::config("core.order_theme"), $desc, $desc,date('c', time()),date('c', time()),1);
+			include_once 'google.php';
+			#$event = new GCalendarEvent(Kohana::config("core.g_mail"),Kohana::config("core.g_pass"));
+			#$result = $event->addEvent(Kohana::config("core.order_theme"), $desc, $desc,date('c', time()+1200),date('c', time()+1200),1);
 	}
 
 	public function error_page(){

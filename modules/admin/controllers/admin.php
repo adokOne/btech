@@ -93,12 +93,12 @@ class Admin_Controller extends Controller {
 		url::redirect(request::referrer(),301);
 	}
 
-	protected function pagination(){
-
+	protected function pagination($total = false){
+		$total = $total ? $total : $this->db->count_last_query();
 		$config = array(
 			"base_url"			=> "/admin/".current(explode("_", strtolower(get_called_class()))),
 			"uri_segment"    	=>  "index",
-			"total_items"		=>  $this->db->count_last_query(),
+			"total_items"		=>  $total,
 			"items_per_page"	=>  $this->config['per_page'],
 			'style'          	=> "b_tech",
 			'auto_hide'         => true

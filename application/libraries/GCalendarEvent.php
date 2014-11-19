@@ -18,8 +18,8 @@ class GCalendarEvent {
 		$sms_reminder)
 	{
 		try {
-		$path = '.' . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'].'/application/libraries' . PATH_SEPARATOR . get_include_path();
-		#$path = '.' . PATH_SEPARATOR .'/home/adok/WWW/cake/application/libraries' . PATH_SEPARATOR . get_include_path();
+		#$path = '.' . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'].'/application/libraries' . PATH_SEPARATOR . get_include_path();
+		$path = '.' . PATH_SEPARATOR .'/home/adok/WWW/cake/application/libraries' . PATH_SEPARATOR . get_include_path();
 		set_include_path($path);
 		include_once 'Zend/Loader.php';
 		
@@ -30,6 +30,7 @@ class GCalendarEvent {
 		Zend_Loader::loadClass('Zend_Gdata_Calendar');
 
 		$client = Zend_Gdata_ClientLogin::getHttpClient($this->_user, $this->_pass, "cl");
+		var_dump($client);die;
 		$gdataCal = new Zend_Gdata_Calendar($client);
 		$newEvent = $gdataCal->newEventEntry();
 		$newEvent->title = $gdataCal->newTitle($title);
@@ -53,7 +54,7 @@ class GCalendarEvent {
 		return $createdEvent->id->text;
 
 		} catch(Exception $ex) {
-			var_dump($ex->getMessage());
+			var_dump($ex->getResponse()->getRawBody());
  		   // Report the exception to the user
 		}
 	}

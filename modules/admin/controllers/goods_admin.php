@@ -12,7 +12,7 @@ class Goods_Admin extends Admin_Controller {
 		$view  = new View("goods/index");
 		$view->items = $items;
 		$actions = new View("goods/actions");
-		$view->pagination = $this->pagination();
+		$view->pagination = $this->pagination(ORM::factory("good")->count());
 		$this->view->content = $view->render(false);
 		$this->view->actions = $actions->render(false);
 		$this->view->render(true);
@@ -47,6 +47,10 @@ class Goods_Admin extends Admin_Controller {
 		foreach ($object as $attr => $value) {
 			$item->$attr = $value;
 		}
+		$item->has_sale = isset($object->has_sale) ? 1 : 0;
+		$item->show_on_main = isset($object->show_on_main) ? 1 : 0;
+		$item->active = isset($object->active) ? 1 : 0;
+		$item->show_as_popular = isset($object->show_as_popular) ? 1 : 0;
 		$item->save();
 		foreach(ORM::factory('ingredient')->find_all() as $_item){
 			$item->remove($_item);
