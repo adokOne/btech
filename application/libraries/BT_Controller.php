@@ -5,7 +5,7 @@ class Controller extends Controller_Core {
 		parent::__construct();
 		$this->_set_user();
 		$this->_set_connect();
-		$this->_send_sms("efwef");die;
+
 		
 	}
 

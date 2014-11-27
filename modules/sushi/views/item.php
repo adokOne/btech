@@ -67,8 +67,11 @@
                                        <div class="cart-top-padd form-inline">
                                           <label>
                                           <?php echo Kohana::lang("global.quantity")?>
-                                          <input class="q-mini" type="text" name="quantity" size="2" value="1" />
-                                          <input class="q-mini" type="hidden" name="product_id" size="2" value="36" />
+                                          <select style="width: 50px;" name="quantity">
+                                             <?php for ($i=1; $i < 5; $i++):?>
+                                                <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                             <?php endfor;?>
+                                          </select>
                                           </label>
                                           <a id="button-cart" href="<?php echo url::base()?>to_card/<?php echo $active_item->id?>" class="button-prod addToCart" ><i class="icon-plus-sign"></i>
                                             <?php echo Kohana::lang("global.add_to_cart")?>
