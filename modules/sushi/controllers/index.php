@@ -242,21 +242,22 @@ count($this->cart["items"]) || Kohana::show_404();
     is_numeric($id) || die(json_encode(array("success"=>false)));
     $obj = ORM::factory("good")->find($id);
     $obj->id || die(json_encode(array("success"=>false)));
+    $qty = $this->input->get("qty",1);
     if(!$data = Session::instance()->get($this->session_key)){
-      $data  = array("ids"=>array($obj->id),"items"=>array(array("price"=>$obj->price,"id"=>$obj->id,"count"=>1,"name"=>$obj->name())),"total"=>$obj->price);
+      $data  = array("ids"=>array($obj->id),"items"=>array(array("price"=>$obj->price,"id"=>$obj->id,"count"=>$qty,"name"=>$obj->name())),"total"=>$obj->price * $qty);
     }
     else{
       if(in_array($obj->id, $data["ids"])){
         foreach($data["items"] as &$item){
           if($obj->id == $item["id"]){
-            $item["count"] =  $item["count"] + 1;
+            $item["count"] =  $item["count"] + $qty;
           }
         }
       }
       else{
-        array_push($data["items"], array("price"=>$obj->price,"id"=>$obj->id,"count"=>1,"name"=>$obj->name()));
+        array_push($data["items"], array("price"=>$obj->price,"id"=>$obj->id,"count"=>$qty,"name"=>$obj->name()));
       }
-      $data["total"] =  $data["total"] + $obj->price;
+      $data["total"] =  $data["total"] + $obj->price * $qty;
       array_push($data["ids"] , $obj->id);
     }
     Session::instance()->set($this->session_key,$data);

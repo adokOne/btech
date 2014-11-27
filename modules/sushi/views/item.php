@@ -67,7 +67,7 @@
                                        <div class="cart-top-padd form-inline">
                                           <label>
                                           <?php echo Kohana::lang("global.quantity")?>
-                                          <select style="width: 50px;" name="quantity">
+                                          <select style="width: 50px;" name="quantity" class="quantity_sel">
                                              <?php for ($i=1; $i < 5; $i++):?>
                                                 <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                              <?php endfor;?>

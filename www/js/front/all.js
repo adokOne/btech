@@ -21,6 +21,7 @@ $.Controller("All",{
     $.ajax({
       url:el.attr("href"),
       dataType:"json",
+      data:{qty:$(".quantity_sel").val()},
       success:function(resp){
         if(resp.success){
           self.element.find(".mini-cart-info").empty();
