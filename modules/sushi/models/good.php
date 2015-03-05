@@ -6,7 +6,7 @@ class Good_Model  extends ORM{
     protected $belongs_to = array("category");
     public    $img_dir = "upload/goods/";
     protected $has_many = array("positions");
-    
+    protected $sorting = array('price'=>"asc");
 	public function name(){
 		$field = "name_".Router::$current_language; 
 		return $this->$field;
