@@ -6,3 +6,5 @@
  */
 $config['_default'] = 'index';
 $config["to_card/(\d+)"]  = 'index/to_card/$1';
+$config["cart"]  = 'index/cart/';
+$config["tort_na_zakaz"]  = 'index/tort_na_zakaz/';

@@ -11,6 +11,63 @@
  */
 class date_Core {
 
+  // Возвращает дату на основе числа секунд в литературном формате месяца. Пример 1 Января
+  public static function rusdate($format, $lang, $tm=FALSE){
+    $tm = !$tm ? time() : $tm;
+        $d = date($format, $tm);
+        switch($lang){
+            case '':
+            case 'ru':
+                $DateNamesSet = array();
+                $DateNamesSet =array("January"=>"января", "February"=>"февраля", "March"=>"марта", "April"=>"апреля", "May"=>"мая", "June"=>"июня", "July"=>"июля", "August"=>"августа", "September"=>"сентября", "October"=>"октября", "November"=>"ноября", "December"=>"декабря");
+                $DateNamesSet+=array("Jan"=>"Янв", "Feb"=>"Фев", "Mar"=>"Мар", "Apr"=>"Апр", "May"=>"Май", "Jun"=>"Июн", "Jul"=>"Июл", "Aug"=>"Авг", "Sep"=>"Сен", "Oct"=>"Окт", "Nov"=>"Ноя", "Dec"=>"Дек");
+                $DateNamesSet+=array("Monday"=>"Понедельник", "Tuesday"=>"Вторник", "Wednesday"=>"Среда", "Thursday"=>"Четверг", "Friday"=>"Пятница", "Saturday"=>"Суббота", "Sunday"=>"Воскресенье");
+                $DateNamesSet+=array("Mon"=>"Пн", "Tue"=>"вт", "Wed"=>"Ср", "Thu"=>"Чт", "Fri"=>"Пт", "Sat"=>"Сб", "Sun"=>"Вс");
+                for(reset($DateNamesSet); list($k,$v)=each($DateNamesSet);) $d=str_ireplace($k,$v,$d);
+                break;
+            case 'uk':
+                $DateNamesSet = array();
+                $DateNamesSet =array("January"=>"січня", "February"=>"лютого", "March"=>"березня", "April"=>"квітня", "May"=>"травня", "June"=>"червня", "July"=>"липня", "August"=>"серпня", "September"=>"вересня", "October"=>"жовтня", "November"=>"листопада", "December"=>"грудня");
+                $DateNamesSet+=array("Jan"=>"Січ", "Feb"=>"Лют", "Mar"=>"Бер", "Apr"=>"Кві", "May"=>"Тра", "Jun"=>"Чер", "Jul"=>"Лип", "Aug"=>"Сер", "Sep"=>"Вер", "Oct"=>"Жов", "Nov"=>"Лис", "Dec"=>"Гру");
+                $DateNamesSet+=array("Monday"=>"Понеділок", "Tuesday"=>"Вівторок", "Wednesday"=>"Середа", "Thursday"=>"Четвер", "Friday"=>"П'ятниця", "Saturday"=>"Субота", "Sunday"=>"Неділя");
+                $DateNamesSet+=array("Mon"=>"Пн", "Tue"=>"Вт", "Wed"=>"Ср", "Thu"=>"Чт", "Fri"=>"Пт", "Sat"=>"Сб", "Sun"=>"Нд");
+                for(reset($DateNamesSet); list($k,$v)=each($DateNamesSet);) $d=str_ireplace($k,$v,$d);
+                break;
+            case 'en':
+                break;
+            case 'az':
+                break;
+            case 'pl':
+              $DateNamesSet = array();
+              $DateNamesSet =array("January"=>"stycznia", "February"=>"lutego", "March"=>"marca", "April"=>"kwietnia", "May"=>"maja", "June"=>"czerwca", "July"=>"lipca", "August"=>"sierpnia", "September"=>"września", "October"=>"października", "November"=>"listopada", "December"=>"grudnia");
+              $DateNamesSet+=array("Jan"=>"Sty", "Feb"=>"Lut", "Mar"=>"Mar", "Apr"=>"Kwi", "May"=>"Maj", "Jun"=>"Cze", "Jul"=>"Lip", "Aug"=>"Sie", "Sep"=>"Wrz", "Oct"=>"Paź", "Nov"=>"Lis", "Dec"=>"Gru");
+          $DateNamesSet+=array("Monday"=>"Poniedziełek", "Tuesday"=>"Wtorek", "Wednesday"=>"Środa", "Thursday"=>"Czwartek", "Friday"=>"Piątek", "Saturday"=>"Sobota", "Sunday"=>"Niedziela");
+                $DateNamesSet+=array("Mon"=>"Pon", "Tue"=>"Wt", "Wed"=>"Śr", "Thu"=>"Czw", "Fri"=>"Pt", "Sat"=>"Sob", "Sun"=>"Niedz");
+                for(reset($DateNamesSet); list($k,$v)=each($DateNamesSet);) $d=str_ireplace($k,$v,$d);
+                break;
+            case 'de':
+                $DateNamesSet = array();
+                $DateNamesSet =array("January"=>"Januar", "February"=>"februar", "March"=>"März", "April"=>"April", "May"=>"Mai", "June"=>"Juni", "July"=>"Juli", "August"=>"August", "September"=>"September", "October"=>"Oktober", "November"=>"November", "December"=>"Dezember");
+                $DateNamesSet+=array("Jan"=>"Jan", "Feb"=>"Feb", "Mar"=>"Mar", "Apr"=>"Apr", "May"=>"Mai", "Jun"=>"Jun", "Jul"=>"Jul", "Aug"=>"Aug", "Sep"=>"Sep", "Oct"=>"Okt", "Nov"=>"Nov", "Dec"=>"Dez");
+                $DateNamesSet+=array("Monday"=>"Montag", "Tuesday"=>"Dienstag", "Wednesday"=>"Mittwoch", "Thursday"=>"Donnerstag", "Friday"=>"Freitag", "Saturday"=>"Samstag", "Sunday"=>"Sonntag");
+                $DateNamesSet+=array("Mon"=>"Mon", "Tue"=>"Die", "Wed"=>"Mit", "Thu"=>"Don", "Fri"=>"Fre", "Sat"=>"Sam", "Sun"=>"Son");
+                for(reset($DateNamesSet); list($k,$v)=each($DateNamesSet);) $d=str_ireplace($k,$v,$d);
+                break;
+            case 'ro':
+                $DateNamesSet = array();
+                $DateNamesSet =array("January"=>"ianuarie", "February"=>"februarie", "March"=>"martie", "April"=>"april", "May"=>"mai", "June"=>"iunie", "July"=>"iulie", "August"=>"august", "September"=>"septembrie", "October"=>"octombrie", "November"=>"noiembrie", "December"=>"decembrie");
+                $DateNamesSet+=array("Jan"=>"Ian", "Feb"=>"Feb", "Mar"=>"Mar", "Apr"=>"Apr", "May"=>"Mai", "Jun"=>"Iun", "Jul"=>"Iul", "Aug"=>"Aug", "Sep"=>"Sep", "Oct"=>"Oct", "Nov"=>"Noi", "Dec"=>"Dec");
+                $DateNamesSet+=array("Monday"=>"Luni", "Tuesday"=>"Marți", "Wednesday"=>"Miercuri", "Thursday"=>"Joi", "Friday"=>"Vineri", "Saturday"=>"Sâmbăta", "Sunday"=>"Duminica");
+                $DateNamesSet+=array("Mon"=>"l", "Tue"=>"mț", "Wed"=>"mc", "Thu"=>"j", "Fri"=>"v", "Sat"=>"s", "Sun"=>"d");
+                for(reset($DateNamesSet); list($k,$v)=each($DateNamesSet);) $d=str_ireplace($k,$v,$d);
+                break;
+            default:
+                return;
+        }
+
+    return $d;
+  }
+
 	/**
 	 * Converts a UNIX timestamp to DOS format.
 	 *

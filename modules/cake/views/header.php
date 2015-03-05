@@ -18,7 +18,7 @@
 
 </head>
 
-<body data-auto-controller="Main">
+<body data-auto-controller="Main" class="<?php echo isset($body_cls) ? $body_cls : "" ?>">
 
   <header>
     <div class="container">
@@ -35,17 +35,17 @@
             <div class="collapse navbar-collapse" id="responsive-menu">
               <ul class="nav navbar-nav">
                 <li class="<?php echo url::current() == "index" ? "active" : "" ?>"><a href="/"><?php echo Kohana::lang("global.menu.home");?></a></li>
-                <li class="<?php echo url::current() == "mini" ? "active" : "" ?>"><a href="/mini"><?php echo Kohana::lang("global.menu.mini");?></a></li>
-                <li class="<?php echo url::current() == "love" ? "active" : "" ?>"><a href="/love"><?php echo Kohana::lang("global.menu.love");?></a></li>
-                <li class="<?php echo url::current() == "copropate" ? "active" : "" ?>"><a href="/copropate"><?php echo Kohana::lang("global.menu.corp");?></a></li>
-                <li class="<?php echo url::current() == "cookies" ? "active" : "" ?>"><a href="/cookies"><?php echo Kohana::lang("global.menu.vup");?></a></li>
+<!--                 <li class="<?php echo url::current() == "mini" ? "active" : "" ?>"><a href="/mini"><?php echo Kohana::lang("global.menu.mini");?></a></li>
+                <li class="<?php echo url::current() == "love" ? "active" : "" ?>"><a href="/love"><?php echo Kohana::lang("global.menu.love");?></a></li> -->
+                <li class="<?php echo url::current() == "tort_na_zakaz" ? "active" : "" ?>"><a href="/tort_na_zakaz"><?php echo Kohana::lang("global.menu.tort_na_zakaz");?></a></li>
+               <!--  <li class="<?php echo url::current() == "cookies" ? "active" : "" ?>"><a href="/cookies"><?php echo Kohana::lang("global.menu.vup");?></a></li> -->
               </ul>
           </div>
           </div>
           </div>
 
           <div class="col-lg-4 hidden-sm hidden-xs">
-            <a href="#" class="cart">
+            <a href="<?php echo $card ? url::base()."cart" : "#" ?>" data-href="<?php echo url::base()?>cart" class="cart">
               <span><?php echo $card ? Kohana::lang("global.vubrano")." <span class='count'>".count($card["ids"]).'</span>' : Kohana::lang("global.card_empty");?></span>
                     <br>
                   <span class="<?php echo $card ? "" : "hidden"?>"><?php echo Kohana::lang("global.na_symmy");?> <span class="total"><?php echo $card["price"]?></span> <?php echo Kohana::lang("global.grn");?></span></span>
@@ -95,7 +95,7 @@
   
         <div class="col-lg-4 col-md-3 col-sm-3 col-xs-12">
           <div class="row ">
-            <a href="#">
+            <a href="<?php echo $card ? url::base()."cart" : "#" ?>" data-href="<?php echo url::base()?>cart">
               <div class="col-lg-7 col-md-5 hidden-sm col-xs-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-0 col-xs-offset-1">
                 <div class="cart_image">
                   <img src="/img/front/cart_big_icon.png" alt=".">

@@ -21,5 +21,14 @@ $.Controller("Main",{
         }
       }
     })
-  }
+  },
+  ".time.counter a -> click":function(ev){
+    ev.preventDefault();
+  },
+  ".counts.counter a -> click":function(ev){
+    ev.preventDefault();
+  },
+  ".delete -> click":function(ev){
+    ev.preventDefault();
+  },
 })

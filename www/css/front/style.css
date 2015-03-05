@@ -282,13 +282,13 @@ header .cart {
 .order_block .description .spec .weight {background-position: 0 -1px;}
 .order_block .description .spec .slice {background-position: 0 -28px;}
 
-.order_block .make_order {
+.make_order {
 	height: 11px;
 	position: relative;
 	background: url(/img/front/order_bg.png);
 }
 
-.order_block .make_order .ord_btn {
+.make_order .ord_btn {
 	position: absolute;
 	left: 50%; top: -21px;
 	margin-left: -80px;
@@ -305,12 +305,16 @@ header .cart {
 			border-radius: 7px;
 }
 
-.order_block .make_order .ord_btn:hover,
-.order_block .make_order .ord_btn.active {
-	background: #990e0e;
+ 
+.ord_btn, .submit {
 	-webkit-transition: background-color 0.3s ease;
 	   -moz-transition: background-color 0.3s ease;
 			transition: background-color 0.3s ease;
+}
+
+.make_order .ord_btn:hover,
+.make_order .ord_btn.active {
+	background: #990e0e;
 }
 
 /* Reviews */
@@ -466,4 +470,429 @@ footer ul li {
 
 	.delivery .shipping, .delivery .pack {text-align: center;}
 	.delivery .pack {margin-top: 30px;}
+}
+
+
+
+
+
+
+/* ====== */
+
+/* Special Order */
+
+.special_order {
+	padding: 60px 0; 
+}
+
+.special_order h3 {
+	color: #fff;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.special_order .description {
+	margin-top: 50px;
+}
+
+.special_order .description p {
+	text-transform: none;
+}
+
+.special_order .cake_preview {
+	text-align: left;
+}
+
+.special_order .ord_btn {
+	margin-left: -206px;
+	color: #382b1d;
+	background: #d7a97b;
+	text-shadow: none;
+}
+
+.special_order .ord_btn:hover,
+.special_order .ord_btn.active {
+	color: #fff;
+}
+
+.example {
+	padding: 40px 0; 
+}
+
+.example .row {
+	margin-top: 20px;
+}
+
+.example .row div,
+.clients .row div {
+	text-align: center;
+}
+
+/* ============= */
+
+/* Clients */
+
+.clients {
+	background: #382b1d;
+}
+
+.clients .container {
+	padding: 40px 0 50px;
+}
+
+.clients h2 {
+	color: #ffd7b0;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.clients .row {
+	margin-top: 30px;
+}
+
+/* ======= */
+
+/* Order form */
+
+.order_form { 
+	padding: 30px 0 40px;
+	text-align: center;
+	background: #382b1d;
+	font-family: 'Droid_Serif';
+	text-shadow: none;
+}
+
+.order_form h1,
+.order_form h2 {
+	text-transform: uppercase;
+	color: #ffd7b0;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.order_form h2 {font-size: 24px;}
+
+.order_form i {
+	display: block;
+	margin-top: 10px;
+	font-family: 'Droid_Serif_Italic';
+	color: #e3e2e1;
+	font-size: 12px;
+}
+
+.ordering {
+	margin-top: 50px;
+	padding-bottom: 40px;
+	font-size: 28px;
+	color: #fff;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+	border-bottom: 2px solid #34281b;
+}
+
+.ordering h4 {
+	margin-top: 40px;
+	text-transform: uppercase;
+	font-family: 'RotondaC_Bold';
+}
+
+.ordering .price {
+	font-family: 'RotondaC_Bold';
+}
+
+.ordering .price span {
+	font-size: 18px;
+}
+
+.ordering .counter {
+	width: 75px;
+	font-family: 'RotondaC_Bold';
+}
+
+.order_form input,
+.order_form textarea {
+	height: 38px;
+	color: #2b1c0c;
+	border: none;
+	outline: none;
+	background: #efddcb;
+	box-shadow: 1px 1px 0px rgba(0, 0, 0, 1);
+	-webkit-border-radius: 5px; 
+	   -moz-border-radius: 5px; 
+			border-radius: 5px; 
+}
+
+.counter input {
+	width: 40px;
+	text-align: center;
+}
+
+.ordering .counter a {
+	display: block;
+	width: 16px;
+	height: 15px;
+	background: url('/img/front/plus-minus.png') no-repeat;
+}
+
+.ordering .counter a.minus {
+	margin-top: 8px;
+	background-position: 0 -17px;
+}
+
+.ordering .delete {
+	display: block;
+	padding-left: 25px;
+	color: #fff;
+	font-family: 'RotondaC_Bold';
+	background: url('/img/front/delete.png') no-repeat 0 7px;
+}
+
+.ordering .price,
+.ordering .counter,
+.ordering .delete {
+	margin-top: 50px;
+}
+
+.date_block {
+	padding: 40px 0;
+	border-top: 2px solid #483c2f;
+	border-bottom: 2px solid #34281b;
+}
+
+.date_block {
+	text-shadow: none;
+}
+
+.date_block .row {
+	margin-top: 20px;
+}
+
+.date_block .calendar {
+	float: right;
+	margin-right: 10px;
+}
+
+.date_block .calendar #datepicker {
+	margin-top: 10px;
+}
+
+.order_form h6 {
+	font-size: 16px;
+	color: #fdc893;
+	font-family: 'Droid_Serif';
+}
+
+.date_block .delivery_time {
+	float: left;
+	margin-top: 34px;
+}
+
+.date_block .time {
+	width: 129px;
+	margin: 25px auto 20px;
+}
+
+.date_block .time a {
+	display: block;
+	width: 17px;
+	height: 16px;
+	margin-top: 11px;
+	background: url('/img/front/arrows.png') no-repeat;
+}
+
+.date_block .time a.left {
+	float: left;
+}
+
+.date_block .time a.right {
+	float: right;
+	background-position: -23px 0;
+}
+
+.date_block .time input {
+	width: 70px;
+	height: 40px;
+	font-size: 22px;
+}
+
+.date_block .delivery_info {
+	margin-top: 30px;
+}
+
+.date_block .delivery_info p {
+	color: #fff;
+	font-size: 20px; 
+}
+
+.data_block {
+	padding: 40px 0;
+	border-top: 2px solid #483c2f;
+}
+
+.data_block .user_data {
+	width: 290px;
+	margin: 50px auto;
+}
+
+.data_block .user_data .field {
+	margin-bottom: 30px;
+}
+
+.data_block .user_data input,
+.data_block .user_data textarea {
+	width: 100%;
+	padding-left: 10px; 
+}
+
+.data_block .user_data textarea {
+	height: 70px;
+	padding: 10px;
+}
+
+.data_block .payment_method {
+	width: 465px;
+	margin: auto; 
+}
+
+.data_block .payment_method ul {
+	overflow: hidden;
+	margin: 20px auto;
+	color: #fff;
+}
+
+.data_block .payment_method li {
+	float: left;
+	margin-right: 15px;
+	overflow: hidden;
+}
+
+.data_block .payment_method input {
+	display: none;
+}
+
+.data_block .payment_method label {
+	float: left;
+	padding-left: 5px;
+}
+
+.data_block .payment_method .iradio {
+	float: left;
+	width: 17px;
+	height: 17px;
+	background: url('/img/front/checkbox_sprite.png') no-repeat -24px 0;
+}
+
+.data_block .payment_method .iradio.checked {
+	background-position: 0 0;
+}
+
+.data_block .total {
+	margin-top: 40px;
+	color: #fdc893;
+	font-size: 18px;
+}
+
+.order_form .submit_btn {
+	margin-top: 70px;
+}
+
+.order_form .submit {
+	margin-top: 40px;
+	padding: 12px 16px;
+	font-family: 'Appetite';
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #382b1d;
+	background: #d7a97b;
+	-webkit-border-radius: 7px;
+	   -moz-border-radius: 7px;
+			border-radius: 7px;
+}
+
+.order_form .submit:hover {
+	color: #fff;
+	background: #990e0e;
+}
+
+/* ========== */
+
+/* Order page delivery */
+
+.order_page .delivery {
+	text-align: center;
+	color: #2f150d;
+	text-shadow: 1px 1px 0px rgba(245, 214, 181, 1);
+	background: none;
+}
+
+.order_page .delivery .copyright {
+	margin-top: 50px;
+}
+
+/* =================== */
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.top_bar .cart_big {
+		padding-top: 36px;
+		font-size: 13px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	header .navbar li {
+		margin: 0 27px;
+	}
+
+	.info_text {margin: 0;}
+	.info_text, .info_text .mail {font-size: 14px;}
+	.info_text .tel {font-size: 20px;}
+
+	.top_bar .social_block {margin-top: 7px;}
+	.top_bar .social li a {margin: 17px 8px 0 0;}
+
+	.top_bar .cart_big {padding-top: 30px}
+
+	.description p {font-size: 18px;}
+	.cake_preview {margin-top: 20px;}
+	.description .spec span {margin-right: 5px;}
+
+	.delivery .info_text {margin-top: 6px;}
+	.delivery .pack .info_text {margin-top: 10px;}
+
+	.ordering img {margin: 30px 0 0 20px;}
+	.ordering .price {line-height: 20px;}
+}
+
+@media screen and (max-width: 767px) {
+	.logo {text-align: center;}
+	
+	.top_bar .social_block {padding-left: 10px;}
+	.top_bar .cart_big {padding-top: 35px; text-align: left; font-size: 15px;}
+
+	.reviews .carousel-inner .item {padding: 0 55px;}
+
+	.cake_preview {text-align: center !important;}
+	
+	.delivery .shipping, .delivery .pack {text-align: center;}
+	.delivery .pack {margin-top: 30px;}
+	
+	.special_order .ord_btn {
+		font-size: 12px;
+		top: -13px;
+		margin-left: -124px;
+	}
+
+	.date_block .calendar, .date_block .delivery_time {float: none;}
+
+	.date_block .delivery_info p {font-size: 14px;}
+
+	.data_block .payment_method {width: auto;}
+	.data_block .payment_method ul {max-width: 420px;}
+	.data_block .payment_method li {margin-bottom: 10px;}
+	.data_block .payment_method label {font-size: 12px; margin-top: 2px;}
+}
+
+@media screen and (max-width: 386px) {
+	.ordering .delete {text-indent: -9999px; margin-left: 50px;}
+	.ordering .price {line-height: 0.8;}
+
+	.data_block .user_data {width: 250px;}
+	.data_block .payment_method li {float: none;}
+
 }

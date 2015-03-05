@@ -1,5 +1,6 @@
+    
+  <?php if(isset($feedbacks) && $feedbacks->count()):?>
     <div class="corner top"></div>
-  <?php if($feedbacks->count()):?>
     <section class="reviews">
       <div class="container">
 
@@ -27,8 +28,9 @@
       </div>
     </section>
   <?php endif;?>
+    
+  <?php if(!isset($without_about)): ?>
     <div class="corner bottom"></div>
-  
   <section class="about_us">
     <div class="container">
       <h2><?php echo Kohana::lang("global.about")?></h2>
@@ -43,7 +45,7 @@
       </div>
     </div>
   </section>
-    <div class="corner top"></div>
+  <div class="corner top"></div>
 
   <section class="delivery">
     <div class="container">
@@ -80,7 +82,7 @@
     </div>
   </section>
     <div class="corner bottom"></div>
-
+  <?php endif;?>
   <footer>
     <div class="container">
       <h4><?php echo Kohana::lang("global.footer_head");?></h4>

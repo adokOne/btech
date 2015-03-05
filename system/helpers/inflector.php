@@ -18,6 +18,14 @@ class inflector_Core {
 	protected static $uncountable;
 	protected static $irregular;
 
+
+
+    public static function cake_count($count){
+      $lang = Kohana::lang("global.cake_count");
+      $idx  = $count == 1 ? 0 : ($count < 5 ? 1 : 2);
+      return $count." ".$lang[$idx];
+    }
+
 	/**
 	 * Checks if a word is defined as uncountable.
 	 *
